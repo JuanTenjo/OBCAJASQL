@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsReportFacturaConSaldo" targetNamespace="http://tempuri.org/dsReportFacturaConSaldo.xsd" xmlns:mstns="http://tempuri.org/dsReportFacturaConSaldo.xsd" xmlns="http://tempuri.org/dsReportFacturaConSaldo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ACDATOXPSQLConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ACDATOXPSQLConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.OBCAJASQL.Properties.Settings.GlobalReference.Default.ACDATOXPSQLConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Datos de las facturas realizadasTableAdapter" GeneratorDataComponentClassName="Datos_de_las_facturas_realizadasTableAdapter" Name="Datos de las facturas realizadas" UserDataComponentName="Datos de las facturas realizadasTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ACDATOXPSQLConnectionString (Settings)" DbObjectName="ACDATOXPSQL.dbo.[Datos de las facturas realizadas]" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        [Datos de las facturas realizadas].NumFactura, Trim(DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].NombreUsa + ' ' + DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].Apellido1Usa) 
+                         + ' ' + Trim(DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].Apellido2Usa + ' ' + [Datos del Paciente].Apellido2) AS Facturador, [Datos de las facturas realizadas].Cartercero, 
+                         Trim([Datos del Paciente].Nombre1 + ' ' + [Datos del Paciente].Nombre2) + ' ' + Trim([Datos del Paciente].Apellido1 + ' ' + [Datos del Paciente].Apellido2) AS Paciente, [Datos de las facturas realizadas].FechaFac, 
+                         [Datos de las facturas realizadas].ValorTotal, [Datos de las facturas realizadas].Copago, [Datos de las facturas realizadas].PagoFac + [Datos de las facturas realizadas].CanceCopago AS ValorCancelado, 
+                         [Datos de las facturas realizadas].ValorTotal - ([Datos de las facturas realizadas].PagoFac + [Datos de las facturas realizadas].CanceCopago) AS Saldo, 
+                         Trim([Datos empresas y terceros].NomAdmin + ' ' + [Datos empresas y terceros].ProgrAmin) AS Entidad, [Datos de las facturas realizadas].AnuladaFac, 
+                         CASE WHEN [AnuladaFac] = 0 THEN 'Vigentes' ELSE 'Anuladas' END AS TerAnul
+FROM            [Datos empresas y terceros] INNER JOIN
+                         [Datos del Paciente] INNER JOIN
+                         [Datos cuentas de consumos] ON [Datos del Paciente].HistorPaci = [Datos cuentas de consumos].HistoNum INNER JOIN
+                         [Datos de las facturas realizadas] ON [Datos cuentas de consumos].CuenNum = [Datos de las facturas realizadas].NumCuenFac ON 
+                         [Datos empresas y terceros].CarAdmin = [Datos de las facturas realizadas].Cartercero INNER JOIN
+                         DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos] ON [Datos de las facturas realizadas].CodiRegis = DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].CodigoUsa
+WHERE        ([Datos de las facturas realizadas].PagoFac + [Datos de las facturas realizadas].CanceCopago = 0)
+ORDER BY [Datos de las facturas realizadas].NumFactura</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="NumFactura" DataSetColumn="NumFactura" />
+              <Mapping SourceColumn="Facturador" DataSetColumn="Facturador" />
+              <Mapping SourceColumn="Cartercero" DataSetColumn="Cartercero" />
+              <Mapping SourceColumn="Paciente" DataSetColumn="Paciente" />
+              <Mapping SourceColumn="FechaFac" DataSetColumn="FechaFac" />
+              <Mapping SourceColumn="ValorTotal" DataSetColumn="ValorTotal" />
+              <Mapping SourceColumn="Copago" DataSetColumn="Copago" />
+              <Mapping SourceColumn="ValorCancelado" DataSetColumn="ValorCancelado" />
+              <Mapping SourceColumn="Saldo" DataSetColumn="Saldo" />
+              <Mapping SourceColumn="Entidad" DataSetColumn="Entidad" />
+              <Mapping SourceColumn="AnuladaFac" DataSetColumn="AnuladaFac" />
+              <Mapping SourceColumn="TerAnul" DataSetColumn="TerAnul" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsReportFacturaConSaldo" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsReportFacturaConSaldo" msprop:Generator_UserDSName="dsReportFacturaConSaldo">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Datos_x0020_de_x0020_las_x0020_facturas_x0020_realizadas" msprop:Generator_TableClassName="Datos_de_las_facturas_realizadasDataTable" msprop:Generator_TableVarName="tableDatos_de_las_facturas_realizadas" msprop:Generator_TablePropName="Datos_de_las_facturas_realizadas" msprop:Generator_RowDeletingName="Datos_de_las_facturas_realizadasRowDeleting" msprop:Generator_RowChangingName="Datos_de_las_facturas_realizadasRowChanging" msprop:Generator_RowEvHandlerName="Datos_de_las_facturas_realizadasRowChangeEventHandler" msprop:Generator_RowDeletedName="Datos_de_las_facturas_realizadasRowDeleted" msprop:Generator_UserTableName="Datos de las facturas realizadas" msprop:Generator_RowChangedName="Datos_de_las_facturas_realizadasRowChanged" msprop:Generator_RowEvArgName="Datos_de_las_facturas_realizadasRowChangeEvent" msprop:Generator_RowClassName="Datos_de_las_facturas_realizadasRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NumFactura" msprop:Generator_ColumnVarNameInTable="columnNumFactura" msprop:Generator_ColumnPropNameInRow="NumFactura" msprop:Generator_ColumnPropNameInTable="NumFacturaColumn" msprop:Generator_UserColumnName="NumFactura">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Facturador" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFacturador" msprop:Generator_ColumnPropNameInRow="Facturador" msprop:Generator_ColumnPropNameInTable="FacturadorColumn" msprop:Generator_UserColumnName="Facturador" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="108" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Cartercero" msprop:Generator_ColumnVarNameInTable="columnCartercero" msprop:Generator_ColumnPropNameInRow="Cartercero" msprop:Generator_ColumnPropNameInTable="CarterceroColumn" msprop:Generator_UserColumnName="Cartercero">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Paciente" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPaciente" msprop:Generator_ColumnPropNameInRow="Paciente" msprop:Generator_ColumnPropNameInTable="PacienteColumn" msprop:Generator_UserColumnName="Paciente" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="103" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FechaFac" msprop:Generator_ColumnVarNameInTable="columnFechaFac" msprop:Generator_ColumnPropNameInRow="FechaFac" msprop:Generator_ColumnPropNameInTable="FechaFacColumn" msprop:Generator_UserColumnName="FechaFac" type="xs:dateTime" />
+              <xs:element name="ValorTotal" msprop:Generator_ColumnVarNameInTable="columnValorTotal" msprop:Generator_ColumnPropNameInRow="ValorTotal" msprop:Generator_ColumnPropNameInTable="ValorTotalColumn" msprop:Generator_UserColumnName="ValorTotal" type="xs:double" />
+              <xs:element name="Copago" msprop:Generator_ColumnVarNameInTable="columnCopago" msprop:Generator_ColumnPropNameInRow="Copago" msprop:Generator_ColumnPropNameInTable="CopagoColumn" msprop:Generator_UserColumnName="Copago" type="xs:double" />
+              <xs:element name="ValorCancelado" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnValorCancelado" msprop:Generator_ColumnPropNameInRow="ValorCancelado" msprop:Generator_ColumnPropNameInTable="ValorCanceladoColumn" msprop:Generator_UserColumnName="ValorCancelado" type="xs:double" minOccurs="0" />
+              <xs:element name="Saldo" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSaldo" msprop:Generator_ColumnPropNameInRow="Saldo" msprop:Generator_ColumnPropNameInTable="SaldoColumn" msprop:Generator_UserColumnName="Saldo" type="xs:double" minOccurs="0" />
+              <xs:element name="Entidad" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnEntidad" msprop:Generator_ColumnPropNameInRow="Entidad" msprop:Generator_ColumnPropNameInTable="EntidadColumn" msprop:Generator_UserColumnName="Entidad" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="121" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AnuladaFac" msprop:Generator_ColumnVarNameInTable="columnAnuladaFac" msprop:Generator_ColumnPropNameInRow="AnuladaFac" msprop:Generator_ColumnPropNameInTable="AnuladaFacColumn" msprop:Generator_UserColumnName="AnuladaFac" type="xs:boolean" />
+              <xs:element name="TerAnul" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTerAnul" msprop:Generator_ColumnPropNameInRow="TerAnul" msprop:Generator_ColumnPropNameInTable="TerAnulColumn" msprop:Generator_UserColumnName="TerAnul" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Datos_x0020_de_x0020_las_x0020_facturas_x0020_realizadas" />
+      <xs:field xpath="mstns:NumFactura" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
