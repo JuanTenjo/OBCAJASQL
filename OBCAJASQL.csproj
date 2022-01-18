@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\Conexion.cs" />
+    <Compile Include="Class\Conversores.cs" />
     <Compile Include="Class\Utils.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -78,17 +79,65 @@
     <Compile Include="Forms\Administracion\Auditoria\FrmReportesFacturaConSaldo.Designer.cs">
       <DependentUpon>FrmReportesFacturaConSaldo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Caja\FrmBuscarPacientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Caja\FrmBuscarPacientes.Designer.cs">
+      <DependentUpon>FrmBuscarPacientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Caja\FrmBuscarServicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Caja\FrmBuscarServicios.Designer.cs">
+      <DependentUpon>FrmBuscarServicios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Caja\FrmBuscarTerceros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Caja\FrmBuscarTerceros.Designer.cs">
+      <DependentUpon>FrmBuscarTerceros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Caja\FrmCajaDepositos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Caja\FrmCajaDepositos.Designer.cs">
+      <DependentUpon>FrmCajaDepositos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Caja\FrmCajaGeneral.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Caja\FrmCajaGeneral.Designer.cs">
       <DependentUpon>FrmCajaGeneral.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Caja\FrmCruceDepositos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Caja\FrmCruceDepositos.Designer.cs">
+      <DependentUpon>FrmCruceDepositos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Caja\FrmInputReciboCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Caja\FrmInputReciboCaja.Designer.cs">
+      <DependentUpon>FrmInputReciboCaja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Caja\FrmPagosAFacturas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Caja\FrmPagosAFacturas.Designer.cs">
       <DependentUpon>FrmPagosAFacturas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Caja\Reportes\FrmReporteIngresosPorCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Caja\Reportes\FrmReporteIngresosPorCaja.Designer.cs">
+      <DependentUpon>FrmReporteIngresosPorCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmInputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmInputBox.Designer.cs">
+      <DependentUpon>FrmInputBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmPrincipal.cs">
       <SubType>Form</SubType>
@@ -103,10 +152,32 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsInformacionEmpresa.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Report\DataSet\dsReciboCaja.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReciboCaja.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\DataSet\dsReportes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReportes.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Report\DataSet\dsReportFacturaConSaldo.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsReportFacturaConSaldo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\FrmReciboDeCajas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\FrmReciboDeCajas.Designer.cs">
+      <DependentUpon>FrmReciboDeCajas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\FrmReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\FrmReportes.Designer.cs">
+      <DependentUpon>FrmReportes.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\FrmReportFacturaSaldo.cs">
       <SubType>Form</SubType>
@@ -118,11 +189,35 @@
     <EmbeddedResource Include="Forms\Administracion\Auditoria\FrmReportesFacturaConSaldo.resx">
       <DependentUpon>FrmReportesFacturaConSaldo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Caja\FrmBuscarPacientes.resx">
+      <DependentUpon>FrmBuscarPacientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Caja\FrmBuscarServicios.resx">
+      <DependentUpon>FrmBuscarServicios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Caja\FrmBuscarTerceros.resx">
+      <DependentUpon>FrmBuscarTerceros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Caja\FrmCajaDepositos.resx">
+      <DependentUpon>FrmCajaDepositos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Caja\FrmCajaGeneral.resx">
       <DependentUpon>FrmCajaGeneral.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Caja\FrmCruceDepositos.resx">
+      <DependentUpon>FrmCruceDepositos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Caja\FrmInputReciboCaja.resx">
+      <DependentUpon>FrmInputReciboCaja.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Caja\FrmPagosAFacturas.resx">
       <DependentUpon>FrmPagosAFacturas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Caja\Reportes\FrmReporteIngresosPorCaja.resx">
+      <DependentUpon>FrmReporteIngresosPorCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmInputBox.resx">
+      <DependentUpon>FrmInputBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
@@ -137,11 +232,26 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Report\FrmReciboDeCajas.resx">
+      <DependentUpon>FrmReciboDeCajas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\FrmReportes.resx">
+      <DependentUpon>FrmReportes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\FrmReportFacturaSaldo.resx">
       <DependentUpon>FrmReportFacturaSaldo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rdlc\Informe de caja por entidades.rdlc" />
+    <EmbeddedResource Include="Report\Rdlc\Informe de caja por pacientes.rdlc" />
+    <EmbeddedResource Include="Report\Rdlc\Informe de caja por regimen costos.rdlc" />
+    <EmbeddedResource Include="Report\Rdlc\Informe de caja por regimen.rdlc" />
+    <EmbeddedResource Include="Report\Rdlc\Informe de caja por todos.rdlc" />
+    <EmbeddedResource Include="Report\Rdlc\Informe de caja por usuarios.rdlc" />
     <EmbeddedResource Include="Report\Rdlc\Informe facturas con saldos por entidades.rdlc" />
     <EmbeddedResource Include="Report\Rdlc\Informe facturas con saldos todas.rdlc" />
+    <EmbeddedResource Include="Report\Rdlc\Informe recibos de cajas contabilidad.rdlc" />
+    <EmbeddedResource Include="Report\Rdlc\Informe recibos de cajas preformateado IngOp.rdlc" />
+    <EmbeddedResource Include="Report\Rdlc\Informe recibos de cajas.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -171,6 +281,28 @@
     </None>
     <None Include="Report\DataSet\dsInformacionEmpresa.xss">
       <DependentUpon>dsInformacionEmpresa.xsd</DependentUpon>
+    </None>
+    <None Include="Report\DataSet\dsReciboCaja.xsc">
+      <DependentUpon>dsReciboCaja.xsd</DependentUpon>
+    </None>
+    <None Include="Report\DataSet\dsReciboCaja.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReciboCaja.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Report\DataSet\dsReciboCaja.xss">
+      <DependentUpon>dsReciboCaja.xsd</DependentUpon>
+    </None>
+    <None Include="Report\DataSet\dsReportes.xsc">
+      <DependentUpon>dsReportes.xsd</DependentUpon>
+    </None>
+    <None Include="Report\DataSet\dsReportes.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReportes.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Report\DataSet\dsReportes.xss">
+      <DependentUpon>dsReportes.xsd</DependentUpon>
     </None>
     <None Include="Report\DataSet\dsReportFacturaConSaldo.xsc">
       <DependentUpon>dsReportFacturaConSaldo.xsd</DependentUpon>
@@ -204,6 +336,8 @@
     <None Include="Iconos\icons8-servicio-40.png" />
     <None Include="Iconos\icons8-guardar-40.png" />
     <None Include="Iconos\icons8-imprimir-40.png" />
+    <None Include="Iconos\icons8-fusionar-docunemts-40.png" />
+    <None Include="Iconos\icons8-añadir-marcador-40.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

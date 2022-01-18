@@ -9,6 +9,7 @@ namespace OBCAJASQL.Class
     class Utils
     {
         public static string codUsuario { get; set; }
+
         public static string nomUsuario { get; set; }
         public static string nivelPermiso { get; set; }
         public static string codUnicoEmpresa { get; set; }
@@ -56,6 +57,7 @@ namespace OBCAJASQL.Class
         public static string CodCaja { get; set; }
         public static string CenCosCaja { get; set; }
         public static string CuenConta { get; set; }
+        public static string CuentaContable { get; set; }
         public static string TipoDocDebi { get; set; }
         public static string NumDocDebi { get; set; }
         public static string SucuCtaDebi { get; set; }
@@ -65,6 +67,43 @@ namespace OBCAJASQL.Class
         public static string TipDocPre { get; set; }
         public static string NumDocPre { get; set; }
         public static string SucurPre { get; set; }
+
+        //Busqeuda por tecero
+
+        public static string TipDocFac { get; set; }
+        public static string NitCC { get; set; }
+        public static string SucurTer { get; set; }
+
+        //Reporte Recibo de Caja
+        public static string Condicion { get; set; }
+
+        //Cruce Depositos
+
+        public static string Histocruce { get; set; }
+        public static string FacturDepo { get; set; }
+        public static string TipoPago { get; set; }
+        public static string RegimenUsu { get; set; }
+
+        //Ingresos Generarles
+
+        public static string HistoriaNumero { get; set; }
+        public static string NombrePaciente { get; set; }
+
+        public static string CodigoServi { get; set; }
+
+
+        //Formulario InputBox
+
+        public static string ReciboCaja { get; set; }
+        public static string TextoInputBox { get; set; }
+        public static string ValueInput { get; set; }
+
+        //Informes
+
+        public static string FechaInicial { get; set; }
+        public static string FechaFinal { get; set; }
+        public static int Anulado { get; set; }
+
 
     }
 }

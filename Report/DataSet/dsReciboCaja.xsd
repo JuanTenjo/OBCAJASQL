@@ -1,0 +1,940 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsReciboCaja" targetNamespace="http://tempuri.org/dsReciboCaja.xsd" xmlns:mstns="http://tempuri.org/dsReciboCaja.xsd" xmlns="http://tempuri.org/dsReciboCaja.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ACDATOXPSQLConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ACDATOXPSQLConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.OBCAJASQL.Properties.Settings.GlobalReference.Default.ACDATOXPSQLConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Recibo CajaTableAdapter" GeneratorDataComponentClassName="Recibo_CajaTableAdapter" Name="Recibo Caja" UserDataComponentName="Recibo CajaTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ACDATOXPSQLConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        BDCAJASQL.dbo.[Datos recibos de caja].ReciboCaja, BDCAJASQL.dbo.[Datos recibos de caja].HistorPaciente, Trim([Datos del Paciente].Apellido1 + ' ' + [Datos del Paciente].Apellido2) 
+                         + ' ' + Trim([Datos del Paciente].Nombre1 + ' ' + [Datos del Paciente].Nombre2) AS Paciente, BDCAJASQL.dbo.[Datos recibos de caja].TipoDocu, BDCAJASQL.dbo.[Datos recibos de caja].NumDocu, 
+                         BDCAJASQL.dbo.[Datos recibos de caja].SucuDocu, GEOGRAXPSQL.dbo.[Datos proveedores].RazonSol, BDCAJASQL.dbo.[Datos recibos de caja].DocumNumero, BDCAJASQL.dbo.[Datos recibos de caja].EntidadDocumen, 
+                         BDCAJASQL.dbo.[Datos recibos de caja].FechaPagoCaja, BDCAJASQL.dbo.[Datos recibos de caja].CodRegis, BDCAJASQL.dbo.[Datos detalles recibos de caja].CodServi, 
+                         BDCAJASQL.dbo.[Datos detalles recibos de caja].DetaPagoCaja, BDCAJASQL.dbo.[Datos detalles recibos de caja].CantidadCaja, BDCAJASQL.dbo.[Datos detalles recibos de caja].ValorUnitaCaja, 
+                         BDCAJASQL.dbo.[Datos detalles recibos de caja].CuentaContable + '-' + BDCAJASQL.dbo.[Datos detalles recibos de caja].CentroCosto AS CuenCenT, 
+                         BDCAJASQL.dbo.[Datos detalles recibos de caja].CantidadCaja * BDCAJASQL.dbo.[Datos detalles recibos de caja].ValorUnitaCaja AS VT, BDCAJASQL.dbo.[Datos recibos de caja].AnuladoRecibo, 
+                         BDCAJASQL.dbo.[Datos recibos de caja].FechAnulado, BDCAJASQL.dbo.[Datos recibos de caja].CodiAnul, BDCAJASQL.dbo.[Datos recibos de caja].RazonAnula, BDCAJASQL.dbo.[Datos recibos de caja].ObserCaja
+FROM            GEOGRAXPSQL.dbo.[Datos proveedores] INNER JOIN
+                         [Datos del Paciente] INNER JOIN
+                         BDCAJASQL.dbo.[Datos recibos de caja] ON [Datos del Paciente].HistorPaci = BDCAJASQL.dbo.[Datos recibos de caja].HistorPaciente INNER JOIN
+                         BDCAJASQL.dbo.[Datos detalles recibos de caja] ON BDCAJASQL.dbo.[Datos recibos de caja].ReciboCaja = BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum ON 
+                         GEOGRAXPSQL.dbo.[Datos proveedores].TipoDocu = BDCAJASQL.dbo.[Datos recibos de caja].TipoDocu AND GEOGRAXPSQL.dbo.[Datos proveedores].IdenProve = BDCAJASQL.dbo.[Datos recibos de caja].NumDocu AND 
+                         GEOGRAXPSQL.dbo.[Datos proveedores].SucurProv = BDCAJASQL.dbo.[Datos recibos de caja].SucuDocu
+WHERE        (BDCAJASQL.dbo.[Datos detalles recibos de caja].ValorUnitaCaja &gt; 0)
+ORDER BY BDCAJASQL.dbo.[Datos recibos de caja].ReciboCaja</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ReciboCaja" DataSetColumn="ReciboCaja" />
+              <Mapping SourceColumn="HistorPaciente" DataSetColumn="HistorPaciente" />
+              <Mapping SourceColumn="Paciente" DataSetColumn="Paciente" />
+              <Mapping SourceColumn="TipoDocu" DataSetColumn="TipoDocu" />
+              <Mapping SourceColumn="NumDocu" DataSetColumn="NumDocu" />
+              <Mapping SourceColumn="SucuDocu" DataSetColumn="SucuDocu" />
+              <Mapping SourceColumn="RazonSol" DataSetColumn="RazonSol" />
+              <Mapping SourceColumn="DocumNumero" DataSetColumn="DocumNumero" />
+              <Mapping SourceColumn="EntidadDocumen" DataSetColumn="EntidadDocumen" />
+              <Mapping SourceColumn="FechaPagoCaja" DataSetColumn="FechaPagoCaja" />
+              <Mapping SourceColumn="CodRegis" DataSetColumn="CodRegis" />
+              <Mapping SourceColumn="CodServi" DataSetColumn="CodServi" />
+              <Mapping SourceColumn="DetaPagoCaja" DataSetColumn="DetaPagoCaja" />
+              <Mapping SourceColumn="CantidadCaja" DataSetColumn="CantidadCaja" />
+              <Mapping SourceColumn="ValorUnitaCaja" DataSetColumn="ValorUnitaCaja" />
+              <Mapping SourceColumn="CuenCenT" DataSetColumn="CuenCenT" />
+              <Mapping SourceColumn="VT" DataSetColumn="VT" />
+              <Mapping SourceColumn="AnuladoRecibo" DataSetColumn="AnuladoRecibo" />
+              <Mapping SourceColumn="FechAnulado" DataSetColumn="FechAnulado" />
+              <Mapping SourceColumn="CodiAnul" DataSetColumn="CodiAnul" />
+              <Mapping SourceColumn="RazonAnula" DataSetColumn="RazonAnula" />
+              <Mapping SourceColumn="ObserCaja" DataSetColumn="ObserCaja" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Informacion de la empresaTableAdapter" GeneratorDataComponentClassName="Informacion_de_la_empresaTableAdapter" Name="Informacion de la empresa" UserDataComponentName="Informacion de la empresaTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ACDATOXPSQLConnectionString (Settings)" DbObjectName="BDADMINSIG.dbo.[Datos informacion de la empresa]" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [BDADMINSIG].[dbo].[Datos informacion de la empresa] WHERE (([CodUnico] = @Original_CodUnico) AND ([CodSede] = @Original_CodSede) AND ([TipoDocEmp] = @Original_TipoDocEmp) AND ([NitCCEmpresa] = @Original_NitCCEmpresa) AND ([DigVerEm] = @Original_DigVerEm) AND ([CodiMinSalud] = @Original_CodiMinSalud) AND ([NomEmpresa] = @Original_NomEmpresa) AND ((@IsNull_NomSecEmpre = 1 AND [NomSecEmpre] IS NULL) OR ([NomSecEmpre] = @Original_NomSecEmpre)) AND ((@IsNull_CatEmpresa = 1 AND [CatEmpresa] IS NULL) OR ([CatEmpresa] = @Original_CatEmpresa)) AND ((@IsNull_Eslogan = 1 AND [Eslogan] IS NULL) OR ([Eslogan] = @Original_Eslogan)) AND ([CodPaisDomi] = @Original_CodPaisDomi) AND ([NomPaisDomi] = @Original_NomPaisDomi) AND ([CodDptoDomi] = @Original_CodDptoDomi) AND ([NomDptoDomi] = @Original_NomDptoDomi) AND ([CodMunDomi] = @Original_CodMunDomi) AND ([NomMuniDomi] = @Original_NomMuniDomi) AND ((@IsNull_DirecIPS = 1 AND [DirecIPS] IS NULL) OR ([DirecIPS] = @Original_DirecIPS)) AND ((@IsNull_BarIPS = 1 AND [BarIPS] IS NULL) OR ([BarIPS] = @Original_BarIPS)) AND ((@IsNull_TelPrin = 1 AND [TelPrin] IS NULL) OR ([TelPrin] = @Original_TelPrin)) AND ((@IsNull_TelePie = 1 AND [TelePie] IS NULL) OR ([TelePie] = @Original_TelePie)) AND ((@IsNull_Email1 = 1 AND [Email1] IS NULL) OR ([Email1] = @Original_Email1)) AND ((@IsNull_Email2 = 1 AND [Email2] IS NULL) OR ([Email2] = @Original_Email2)) AND ([FecIniSis] = @Original_FecIniSis) AND ([ContaSIG] = @Original_ContaSIG) AND ([HabilFactu] = @Original_HabilFactu) AND ([DefConta] = @Original_DefConta) AND ([ConFacCapi] = @Original_ConFacCapi) AND ([PagCarAfecBan] = @Original_PagCarAfecBan) AND ([FirmDigPaci] = @Original_FirmDigPaci) AND ([HueDigPaci] = @Original_HueDigPaci) AND ([FotoDigPaci] = @Original_FotoDigPaci) AND ([CodiResIVA] = @Original_CodiResIVA) AND ([IdSetPruebas] = @Original_IdSetPruebas) AND ([RutaDocuDian] = @Original_RutaDocuDian) AND ([SmtpHost] = @Original_SmtpHost) AND ([SmtpPort] = @Original_SmtpPort) AND ([SmtpPass] = @Original_SmtpPass) AND ([CodPostal] = @Original_CodPostal) AND ([TipoAmbiente] = @Original_TipoAmbiente) AND ([FacturElec] = @Original_FacturElec) AND ([FecFacElec] = @Original_FecFacElec) AND ([DiasVenFac] = @Original_DiasVenFac))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CodUnico" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodUnico" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CodSede" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodSede" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_TipoDocEmp" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="TipoDocEmp" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_NitCCEmpresa" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NitCCEmpresa" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_DigVerEm" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DigVerEm" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CodiMinSalud" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodiMinSalud" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_NomEmpresa" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomEmpresa" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_NomSecEmpre" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="NomSecEmpre" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_NomSecEmpre" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomSecEmpre" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_CatEmpresa" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CatEmpresa" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CatEmpresa" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CatEmpresa" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_Eslogan" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Eslogan" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_Eslogan" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Eslogan" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CodPaisDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodPaisDomi" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_NomPaisDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomPaisDomi" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CodDptoDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodDptoDomi" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_NomDptoDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomDptoDomi" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CodMunDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodMunDomi" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_NomMuniDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomMuniDomi" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_DirecIPS" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="DirecIPS" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_DirecIPS" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DirecIPS" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_BarIPS" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="BarIPS" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_BarIPS" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="BarIPS" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_TelPrin" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TelPrin" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_TelPrin" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="TelPrin" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_TelePie" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TelePie" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_TelePie" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="TelePie" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_Email1" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Email1" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_Email1" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Email1" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_Email2" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Email2" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_Email2" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Email2" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="@Original_FecIniSis" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="FecIniSis" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_ContaSIG" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="ContaSIG" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_HabilFactu" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="HabilFactu" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_DefConta" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DefConta" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_ConFacCapi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="ConFacCapi" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_PagCarAfecBan" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="PagCarAfecBan" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_FirmDigPaci" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="FirmDigPaci" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_HueDigPaci" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="HueDigPaci" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_FotoDigPaci" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="FotoDigPaci" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CodiResIVA" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodiResIVA" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_IdSetPruebas" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="IdSetPruebas" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_RutaDocuDian" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="RutaDocuDian" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_SmtpHost" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="SmtpHost" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_SmtpPort" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="SmtpPort" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_SmtpPass" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="SmtpPass" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CodPostal" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodPostal" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_TipoAmbiente" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TipoAmbiente" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Original_FacturElec" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="FacturElec" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="@Original_FecFacElec" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="FecFacElec" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@Original_DiasVenFac" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="DiasVenFac" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [BDADMINSIG].[dbo].[Datos informacion de la empresa] ([CodUnico], [CodSede], [TipoDocEmp], [NitCCEmpresa], [DigVerEm], [CodiMinSalud], [NomEmpresa], [NomSecEmpre], [CatEmpresa], [LogoEmpresa], [Eslogan], [CodPaisDomi], [NomPaisDomi], [CodDptoDomi], [NomDptoDomi], [CodMunDomi], [NomMuniDomi], [DirecIPS], [BarIPS], [TelPrin], [TelePie], [Email1], [Email2], [FecIniSis], [ContaSIG], [HabilFactu], [DefConta], [ConFacCapi], [PagCarAfecBan], [FirmDigPaci], [HueDigPaci], [FotoDigPaci], [CodiResIVA], [IdSetPruebas], [RutaDocuDian], [SmtpHost], [SmtpPort], [SmtpPass], [CodPostal], [TipoAmbiente], [FacturElec], [FecFacElec], [DiasVenFac]) VALUES (@CodUnico, @CodSede, @TipoDocEmp, @NitCCEmpresa, @DigVerEm, @CodiMinSalud, @NomEmpresa, @NomSecEmpre, @CatEmpresa, @LogoEmpresa, @Eslogan, @CodPaisDomi, @NomPaisDomi, @CodDptoDomi, @NomDptoDomi, @CodMunDomi, @NomMuniDomi, @DirecIPS, @BarIPS, @TelPrin, @TelePie, @Email1, @Email2, @FecIniSis, @ContaSIG, @HabilFactu, @DefConta, @ConFacCapi, @PagCarAfecBan, @FirmDigPaci, @HueDigPaci, @FotoDigPaci, @CodiResIVA, @IdSetPruebas, @RutaDocuDian, @SmtpHost, @SmtpPort, @SmtpPass, @CodPostal, @TipoAmbiente, @FacturElec, @FecFacElec, @DiasVenFac);
+SELECT CodUnico, CodSede, TipoDocEmp, NitCCEmpresa, DigVerEm, CodiMinSalud, NomEmpresa, NomSecEmpre, CatEmpresa, LogoEmpresa, Eslogan, CodPaisDomi, NomPaisDomi, CodDptoDomi, NomDptoDomi, CodMunDomi, NomMuniDomi, DirecIPS, BarIPS, TelPrin, TelePie, Email1, Email2, FecIniSis, ContaSIG, HabilFactu, DefConta, ConFacCapi, PagCarAfecBan, FirmDigPaci, HueDigPaci, FotoDigPaci, CodiResIVA, IdSetPruebas, RutaDocuDian, SmtpHost, SmtpPort, SmtpPass, CodPostal, TipoAmbiente, FacturElec, FecFacElec, DiasVenFac FROM BDADMINSIG.dbo.[Datos informacion de la empresa] WHERE (CodUnico = @CodUnico)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CodUnico" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodUnico" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CodSede" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodSede" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@TipoDocEmp" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="TipoDocEmp" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@NitCCEmpresa" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NitCCEmpresa" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@DigVerEm" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DigVerEm" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CodiMinSalud" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodiMinSalud" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@NomEmpresa" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomEmpresa" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@NomSecEmpre" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomSecEmpre" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CatEmpresa" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CatEmpresa" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Binary" Direction="Input" ParameterName="@LogoEmpresa" Precision="0" ProviderType="Image" Scale="0" Size="0" SourceColumn="LogoEmpresa" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Eslogan" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Eslogan" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CodPaisDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodPaisDomi" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@NomPaisDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomPaisDomi" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CodDptoDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodDptoDomi" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@NomDptoDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomDptoDomi" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CodMunDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodMunDomi" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@NomMuniDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomMuniDomi" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@DirecIPS" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DirecIPS" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@BarIPS" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="BarIPS" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@TelPrin" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="TelPrin" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@TelePie" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="TelePie" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Email1" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Email1" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Email2" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Email2" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="@FecIniSis" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="FecIniSis" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@ContaSIG" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="ContaSIG" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@HabilFactu" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="HabilFactu" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@DefConta" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DefConta" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@ConFacCapi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="ConFacCapi" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@PagCarAfecBan" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="PagCarAfecBan" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@FirmDigPaci" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="FirmDigPaci" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@HueDigPaci" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="HueDigPaci" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@FotoDigPaci" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="FotoDigPaci" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CodiResIVA" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodiResIVA" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@IdSetPruebas" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="IdSetPruebas" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@RutaDocuDian" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="RutaDocuDian" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@SmtpHost" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="SmtpHost" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@SmtpPort" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="SmtpPort" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@SmtpPass" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="SmtpPass" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CodPostal" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodPostal" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@TipoAmbiente" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TipoAmbiente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@FacturElec" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="FacturElec" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="@FecFacElec" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="FecFacElec" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@DiasVenFac" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="DiasVenFac" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        CodUnico, CodSede, TipoDocEmp, NitCCEmpresa, DigVerEm, CodiMinSalud, NomEmpresa, NomSecEmpre, CatEmpresa, LogoEmpresa, Eslogan, CodPaisDomi, NomPaisDomi, CodDptoDomi, NomDptoDomi, CodMunDomi, 
+                         NomMuniDomi, DirecIPS, BarIPS, TelPrin, TelePie, Email1, Email2, FecIniSis, ContaSIG, HabilFactu, DefConta, ConFacCapi, PagCarAfecBan, FirmDigPaci, HueDigPaci, FotoDigPaci, CodiResIVA, IdSetPruebas, RutaDocuDian, 
+                         SmtpHost, SmtpPort, SmtpPass, CodPostal, TipoAmbiente, FacturElec, FecFacElec, DiasVenFac
+FROM            BDADMINSIG.dbo.[Datos informacion de la empresa]</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [BDADMINSIG].[dbo].[Datos informacion de la empresa] SET [CodUnico] = @CodUnico, [CodSede] = @CodSede, [TipoDocEmp] = @TipoDocEmp, [NitCCEmpresa] = @NitCCEmpresa, [DigVerEm] = @DigVerEm, [CodiMinSalud] = @CodiMinSalud, [NomEmpresa] = @NomEmpresa, [NomSecEmpre] = @NomSecEmpre, [CatEmpresa] = @CatEmpresa, [LogoEmpresa] = @LogoEmpresa, [Eslogan] = @Eslogan, [CodPaisDomi] = @CodPaisDomi, [NomPaisDomi] = @NomPaisDomi, [CodDptoDomi] = @CodDptoDomi, [NomDptoDomi] = @NomDptoDomi, [CodMunDomi] = @CodMunDomi, [NomMuniDomi] = @NomMuniDomi, [DirecIPS] = @DirecIPS, [BarIPS] = @BarIPS, [TelPrin] = @TelPrin, [TelePie] = @TelePie, [Email1] = @Email1, [Email2] = @Email2, [FecIniSis] = @FecIniSis, [ContaSIG] = @ContaSIG, [HabilFactu] = @HabilFactu, [DefConta] = @DefConta, [ConFacCapi] = @ConFacCapi, [PagCarAfecBan] = @PagCarAfecBan, [FirmDigPaci] = @FirmDigPaci, [HueDigPaci] = @HueDigPaci, [FotoDigPaci] = @FotoDigPaci, [CodiResIVA] = @CodiResIVA, [IdSetPruebas] = @IdSetPruebas, [RutaDocuDian] = @RutaDocuDian, [SmtpHost] = @SmtpHost, [SmtpPort] = @SmtpPort, [SmtpPass] = @SmtpPass, [CodPostal] = @CodPostal, [TipoAmbiente] = @TipoAmbiente, [FacturElec] = @FacturElec, [FecFacElec] = @FecFacElec, [DiasVenFac] = @DiasVenFac WHERE (([CodUnico] = @Original_CodUnico) AND ([CodSede] = @Original_CodSede) AND ([TipoDocEmp] = @Original_TipoDocEmp) AND ([NitCCEmpresa] = @Original_NitCCEmpresa) AND ([DigVerEm] = @Original_DigVerEm) AND ([CodiMinSalud] = @Original_CodiMinSalud) AND ([NomEmpresa] = @Original_NomEmpresa) AND ((@IsNull_NomSecEmpre = 1 AND [NomSecEmpre] IS NULL) OR ([NomSecEmpre] = @Original_NomSecEmpre)) AND ((@IsNull_CatEmpresa = 1 AND [CatEmpresa] IS NULL) OR ([CatEmpresa] = @Original_CatEmpresa)) AND ((@IsNull_Eslogan = 1 AND [Eslogan] IS NULL) OR ([Eslogan] = @Original_Eslogan)) AND ([CodPaisDomi] = @Original_CodPaisDomi) AND ([NomPaisDomi] = @Original_NomPaisDomi) AND ([CodDptoDomi] = @Original_CodDptoDomi) AND ([NomDptoDomi] = @Original_NomDptoDomi) AND ([CodMunDomi] = @Original_CodMunDomi) AND ([NomMuniDomi] = @Original_NomMuniDomi) AND ((@IsNull_DirecIPS = 1 AND [DirecIPS] IS NULL) OR ([DirecIPS] = @Original_DirecIPS)) AND ((@IsNull_BarIPS = 1 AND [BarIPS] IS NULL) OR ([BarIPS] = @Original_BarIPS)) AND ((@IsNull_TelPrin = 1 AND [TelPrin] IS NULL) OR ([TelPrin] = @Original_TelPrin)) AND ((@IsNull_TelePie = 1 AND [TelePie] IS NULL) OR ([TelePie] = @Original_TelePie)) AND ((@IsNull_Email1 = 1 AND [Email1] IS NULL) OR ([Email1] = @Original_Email1)) AND ((@IsNull_Email2 = 1 AND [Email2] IS NULL) OR ([Email2] = @Original_Email2)) AND ([FecIniSis] = @Original_FecIniSis) AND ([ContaSIG] = @Original_ContaSIG) AND ([HabilFactu] = @Original_HabilFactu) AND ([DefConta] = @Original_DefConta) AND ([ConFacCapi] = @Original_ConFacCapi) AND ([PagCarAfecBan] = @Original_PagCarAfecBan) AND ([FirmDigPaci] = @Original_FirmDigPaci) AND ([HueDigPaci] = @Original_HueDigPaci) AND ([FotoDigPaci] = @Original_FotoDigPaci) AND ([CodiResIVA] = @Original_CodiResIVA) AND ([IdSetPruebas] = @Original_IdSetPruebas) AND ([RutaDocuDian] = @Original_RutaDocuDian) AND ([SmtpHost] = @Original_SmtpHost) AND ([SmtpPort] = @Original_SmtpPort) AND ([SmtpPass] = @Original_SmtpPass) AND ([CodPostal] = @Original_CodPostal) AND ([TipoAmbiente] = @Original_TipoAmbiente) AND ([FacturElec] = @Original_FacturElec) AND ([FecFacElec] = @Original_FecFacElec) AND ([DiasVenFac] = @Original_DiasVenFac));
+SELECT CodUnico, CodSede, TipoDocEmp, NitCCEmpresa, DigVerEm, CodiMinSalud, NomEmpresa, NomSecEmpre, CatEmpresa, LogoEmpresa, Eslogan, CodPaisDomi, NomPaisDomi, CodDptoDomi, NomDptoDomi, CodMunDomi, NomMuniDomi, DirecIPS, BarIPS, TelPrin, TelePie, Email1, Email2, FecIniSis, ContaSIG, HabilFactu, DefConta, ConFacCapi, PagCarAfecBan, FirmDigPaci, HueDigPaci, FotoDigPaci, CodiResIVA, IdSetPruebas, RutaDocuDian, SmtpHost, SmtpPort, SmtpPass, CodPostal, TipoAmbiente, FacturElec, FecFacElec, DiasVenFac FROM BDADMINSIG.dbo.[Datos informacion de la empresa] WHERE (CodUnico = @CodUnico)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CodUnico" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodUnico" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CodSede" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodSede" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@TipoDocEmp" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="TipoDocEmp" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@NitCCEmpresa" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NitCCEmpresa" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@DigVerEm" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DigVerEm" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CodiMinSalud" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodiMinSalud" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@NomEmpresa" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomEmpresa" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@NomSecEmpre" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomSecEmpre" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CatEmpresa" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CatEmpresa" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Binary" Direction="Input" ParameterName="@LogoEmpresa" Precision="0" ProviderType="Image" Scale="0" Size="0" SourceColumn="LogoEmpresa" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Eslogan" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Eslogan" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CodPaisDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodPaisDomi" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@NomPaisDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomPaisDomi" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CodDptoDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodDptoDomi" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@NomDptoDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomDptoDomi" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CodMunDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodMunDomi" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@NomMuniDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomMuniDomi" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@DirecIPS" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DirecIPS" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@BarIPS" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="BarIPS" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@TelPrin" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="TelPrin" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@TelePie" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="TelePie" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Email1" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Email1" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Email2" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Email2" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="@FecIniSis" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="FecIniSis" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@ContaSIG" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="ContaSIG" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@HabilFactu" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="HabilFactu" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@DefConta" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DefConta" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@ConFacCapi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="ConFacCapi" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@PagCarAfecBan" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="PagCarAfecBan" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@FirmDigPaci" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="FirmDigPaci" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@HueDigPaci" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="HueDigPaci" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@FotoDigPaci" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="FotoDigPaci" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CodiResIVA" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodiResIVA" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@IdSetPruebas" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="IdSetPruebas" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@RutaDocuDian" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="RutaDocuDian" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@SmtpHost" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="SmtpHost" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@SmtpPort" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="SmtpPort" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@SmtpPass" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="SmtpPass" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CodPostal" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodPostal" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@TipoAmbiente" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TipoAmbiente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@FacturElec" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="FacturElec" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="@FecFacElec" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="FecFacElec" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@DiasVenFac" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="DiasVenFac" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CodUnico" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodUnico" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CodSede" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodSede" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_TipoDocEmp" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="TipoDocEmp" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_NitCCEmpresa" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NitCCEmpresa" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_DigVerEm" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DigVerEm" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CodiMinSalud" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodiMinSalud" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_NomEmpresa" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomEmpresa" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_NomSecEmpre" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="NomSecEmpre" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_NomSecEmpre" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomSecEmpre" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_CatEmpresa" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CatEmpresa" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CatEmpresa" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CatEmpresa" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_Eslogan" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Eslogan" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_Eslogan" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Eslogan" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CodPaisDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodPaisDomi" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_NomPaisDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomPaisDomi" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CodDptoDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodDptoDomi" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_NomDptoDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomDptoDomi" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CodMunDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodMunDomi" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_NomMuniDomi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomMuniDomi" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_DirecIPS" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="DirecIPS" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_DirecIPS" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DirecIPS" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_BarIPS" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="BarIPS" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_BarIPS" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="BarIPS" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_TelPrin" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TelPrin" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_TelPrin" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="TelPrin" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_TelePie" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TelePie" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_TelePie" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="TelePie" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_Email1" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Email1" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_Email1" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Email1" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_Email2" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Email2" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_Email2" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Email2" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="@Original_FecIniSis" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="FecIniSis" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_ContaSIG" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="ContaSIG" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_HabilFactu" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="HabilFactu" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_DefConta" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DefConta" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_ConFacCapi" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="ConFacCapi" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_PagCarAfecBan" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="PagCarAfecBan" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_FirmDigPaci" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="FirmDigPaci" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_HueDigPaci" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="HueDigPaci" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_FotoDigPaci" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="FotoDigPaci" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CodiResIVA" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodiResIVA" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_IdSetPruebas" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="IdSetPruebas" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_RutaDocuDian" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="RutaDocuDian" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_SmtpHost" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="SmtpHost" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_SmtpPort" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="SmtpPort" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_SmtpPass" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="SmtpPass" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CodPostal" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CodPostal" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_TipoAmbiente" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TipoAmbiente" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Original_FacturElec" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="FacturElec" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="@Original_FecFacElec" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="FecFacElec" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@Original_DiasVenFac" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="DiasVenFac" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="CodUnico" DataSetColumn="CodUnico" />
+              <Mapping SourceColumn="CodSede" DataSetColumn="CodSede" />
+              <Mapping SourceColumn="TipoDocEmp" DataSetColumn="TipoDocEmp" />
+              <Mapping SourceColumn="NitCCEmpresa" DataSetColumn="NitCCEmpresa" />
+              <Mapping SourceColumn="DigVerEm" DataSetColumn="DigVerEm" />
+              <Mapping SourceColumn="CodiMinSalud" DataSetColumn="CodiMinSalud" />
+              <Mapping SourceColumn="NomEmpresa" DataSetColumn="NomEmpresa" />
+              <Mapping SourceColumn="NomSecEmpre" DataSetColumn="NomSecEmpre" />
+              <Mapping SourceColumn="CatEmpresa" DataSetColumn="CatEmpresa" />
+              <Mapping SourceColumn="LogoEmpresa" DataSetColumn="LogoEmpresa" />
+              <Mapping SourceColumn="Eslogan" DataSetColumn="Eslogan" />
+              <Mapping SourceColumn="CodPaisDomi" DataSetColumn="CodPaisDomi" />
+              <Mapping SourceColumn="NomPaisDomi" DataSetColumn="NomPaisDomi" />
+              <Mapping SourceColumn="CodDptoDomi" DataSetColumn="CodDptoDomi" />
+              <Mapping SourceColumn="NomDptoDomi" DataSetColumn="NomDptoDomi" />
+              <Mapping SourceColumn="CodMunDomi" DataSetColumn="CodMunDomi" />
+              <Mapping SourceColumn="NomMuniDomi" DataSetColumn="NomMuniDomi" />
+              <Mapping SourceColumn="DirecIPS" DataSetColumn="DirecIPS" />
+              <Mapping SourceColumn="BarIPS" DataSetColumn="BarIPS" />
+              <Mapping SourceColumn="TelPrin" DataSetColumn="TelPrin" />
+              <Mapping SourceColumn="TelePie" DataSetColumn="TelePie" />
+              <Mapping SourceColumn="Email1" DataSetColumn="Email1" />
+              <Mapping SourceColumn="Email2" DataSetColumn="Email2" />
+              <Mapping SourceColumn="FecIniSis" DataSetColumn="FecIniSis" />
+              <Mapping SourceColumn="ContaSIG" DataSetColumn="ContaSIG" />
+              <Mapping SourceColumn="HabilFactu" DataSetColumn="HabilFactu" />
+              <Mapping SourceColumn="DefConta" DataSetColumn="DefConta" />
+              <Mapping SourceColumn="ConFacCapi" DataSetColumn="ConFacCapi" />
+              <Mapping SourceColumn="PagCarAfecBan" DataSetColumn="PagCarAfecBan" />
+              <Mapping SourceColumn="FirmDigPaci" DataSetColumn="FirmDigPaci" />
+              <Mapping SourceColumn="HueDigPaci" DataSetColumn="HueDigPaci" />
+              <Mapping SourceColumn="FotoDigPaci" DataSetColumn="FotoDigPaci" />
+              <Mapping SourceColumn="CodiResIVA" DataSetColumn="CodiResIVA" />
+              <Mapping SourceColumn="IdSetPruebas" DataSetColumn="IdSetPruebas" />
+              <Mapping SourceColumn="RutaDocuDian" DataSetColumn="RutaDocuDian" />
+              <Mapping SourceColumn="SmtpHost" DataSetColumn="SmtpHost" />
+              <Mapping SourceColumn="SmtpPort" DataSetColumn="SmtpPort" />
+              <Mapping SourceColumn="SmtpPass" DataSetColumn="SmtpPass" />
+              <Mapping SourceColumn="CodPostal" DataSetColumn="CodPostal" />
+              <Mapping SourceColumn="TipoAmbiente" DataSetColumn="TipoAmbiente" />
+              <Mapping SourceColumn="FacturElec" DataSetColumn="FacturElec" />
+              <Mapping SourceColumn="FecFacElec" DataSetColumn="FecFacElec" />
+              <Mapping SourceColumn="DiasVenFac" DataSetColumn="DiasVenFac" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Recibo Caja ContabilidadTableAdapter" GeneratorDataComponentClassName="Recibo_Caja_ContabilidadTableAdapter" Name="Recibo Caja Contabilidad" UserDataComponentName="Recibo Caja ContabilidadTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ACDATOXPSQLConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        BDCAJASQL.dbo.[Datos recibos de caja].ReciboCaja, BDCAJASQL.dbo.[Datos recibos de caja].HistorPaciente, Trim([Datos del Paciente].Apellido1 + ' ' + [Datos del Paciente].Apellido2) 
+                         + ' ' + Trim([Datos del Paciente].Nombre1 + ' ' + [Datos del Paciente].Nombre2) AS Paciente, BDCAJASQL.dbo.[Datos recibos de caja].TipoDocu, BDCAJASQL.dbo.[Datos recibos de caja].NumDocu, 
+                         BDCAJASQL.dbo.[Datos recibos de caja].SucuDocu, GEOGRAXPSQL.dbo.[Datos proveedores].RazonSol, BDCAJASQL.dbo.[Datos recibos de caja].DocumNumero, BDCAJASQL.dbo.[Datos recibos de caja].EntidadDocumen, 
+                         BDCAJASQL.dbo.[Datos recibos de caja].FechaPagoCaja, BDCAJASQL.dbo.[Datos recibos de caja].CodRegis, BDCAJASQL.dbo.[Datos detalles recibos de caja].CuentaContable, 
+                         BDCAJASQL.dbo.[Datos detalles recibos de caja].CentroCosto, BDCAJASQL.dbo.[Datos detalles recibos de caja].DetaPagoCaja, GEOGRAXPSQL.dbo.[Datos ctas contables IPS].NomCConIPS, 
+                         SUM(BDCAJASQL.dbo.[Datos detalles recibos de caja].DebiCaja) AS SumaDeDebiCaja, SUM(BDCAJASQL.dbo.[Datos detalles recibos de caja].CrediCaja) AS SumaDeCrediCaja, 
+                         SUM(BDCAJASQL.dbo.[Datos detalles recibos de caja].DebiCaja - BDCAJASQL.dbo.[Datos detalles recibos de caja].CrediCaja) AS SaldoReal, 
+                         SUM(BDCAJASQL.dbo.[Datos detalles recibos de caja].CantidadCaja * BDCAJASQL.dbo.[Datos detalles recibos de caja].ValorUnitaCaja) AS VT, BDCAJASQL.dbo.[Datos recibos de caja].DocuCruce, 
+                         BDCAJASQL.dbo.[Datos recibos de caja].AnuladoRecibo, BDCAJASQL.dbo.[Datos recibos de caja].FechAnulado, BDCAJASQL.dbo.[Datos recibos de caja].CodiAnul, BDCAJASQL.dbo.[Datos recibos de caja].RazonAnula
+FROM            GEOGRAXPSQL.dbo.[Datos ctas contables IPS] INNER JOIN
+                         GEOGRAXPSQL.dbo.[Datos proveedores] INNER JOIN
+                         [Datos del Paciente] INNER JOIN
+                         BDCAJASQL.dbo.[Datos recibos de caja] ON [Datos del Paciente].HistorPaci = BDCAJASQL.dbo.[Datos recibos de caja].HistorPaciente INNER JOIN
+                         BDCAJASQL.dbo.[Datos detalles recibos de caja] ON BDCAJASQL.dbo.[Datos recibos de caja].ReciboCaja = BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum ON 
+                         GEOGRAXPSQL.dbo.[Datos proveedores].TipoDocu = BDCAJASQL.dbo.[Datos recibos de caja].TipoDocu AND GEOGRAXPSQL.dbo.[Datos proveedores].IdenProve = BDCAJASQL.dbo.[Datos recibos de caja].NumDocu AND 
+                         GEOGRAXPSQL.dbo.[Datos proveedores].SucurProv = BDCAJASQL.dbo.[Datos recibos de caja].SucuDocu ON 
+                         GEOGRAXPSQL.dbo.[Datos ctas contables IPS].CueContaIPS = BDCAJASQL.dbo.[Datos detalles recibos de caja].CuentaContable
+GROUP BY BDCAJASQL.dbo.[Datos recibos de caja].ReciboCaja, BDCAJASQL.dbo.[Datos recibos de caja].HistorPaciente, Trim([Datos del Paciente].Apellido1 + ' ' + [Datos del Paciente].Apellido2) 
+                         + ' ' + Trim([Datos del Paciente].Nombre1 + ' ' + [Datos del Paciente].Nombre2), BDCAJASQL.dbo.[Datos recibos de caja].TipoDocu, BDCAJASQL.dbo.[Datos recibos de caja].NumDocu, 
+                         BDCAJASQL.dbo.[Datos recibos de caja].SucuDocu, GEOGRAXPSQL.dbo.[Datos proveedores].RazonSol, BDCAJASQL.dbo.[Datos recibos de caja].DocumNumero, BDCAJASQL.dbo.[Datos recibos de caja].EntidadDocumen, 
+                         BDCAJASQL.dbo.[Datos recibos de caja].FechaPagoCaja, BDCAJASQL.dbo.[Datos recibos de caja].CodRegis, BDCAJASQL.dbo.[Datos detalles recibos de caja].CuentaContable, 
+                         BDCAJASQL.dbo.[Datos detalles recibos de caja].CentroCosto, BDCAJASQL.dbo.[Datos detalles recibos de caja].DetaPagoCaja, GEOGRAXPSQL.dbo.[Datos ctas contables IPS].NomCConIPS, 
+                         BDCAJASQL.dbo.[Datos recibos de caja].DocuCruce, BDCAJASQL.dbo.[Datos recibos de caja].AnuladoRecibo, BDCAJASQL.dbo.[Datos recibos de caja].FechAnulado, BDCAJASQL.dbo.[Datos recibos de caja].CodiAnul, 
+                         BDCAJASQL.dbo.[Datos recibos de caja].RazonAnula;  </CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ReciboCaja" DataSetColumn="ReciboCaja" />
+              <Mapping SourceColumn="HistorPaciente" DataSetColumn="HistorPaciente" />
+              <Mapping SourceColumn="Paciente" DataSetColumn="Paciente" />
+              <Mapping SourceColumn="TipoDocu" DataSetColumn="TipoDocu" />
+              <Mapping SourceColumn="NumDocu" DataSetColumn="NumDocu" />
+              <Mapping SourceColumn="SucuDocu" DataSetColumn="SucuDocu" />
+              <Mapping SourceColumn="RazonSol" DataSetColumn="RazonSol" />
+              <Mapping SourceColumn="DocumNumero" DataSetColumn="DocumNumero" />
+              <Mapping SourceColumn="EntidadDocumen" DataSetColumn="EntidadDocumen" />
+              <Mapping SourceColumn="FechaPagoCaja" DataSetColumn="FechaPagoCaja" />
+              <Mapping SourceColumn="CodRegis" DataSetColumn="CodRegis" />
+              <Mapping SourceColumn="CuentaContable" DataSetColumn="CuentaContable" />
+              <Mapping SourceColumn="CentroCosto" DataSetColumn="CentroCosto" />
+              <Mapping SourceColumn="DetaPagoCaja" DataSetColumn="DetaPagoCaja" />
+              <Mapping SourceColumn="NomCConIPS" DataSetColumn="NomCConIPS" />
+              <Mapping SourceColumn="SumaDeDebiCaja" DataSetColumn="SumaDeDebiCaja" />
+              <Mapping SourceColumn="SumaDeCrediCaja" DataSetColumn="SumaDeCrediCaja" />
+              <Mapping SourceColumn="SaldoReal" DataSetColumn="SaldoReal" />
+              <Mapping SourceColumn="VT" DataSetColumn="VT" />
+              <Mapping SourceColumn="DocuCruce" DataSetColumn="DocuCruce" />
+              <Mapping SourceColumn="AnuladoRecibo" DataSetColumn="AnuladoRecibo" />
+              <Mapping SourceColumn="FechAnulado" DataSetColumn="FechAnulado" />
+              <Mapping SourceColumn="CodiAnul" DataSetColumn="CodiAnul" />
+              <Mapping SourceColumn="RazonAnula" DataSetColumn="RazonAnula" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsReciboCaja" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsReciboCaja" msprop:Generator_UserDSName="dsReciboCaja">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Recibo_x0020_Caja" msprop:Generator_TableClassName="Recibo_CajaDataTable" msprop:Generator_TableVarName="tableRecibo_Caja" msprop:Generator_RowChangedName="Recibo_CajaRowChanged" msprop:Generator_TablePropName="Recibo_Caja" msprop:Generator_RowDeletingName="Recibo_CajaRowDeleting" msprop:Generator_RowChangingName="Recibo_CajaRowChanging" msprop:Generator_RowEvHandlerName="Recibo_CajaRowChangeEventHandler" msprop:Generator_RowDeletedName="Recibo_CajaRowDeleted" msprop:Generator_RowClassName="Recibo_CajaRow" msprop:Generator_UserTableName="Recibo Caja" msprop:Generator_RowEvArgName="Recibo_CajaRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReciboCaja" msprop:Generator_ColumnVarNameInTable="columnReciboCaja" msprop:Generator_ColumnPropNameInRow="ReciboCaja" msprop:Generator_ColumnPropNameInTable="ReciboCajaColumn" msprop:Generator_UserColumnName="ReciboCaja">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HistorPaciente" msprop:Generator_ColumnVarNameInTable="columnHistorPaciente" msprop:Generator_ColumnPropNameInRow="HistorPaciente" msprop:Generator_ColumnPropNameInTable="HistorPacienteColumn" msprop:Generator_UserColumnName="HistorPaciente">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Paciente" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPaciente" msprop:Generator_ColumnPropNameInRow="Paciente" msprop:Generator_ColumnPropNameInTable="PacienteColumn" msprop:Generator_UserColumnName="Paciente" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="103" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TipoDocu" msprop:Generator_ColumnVarNameInTable="columnTipoDocu" msprop:Generator_ColumnPropNameInRow="TipoDocu" msprop:Generator_ColumnPropNameInTable="TipoDocuColumn" msprop:Generator_UserColumnName="TipoDocu">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NumDocu" msprop:Generator_ColumnVarNameInTable="columnNumDocu" msprop:Generator_ColumnPropNameInRow="NumDocu" msprop:Generator_ColumnPropNameInTable="NumDocuColumn" msprop:Generator_UserColumnName="NumDocu">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SucuDocu" msprop:Generator_ColumnVarNameInTable="columnSucuDocu" msprop:Generator_ColumnPropNameInRow="SucuDocu" msprop:Generator_ColumnPropNameInTable="SucuDocuColumn" msprop:Generator_UserColumnName="SucuDocu">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RazonSol" msprop:Generator_ColumnVarNameInTable="columnRazonSol" msprop:Generator_ColumnPropNameInRow="RazonSol" msprop:Generator_ColumnPropNameInTable="RazonSolColumn" msprop:Generator_UserColumnName="RazonSol">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocumNumero" msprop:Generator_ColumnVarNameInTable="columnDocumNumero" msprop:Generator_ColumnPropNameInRow="DocumNumero" msprop:Generator_ColumnPropNameInTable="DocumNumeroColumn" msprop:Generator_UserColumnName="DocumNumero" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="17" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EntidadDocumen" msprop:Generator_ColumnVarNameInTable="columnEntidadDocumen" msprop:Generator_ColumnPropNameInRow="EntidadDocumen" msprop:Generator_ColumnPropNameInTable="EntidadDocumenColumn" msprop:Generator_UserColumnName="EntidadDocumen" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FechaPagoCaja" msprop:Generator_ColumnVarNameInTable="columnFechaPagoCaja" msprop:Generator_ColumnPropNameInRow="FechaPagoCaja" msprop:Generator_ColumnPropNameInTable="FechaPagoCajaColumn" msprop:Generator_UserColumnName="FechaPagoCaja" type="xs:dateTime" />
+              <xs:element name="CodRegis" msprop:Generator_ColumnVarNameInTable="columnCodRegis" msprop:Generator_ColumnPropNameInRow="CodRegis" msprop:Generator_ColumnPropNameInTable="CodRegisColumn" msprop:Generator_UserColumnName="CodRegis">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CodServi" msprop:Generator_ColumnVarNameInTable="columnCodServi" msprop:Generator_ColumnPropNameInRow="CodServi" msprop:Generator_ColumnPropNameInTable="CodServiColumn" msprop:Generator_UserColumnName="CodServi" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="18" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DetaPagoCaja" msprop:Generator_ColumnVarNameInTable="columnDetaPagoCaja" msprop:Generator_ColumnPropNameInRow="DetaPagoCaja" msprop:Generator_ColumnPropNameInTable="DetaPagoCajaColumn" msprop:Generator_UserColumnName="DetaPagoCaja">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CantidadCaja" msprop:Generator_ColumnVarNameInTable="columnCantidadCaja" msprop:Generator_ColumnPropNameInRow="CantidadCaja" msprop:Generator_ColumnPropNameInTable="CantidadCajaColumn" msprop:Generator_UserColumnName="CantidadCaja" type="xs:double" />
+              <xs:element name="ValorUnitaCaja" msprop:Generator_ColumnVarNameInTable="columnValorUnitaCaja" msprop:Generator_ColumnPropNameInRow="ValorUnitaCaja" msprop:Generator_ColumnPropNameInTable="ValorUnitaCajaColumn" msprop:Generator_UserColumnName="ValorUnitaCaja" type="xs:double" />
+              <xs:element name="CuenCenT" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnCuenCenT" msprop:Generator_ColumnPropNameInRow="CuenCenT" msprop:Generator_ColumnPropNameInTable="CuenCenTColumn" msprop:Generator_UserColumnName="CuenCenT" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="16" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VT" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnVT" msprop:Generator_ColumnPropNameInRow="VT" msprop:Generator_ColumnPropNameInTable="VTColumn" msprop:Generator_UserColumnName="VT" type="xs:double" minOccurs="0" />
+              <xs:element name="AnuladoRecibo" msprop:Generator_ColumnVarNameInTable="columnAnuladoRecibo" msprop:Generator_ColumnPropNameInRow="AnuladoRecibo" msprop:Generator_ColumnPropNameInTable="AnuladoReciboColumn" msprop:Generator_UserColumnName="AnuladoRecibo" type="xs:boolean" />
+              <xs:element name="FechAnulado" msprop:Generator_ColumnVarNameInTable="columnFechAnulado" msprop:Generator_ColumnPropNameInRow="FechAnulado" msprop:Generator_ColumnPropNameInTable="FechAnuladoColumn" msprop:Generator_UserColumnName="FechAnulado" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CodiAnul" msprop:Generator_ColumnVarNameInTable="columnCodiAnul" msprop:Generator_ColumnPropNameInRow="CodiAnul" msprop:Generator_ColumnPropNameInTable="CodiAnulColumn" msprop:Generator_UserColumnName="CodiAnul" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RazonAnula" msprop:Generator_ColumnVarNameInTable="columnRazonAnula" msprop:Generator_ColumnPropNameInRow="RazonAnula" msprop:Generator_ColumnPropNameInTable="RazonAnulaColumn" msprop:Generator_UserColumnName="RazonAnula" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ObserCaja" msprop:Generator_ColumnVarNameInTable="columnObserCaja" msprop:Generator_ColumnPropNameInRow="ObserCaja" msprop:Generator_ColumnPropNameInTable="ObserCajaColumn" msprop:Generator_UserColumnName="ObserCaja" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="350" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Informacion_x0020_de_x0020_la_x0020_empresa" msprop:Generator_TableClassName="Informacion_de_la_empresaDataTable" msprop:Generator_TableVarName="tableInformacion_de_la_empresa" msprop:Generator_RowChangedName="Informacion_de_la_empresaRowChanged" msprop:Generator_TablePropName="Informacion_de_la_empresa" msprop:Generator_RowDeletingName="Informacion_de_la_empresaRowDeleting" msprop:Generator_RowChangingName="Informacion_de_la_empresaRowChanging" msprop:Generator_RowEvHandlerName="Informacion_de_la_empresaRowChangeEventHandler" msprop:Generator_RowDeletedName="Informacion_de_la_empresaRowDeleted" msprop:Generator_RowClassName="Informacion_de_la_empresaRow" msprop:Generator_UserTableName="Informacion de la empresa" msprop:Generator_RowEvArgName="Informacion_de_la_empresaRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CodUnico" msprop:Generator_ColumnVarNameInTable="columnCodUnico" msprop:Generator_ColumnPropNameInRow="CodUnico" msprop:Generator_ColumnPropNameInTable="CodUnicoColumn" msprop:Generator_UserColumnName="CodUnico">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CodSede" msprop:Generator_ColumnVarNameInTable="columnCodSede" msprop:Generator_ColumnPropNameInRow="CodSede" msprop:Generator_ColumnPropNameInTable="CodSedeColumn" msprop:Generator_UserColumnName="CodSede">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TipoDocEmp" msprop:Generator_ColumnVarNameInTable="columnTipoDocEmp" msprop:Generator_ColumnPropNameInRow="TipoDocEmp" msprop:Generator_ColumnPropNameInTable="TipoDocEmpColumn" msprop:Generator_UserColumnName="TipoDocEmp">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NitCCEmpresa" msprop:Generator_ColumnVarNameInTable="columnNitCCEmpresa" msprop:Generator_ColumnPropNameInRow="NitCCEmpresa" msprop:Generator_ColumnPropNameInTable="NitCCEmpresaColumn" msprop:Generator_UserColumnName="NitCCEmpresa">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DigVerEm" msprop:Generator_ColumnVarNameInTable="columnDigVerEm" msprop:Generator_ColumnPropNameInRow="DigVerEm" msprop:Generator_ColumnPropNameInTable="DigVerEmColumn" msprop:Generator_UserColumnName="DigVerEm">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CodiMinSalud" msprop:Generator_ColumnVarNameInTable="columnCodiMinSalud" msprop:Generator_ColumnPropNameInRow="CodiMinSalud" msprop:Generator_ColumnPropNameInTable="CodiMinSaludColumn" msprop:Generator_UserColumnName="CodiMinSalud">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NomEmpresa" msprop:Generator_ColumnVarNameInTable="columnNomEmpresa" msprop:Generator_ColumnPropNameInRow="NomEmpresa" msprop:Generator_ColumnPropNameInTable="NomEmpresaColumn" msprop:Generator_UserColumnName="NomEmpresa">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NomSecEmpre" msprop:Generator_ColumnVarNameInTable="columnNomSecEmpre" msprop:Generator_ColumnPropNameInRow="NomSecEmpre" msprop:Generator_ColumnPropNameInTable="NomSecEmpreColumn" msprop:Generator_UserColumnName="NomSecEmpre" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CatEmpresa" msprop:Generator_ColumnVarNameInTable="columnCatEmpresa" msprop:Generator_ColumnPropNameInRow="CatEmpresa" msprop:Generator_ColumnPropNameInTable="CatEmpresaColumn" msprop:Generator_UserColumnName="CatEmpresa" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LogoEmpresa" msprop:Generator_ColumnVarNameInTable="columnLogoEmpresa" msprop:Generator_ColumnPropNameInRow="LogoEmpresa" msprop:Generator_ColumnPropNameInTable="LogoEmpresaColumn" msprop:Generator_UserColumnName="LogoEmpresa" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="Eslogan" msprop:Generator_ColumnVarNameInTable="columnEslogan" msprop:Generator_ColumnPropNameInRow="Eslogan" msprop:Generator_ColumnPropNameInTable="EsloganColumn" msprop:Generator_UserColumnName="Eslogan" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CodPaisDomi" msprop:Generator_ColumnVarNameInTable="columnCodPaisDomi" msprop:Generator_ColumnPropNameInRow="CodPaisDomi" msprop:Generator_ColumnPropNameInTable="CodPaisDomiColumn" msprop:Generator_UserColumnName="CodPaisDomi">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NomPaisDomi" msprop:Generator_ColumnVarNameInTable="columnNomPaisDomi" msprop:Generator_ColumnPropNameInRow="NomPaisDomi" msprop:Generator_ColumnPropNameInTable="NomPaisDomiColumn" msprop:Generator_UserColumnName="NomPaisDomi">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CodDptoDomi" msprop:Generator_ColumnVarNameInTable="columnCodDptoDomi" msprop:Generator_ColumnPropNameInRow="CodDptoDomi" msprop:Generator_ColumnPropNameInTable="CodDptoDomiColumn" msprop:Generator_UserColumnName="CodDptoDomi">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NomDptoDomi" msprop:Generator_ColumnVarNameInTable="columnNomDptoDomi" msprop:Generator_ColumnPropNameInRow="NomDptoDomi" msprop:Generator_ColumnPropNameInTable="NomDptoDomiColumn" msprop:Generator_UserColumnName="NomDptoDomi">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CodMunDomi" msprop:Generator_ColumnVarNameInTable="columnCodMunDomi" msprop:Generator_ColumnPropNameInRow="CodMunDomi" msprop:Generator_ColumnPropNameInTable="CodMunDomiColumn" msprop:Generator_UserColumnName="CodMunDomi">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NomMuniDomi" msprop:Generator_ColumnVarNameInTable="columnNomMuniDomi" msprop:Generator_ColumnPropNameInRow="NomMuniDomi" msprop:Generator_ColumnPropNameInTable="NomMuniDomiColumn" msprop:Generator_UserColumnName="NomMuniDomi">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DirecIPS" msprop:Generator_ColumnVarNameInTable="columnDirecIPS" msprop:Generator_ColumnPropNameInRow="DirecIPS" msprop:Generator_ColumnPropNameInTable="DirecIPSColumn" msprop:Generator_UserColumnName="DirecIPS" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BarIPS" msprop:Generator_ColumnVarNameInTable="columnBarIPS" msprop:Generator_ColumnPropNameInRow="BarIPS" msprop:Generator_ColumnPropNameInTable="BarIPSColumn" msprop:Generator_UserColumnName="BarIPS" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TelPrin" msprop:Generator_ColumnVarNameInTable="columnTelPrin" msprop:Generator_ColumnPropNameInRow="TelPrin" msprop:Generator_ColumnPropNameInTable="TelPrinColumn" msprop:Generator_UserColumnName="TelPrin" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TelePie" msprop:Generator_ColumnVarNameInTable="columnTelePie" msprop:Generator_ColumnPropNameInRow="TelePie" msprop:Generator_ColumnPropNameInTable="TelePieColumn" msprop:Generator_UserColumnName="TelePie" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Email1" msprop:Generator_ColumnVarNameInTable="columnEmail1" msprop:Generator_ColumnPropNameInRow="Email1" msprop:Generator_ColumnPropNameInTable="Email1Column" msprop:Generator_UserColumnName="Email1" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="64" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Email2" msprop:Generator_ColumnVarNameInTable="columnEmail2" msprop:Generator_ColumnPropNameInRow="Email2" msprop:Generator_ColumnPropNameInTable="Email2Column" msprop:Generator_UserColumnName="Email2" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="64" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FecIniSis" msprop:Generator_ColumnVarNameInTable="columnFecIniSis" msprop:Generator_ColumnPropNameInRow="FecIniSis" msprop:Generator_ColumnPropNameInTable="FecIniSisColumn" msprop:Generator_UserColumnName="FecIniSis" type="xs:dateTime" />
+              <xs:element name="ContaSIG" msprop:Generator_ColumnVarNameInTable="columnContaSIG" msprop:Generator_ColumnPropNameInRow="ContaSIG" msprop:Generator_ColumnPropNameInTable="ContaSIGColumn" msprop:Generator_UserColumnName="ContaSIG">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HabilFactu" msprop:Generator_ColumnVarNameInTable="columnHabilFactu" msprop:Generator_ColumnPropNameInRow="HabilFactu" msprop:Generator_ColumnPropNameInTable="HabilFactuColumn" msprop:Generator_UserColumnName="HabilFactu">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DefConta" msprop:Generator_ColumnVarNameInTable="columnDefConta" msprop:Generator_ColumnPropNameInRow="DefConta" msprop:Generator_ColumnPropNameInTable="DefContaColumn" msprop:Generator_UserColumnName="DefConta">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ConFacCapi" msprop:Generator_ColumnVarNameInTable="columnConFacCapi" msprop:Generator_ColumnPropNameInRow="ConFacCapi" msprop:Generator_ColumnPropNameInTable="ConFacCapiColumn" msprop:Generator_UserColumnName="ConFacCapi">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PagCarAfecBan" msprop:Generator_ColumnVarNameInTable="columnPagCarAfecBan" msprop:Generator_ColumnPropNameInRow="PagCarAfecBan" msprop:Generator_ColumnPropNameInTable="PagCarAfecBanColumn" msprop:Generator_UserColumnName="PagCarAfecBan">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FirmDigPaci" msprop:Generator_ColumnVarNameInTable="columnFirmDigPaci" msprop:Generator_ColumnPropNameInRow="FirmDigPaci" msprop:Generator_ColumnPropNameInTable="FirmDigPaciColumn" msprop:Generator_UserColumnName="FirmDigPaci">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HueDigPaci" msprop:Generator_ColumnVarNameInTable="columnHueDigPaci" msprop:Generator_ColumnPropNameInRow="HueDigPaci" msprop:Generator_ColumnPropNameInTable="HueDigPaciColumn" msprop:Generator_UserColumnName="HueDigPaci">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FotoDigPaci" msprop:Generator_ColumnVarNameInTable="columnFotoDigPaci" msprop:Generator_ColumnPropNameInRow="FotoDigPaci" msprop:Generator_ColumnPropNameInTable="FotoDigPaciColumn" msprop:Generator_UserColumnName="FotoDigPaci">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CodiResIVA" msprop:Generator_ColumnVarNameInTable="columnCodiResIVA" msprop:Generator_ColumnPropNameInRow="CodiResIVA" msprop:Generator_ColumnPropNameInTable="CodiResIVAColumn" msprop:Generator_UserColumnName="CodiResIVA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IdSetPruebas" msprop:Generator_ColumnVarNameInTable="columnIdSetPruebas" msprop:Generator_ColumnPropNameInRow="IdSetPruebas" msprop:Generator_ColumnPropNameInTable="IdSetPruebasColumn" msprop:Generator_UserColumnName="IdSetPruebas">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="250" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RutaDocuDian" msprop:Generator_ColumnVarNameInTable="columnRutaDocuDian" msprop:Generator_ColumnPropNameInRow="RutaDocuDian" msprop:Generator_ColumnPropNameInTable="RutaDocuDianColumn" msprop:Generator_UserColumnName="RutaDocuDian">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="250" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SmtpHost" msprop:Generator_ColumnVarNameInTable="columnSmtpHost" msprop:Generator_ColumnPropNameInRow="SmtpHost" msprop:Generator_ColumnPropNameInTable="SmtpHostColumn" msprop:Generator_UserColumnName="SmtpHost">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="250" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SmtpPort" msprop:Generator_ColumnVarNameInTable="columnSmtpPort" msprop:Generator_ColumnPropNameInRow="SmtpPort" msprop:Generator_ColumnPropNameInTable="SmtpPortColumn" msprop:Generator_UserColumnName="SmtpPort" type="xs:int" />
+              <xs:element name="SmtpPass" msprop:Generator_ColumnVarNameInTable="columnSmtpPass" msprop:Generator_ColumnPropNameInRow="SmtpPass" msprop:Generator_ColumnPropNameInTable="SmtpPassColumn" msprop:Generator_UserColumnName="SmtpPass">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CodPostal" msprop:Generator_ColumnVarNameInTable="columnCodPostal" msprop:Generator_ColumnPropNameInRow="CodPostal" msprop:Generator_ColumnPropNameInTable="CodPostalColumn" msprop:Generator_UserColumnName="CodPostal">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="6" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TipoAmbiente" msprop:Generator_ColumnVarNameInTable="columnTipoAmbiente" msprop:Generator_ColumnPropNameInRow="TipoAmbiente" msprop:Generator_ColumnPropNameInTable="TipoAmbienteColumn" msprop:Generator_UserColumnName="TipoAmbiente" type="xs:int" />
+              <xs:element name="FacturElec" msprop:Generator_ColumnVarNameInTable="columnFacturElec" msprop:Generator_ColumnPropNameInRow="FacturElec" msprop:Generator_ColumnPropNameInTable="FacturElecColumn" msprop:Generator_UserColumnName="FacturElec" type="xs:boolean" />
+              <xs:element name="FecFacElec" msprop:Generator_ColumnVarNameInTable="columnFecFacElec" msprop:Generator_ColumnPropNameInRow="FecFacElec" msprop:Generator_ColumnPropNameInTable="FecFacElecColumn" msprop:Generator_UserColumnName="FecFacElec" type="xs:dateTime" />
+              <xs:element name="DiasVenFac" msprop:Generator_ColumnVarNameInTable="columnDiasVenFac" msprop:Generator_ColumnPropNameInRow="DiasVenFac" msprop:Generator_ColumnPropNameInTable="DiasVenFacColumn" msprop:Generator_UserColumnName="DiasVenFac" type="xs:short" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Recibo_x0020_Caja_x0020_Contabilidad" msprop:Generator_TableClassName="Recibo_Caja_ContabilidadDataTable" msprop:Generator_TableVarName="tableRecibo_Caja_Contabilidad" msprop:Generator_TablePropName="Recibo_Caja_Contabilidad" msprop:Generator_RowDeletingName="Recibo_Caja_ContabilidadRowDeleting" msprop:Generator_RowChangingName="Recibo_Caja_ContabilidadRowChanging" msprop:Generator_RowEvHandlerName="Recibo_Caja_ContabilidadRowChangeEventHandler" msprop:Generator_RowDeletedName="Recibo_Caja_ContabilidadRowDeleted" msprop:Generator_UserTableName="Recibo Caja Contabilidad" msprop:Generator_RowChangedName="Recibo_Caja_ContabilidadRowChanged" msprop:Generator_RowEvArgName="Recibo_Caja_ContabilidadRowChangeEvent" msprop:Generator_RowClassName="Recibo_Caja_ContabilidadRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReciboCaja" msprop:Generator_ColumnVarNameInTable="columnReciboCaja" msprop:Generator_ColumnPropNameInRow="ReciboCaja" msprop:Generator_ColumnPropNameInTable="ReciboCajaColumn" msprop:Generator_UserColumnName="ReciboCaja">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HistorPaciente" msprop:Generator_ColumnVarNameInTable="columnHistorPaciente" msprop:Generator_ColumnPropNameInRow="HistorPaciente" msprop:Generator_ColumnPropNameInTable="HistorPacienteColumn" msprop:Generator_UserColumnName="HistorPaciente">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Paciente" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPaciente" msprop:Generator_ColumnPropNameInRow="Paciente" msprop:Generator_ColumnPropNameInTable="PacienteColumn" msprop:Generator_UserColumnName="Paciente" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="103" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TipoDocu" msprop:Generator_ColumnVarNameInTable="columnTipoDocu" msprop:Generator_ColumnPropNameInRow="TipoDocu" msprop:Generator_ColumnPropNameInTable="TipoDocuColumn" msprop:Generator_UserColumnName="TipoDocu">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NumDocu" msprop:Generator_ColumnVarNameInTable="columnNumDocu" msprop:Generator_ColumnPropNameInRow="NumDocu" msprop:Generator_ColumnPropNameInTable="NumDocuColumn" msprop:Generator_UserColumnName="NumDocu">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SucuDocu" msprop:Generator_ColumnVarNameInTable="columnSucuDocu" msprop:Generator_ColumnPropNameInRow="SucuDocu" msprop:Generator_ColumnPropNameInTable="SucuDocuColumn" msprop:Generator_UserColumnName="SucuDocu">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RazonSol" msprop:Generator_ColumnVarNameInTable="columnRazonSol" msprop:Generator_ColumnPropNameInRow="RazonSol" msprop:Generator_ColumnPropNameInTable="RazonSolColumn" msprop:Generator_UserColumnName="RazonSol">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocumNumero" msprop:Generator_ColumnVarNameInTable="columnDocumNumero" msprop:Generator_ColumnPropNameInRow="DocumNumero" msprop:Generator_ColumnPropNameInTable="DocumNumeroColumn" msprop:Generator_UserColumnName="DocumNumero" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="17" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EntidadDocumen" msprop:Generator_ColumnVarNameInTable="columnEntidadDocumen" msprop:Generator_ColumnPropNameInRow="EntidadDocumen" msprop:Generator_ColumnPropNameInTable="EntidadDocumenColumn" msprop:Generator_UserColumnName="EntidadDocumen" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FechaPagoCaja" msprop:Generator_ColumnVarNameInTable="columnFechaPagoCaja" msprop:Generator_ColumnPropNameInRow="FechaPagoCaja" msprop:Generator_ColumnPropNameInTable="FechaPagoCajaColumn" msprop:Generator_UserColumnName="FechaPagoCaja" type="xs:dateTime" />
+              <xs:element name="CodRegis" msprop:Generator_ColumnVarNameInTable="columnCodRegis" msprop:Generator_ColumnPropNameInRow="CodRegis" msprop:Generator_ColumnPropNameInTable="CodRegisColumn" msprop:Generator_UserColumnName="CodRegis">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CuentaContable" msprop:Generator_ColumnVarNameInTable="columnCuentaContable" msprop:Generator_ColumnPropNameInRow="CuentaContable" msprop:Generator_ColumnPropNameInTable="CuentaContableColumn" msprop:Generator_UserColumnName="CuentaContable">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CentroCosto" msprop:Generator_ColumnVarNameInTable="columnCentroCosto" msprop:Generator_ColumnPropNameInRow="CentroCosto" msprop:Generator_ColumnPropNameInTable="CentroCostoColumn" msprop:Generator_UserColumnName="CentroCosto">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DetaPagoCaja" msprop:Generator_ColumnVarNameInTable="columnDetaPagoCaja" msprop:Generator_ColumnPropNameInRow="DetaPagoCaja" msprop:Generator_ColumnPropNameInTable="DetaPagoCajaColumn" msprop:Generator_UserColumnName="DetaPagoCaja">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NomCConIPS" msprop:Generator_ColumnVarNameInTable="columnNomCConIPS" msprop:Generator_ColumnPropNameInRow="NomCConIPS" msprop:Generator_ColumnPropNameInTable="NomCConIPSColumn" msprop:Generator_UserColumnName="NomCConIPS">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="80" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SumaDeDebiCaja" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSumaDeDebiCaja" msprop:Generator_ColumnPropNameInRow="SumaDeDebiCaja" msprop:Generator_ColumnPropNameInTable="SumaDeDebiCajaColumn" msprop:Generator_UserColumnName="SumaDeDebiCaja" type="xs:double" minOccurs="0" />
+              <xs:element name="SumaDeCrediCaja" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSumaDeCrediCaja" msprop:Generator_ColumnPropNameInRow="SumaDeCrediCaja" msprop:Generator_ColumnPropNameInTable="SumaDeCrediCajaColumn" msprop:Generator_UserColumnName="SumaDeCrediCaja" type="xs:double" minOccurs="0" />
+              <xs:element name="SaldoReal" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSaldoReal" msprop:Generator_ColumnPropNameInRow="SaldoReal" msprop:Generator_ColumnPropNameInTable="SaldoRealColumn" msprop:Generator_UserColumnName="SaldoReal" type="xs:double" minOccurs="0" />
+              <xs:element name="VT" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnVT" msprop:Generator_ColumnPropNameInRow="VT" msprop:Generator_ColumnPropNameInTable="VTColumn" msprop:Generator_UserColumnName="VT" type="xs:double" minOccurs="0" />
+              <xs:element name="DocuCruce" msprop:Generator_ColumnVarNameInTable="columnDocuCruce" msprop:Generator_ColumnPropNameInRow="DocuCruce" msprop:Generator_ColumnPropNameInTable="DocuCruceColumn" msprop:Generator_UserColumnName="DocuCruce">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AnuladoRecibo" msprop:Generator_ColumnVarNameInTable="columnAnuladoRecibo" msprop:Generator_ColumnPropNameInRow="AnuladoRecibo" msprop:Generator_ColumnPropNameInTable="AnuladoReciboColumn" msprop:Generator_UserColumnName="AnuladoRecibo" type="xs:boolean" />
+              <xs:element name="FechAnulado" msprop:Generator_ColumnVarNameInTable="columnFechAnulado" msprop:Generator_ColumnPropNameInRow="FechAnulado" msprop:Generator_ColumnPropNameInTable="FechAnuladoColumn" msprop:Generator_UserColumnName="FechAnulado" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CodiAnul" msprop:Generator_ColumnVarNameInTable="columnCodiAnul" msprop:Generator_ColumnPropNameInRow="CodiAnul" msprop:Generator_ColumnPropNameInTable="CodiAnulColumn" msprop:Generator_UserColumnName="CodiAnul" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RazonAnula" msprop:Generator_ColumnVarNameInTable="columnRazonAnula" msprop:Generator_ColumnPropNameInRow="RazonAnula" msprop:Generator_ColumnPropNameInTable="RazonAnulaColumn" msprop:Generator_UserColumnName="RazonAnula" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Recibo_x0020_Caja" />
+      <xs:field xpath="mstns:ReciboCaja" />
+    </xs:unique>
+    <xs:unique name="Informacion_x0020_de_x0020_la_x0020_empresa_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Informacion_x0020_de_x0020_la_x0020_empresa" />
+      <xs:field xpath="mstns:CodUnico" />
+    </xs:unique>
+    <xs:unique name="Recibo_x0020_Caja_x0020_Contabilidad_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Recibo_x0020_Caja_x0020_Contabilidad" />
+      <xs:field xpath="mstns:ReciboCaja" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

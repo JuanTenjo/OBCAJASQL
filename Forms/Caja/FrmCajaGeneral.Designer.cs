@@ -35,6 +35,7 @@ namespace OBCAJASQL.Forms.Caja
             this.LblCodCajAct = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.DtFechaRecibo = new System.Windows.Forms.DateTimePicker();
             this.CboCobraTarifa = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.CboRegimUsua = new System.Windows.Forms.ComboBox();
@@ -52,7 +53,7 @@ namespace OBCAJASQL.Forms.Caja
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.GridDetalleRecibos = new System.Windows.Forms.DataGridView();
-            this.CódigoServi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CodigoServi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CuentaContable1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombreServi1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CentroCuenta = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -111,15 +112,14 @@ namespace OBCAJASQL.Forms.Caja
             this.lblCodigoUser = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
-            this.textBox17 = new System.Windows.Forms.TextBox();
+            this.TxtNetoPaga = new System.Windows.Forms.TextBox();
             this.BtnRegistraCaja = new System.Windows.Forms.Button();
             this.BtnServicioCaja = new System.Windows.Forms.Button();
             this.BtnBuscarPaci = new System.Windows.Forms.Button();
             this.BtnBuscarTercer = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnEliminar = new System.Windows.Forms.Button();
+            this.BtnCopias = new System.Windows.Forms.Button();
             this.BtnSalir = new System.Windows.Forms.Button();
-            this.DtFechaRecibo = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridDetalleRecibos)).BeginInit();
@@ -203,6 +203,18 @@ namespace OBCAJASQL.Forms.Caja
             this.groupBox2.Size = new System.Drawing.Size(732, 137);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
+            // 
+            // DtFechaRecibo
+            // 
+            this.DtFechaRecibo.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.DtFechaRecibo.CalendarTitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.DtFechaRecibo.CustomFormat = "dd-MMM-yyyy";
+            this.DtFechaRecibo.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DtFechaRecibo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DtFechaRecibo.Location = new System.Drawing.Point(590, 26);
+            this.DtFechaRecibo.Name = "DtFechaRecibo";
+            this.DtFechaRecibo.Size = new System.Drawing.Size(142, 22);
+            this.DtFechaRecibo.TabIndex = 20;
             // 
             // CboCobraTarifa
             // 
@@ -376,13 +388,11 @@ namespace OBCAJASQL.Forms.Caja
             // 
             // GridDetalleRecibos
             // 
-            this.GridDetalleRecibos.AllowUserToAddRows = false;
-            this.GridDetalleRecibos.AllowUserToDeleteRows = false;
             this.GridDetalleRecibos.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.GridDetalleRecibos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.GridDetalleRecibos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridDetalleRecibos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CódigoServi,
+            this.CodigoServi,
             this.CuentaContable1,
             this.NombreServi1,
             this.CentroCuenta,
@@ -398,35 +408,34 @@ namespace OBCAJASQL.Forms.Caja
             this.NitDosDeta});
             this.GridDetalleRecibos.GridColor = System.Drawing.Color.White;
             this.GridDetalleRecibos.Location = new System.Drawing.Point(3, 203);
+            this.GridDetalleRecibos.MultiSelect = false;
             this.GridDetalleRecibos.Name = "GridDetalleRecibos";
-            this.GridDetalleRecibos.ReadOnly = true;
+            this.GridDetalleRecibos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.GridDetalleRecibos.Size = new System.Drawing.Size(732, 97);
             this.GridDetalleRecibos.TabIndex = 6;
+            this.GridDetalleRecibos.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridDetalleRecibos_CellEndEdit);
+            this.GridDetalleRecibos.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridDetalleRecibos_CellValueChanged);
             // 
-            // CódigoServi
+            // CodigoServi
             // 
-            this.CódigoServi.HeaderText = "Código";
-            this.CódigoServi.Name = "CódigoServi";
-            this.CódigoServi.ReadOnly = true;
+            this.CodigoServi.HeaderText = "Código";
+            this.CodigoServi.Name = "CodigoServi";
             // 
             // CuentaContable1
             // 
             this.CuentaContable1.HeaderText = "Contable";
             this.CuentaContable1.Name = "CuentaContable1";
-            this.CuentaContable1.ReadOnly = true;
             // 
             // NombreServi1
             // 
             this.NombreServi1.HeaderText = "Nombre del servicio";
             this.NombreServi1.Name = "NombreServi1";
-            this.NombreServi1.ReadOnly = true;
             this.NombreServi1.Width = 140;
             // 
             // CentroCuenta
             // 
             this.CentroCuenta.HeaderText = "C.C";
             this.CentroCuenta.Name = "CentroCuenta";
-            this.CentroCuenta.ReadOnly = true;
             this.CentroCuenta.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.CentroCuenta.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
@@ -434,61 +443,51 @@ namespace OBCAJASQL.Forms.Caja
             // 
             this.CantiSer1.HeaderText = "Can";
             this.CantiSer1.Name = "CantiSer1";
-            this.CantiSer1.ReadOnly = true;
             // 
             // ValorUnita1
             // 
             this.ValorUnita1.HeaderText = "Vr Unita";
             this.ValorUnita1.Name = "ValorUnita1";
-            this.ValorUnita1.ReadOnly = true;
             // 
             // PorcentajePago1
             // 
             this.PorcentajePago1.HeaderText = "Porc";
             this.PorcentajePago1.Name = "PorcentajePago1";
-            this.PorcentajePago1.ReadOnly = true;
             // 
             // ValorTotal1
             // 
             this.ValorTotal1.HeaderText = "Vr Total";
             this.ValorTotal1.Name = "ValorTotal1";
-            this.ValorTotal1.ReadOnly = true;
             // 
             // ValorNeto1
             // 
             this.ValorNeto1.HeaderText = "Vr. Neto";
             this.ValorNeto1.Name = "ValorNeto1";
-            this.ValorNeto1.ReadOnly = true;
             // 
             // TipoDocDeTer
             // 
             this.TipoDocDeTer.HeaderText = "TP";
             this.TipoDocDeTer.Name = "TipoDocDeTer";
-            this.TipoDocDeTer.ReadOnly = true;
             // 
             // NitTerDeta
             // 
             this.NitTerDeta.HeaderText = "Identificacion";
             this.NitTerDeta.Name = "NitTerDeta";
-            this.NitTerDeta.ReadOnly = true;
             // 
             // DigVerDeta
             // 
             this.DigVerDeta.HeaderText = "DigiVeri";
             this.DigVerDeta.Name = "DigVerDeta";
-            this.DigVerDeta.ReadOnly = true;
             // 
             // SucTerDeta
             // 
             this.SucTerDeta.HeaderText = "Sucur";
             this.SucTerDeta.Name = "SucTerDeta";
-            this.SucTerDeta.ReadOnly = true;
             // 
             // NitDosDeta
             // 
             this.NitDosDeta.HeaderText = "NitDosDeta";
             this.NitDosDeta.Name = "NitDosDeta";
-            this.NitDosDeta.ReadOnly = true;
             // 
             // groupBox3
             // 
@@ -978,19 +977,19 @@ namespace OBCAJASQL.Forms.Caja
             this.label28.BackColor = System.Drawing.Color.LightSeaGreen;
             this.label28.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label28.ForeColor = System.Drawing.Color.White;
-            this.label28.Location = new System.Drawing.Point(241, 303);
+            this.label28.Location = new System.Drawing.Point(466, 302);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(123, 23);
+            this.label28.Size = new System.Drawing.Size(109, 21);
             this.label28.TabIndex = 24;
             this.label28.Text = "Neto a pagar:";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox17
+            // TxtNetoPaga
             // 
-            this.textBox17.Location = new System.Drawing.Point(367, 302);
-            this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(100, 21);
-            this.textBox17.TabIndex = 29;
+            this.TxtNetoPaga.Location = new System.Drawing.Point(575, 302);
+            this.TxtNetoPaga.Name = "TxtNetoPaga";
+            this.TxtNetoPaga.Size = new System.Drawing.Size(108, 21);
+            this.TxtNetoPaga.TabIndex = 29;
             // 
             // BtnRegistraCaja
             // 
@@ -1005,6 +1004,7 @@ namespace OBCAJASQL.Forms.Caja
             this.BtnRegistraCaja.Size = new System.Drawing.Size(64, 44);
             this.BtnRegistraCaja.TabIndex = 136;
             this.BtnRegistraCaja.UseVisualStyleBackColor = false;
+            this.BtnRegistraCaja.Click += new System.EventHandler(this.BtnRegistraCaja_Click);
             // 
             // BtnServicioCaja
             // 
@@ -1019,6 +1019,7 @@ namespace OBCAJASQL.Forms.Caja
             this.BtnServicioCaja.Size = new System.Drawing.Size(56, 44);
             this.BtnServicioCaja.TabIndex = 134;
             this.BtnServicioCaja.UseVisualStyleBackColor = false;
+            this.BtnServicioCaja.Click += new System.EventHandler(this.BtnServicioCaja_Click);
             // 
             // BtnBuscarPaci
             // 
@@ -1033,6 +1034,7 @@ namespace OBCAJASQL.Forms.Caja
             this.BtnBuscarPaci.Size = new System.Drawing.Size(64, 44);
             this.BtnBuscarPaci.TabIndex = 132;
             this.BtnBuscarPaci.UseVisualStyleBackColor = false;
+            this.BtnBuscarPaci.Click += new System.EventHandler(this.BtnBuscarPaci_Click);
             // 
             // BtnBuscarTercer
             // 
@@ -1047,34 +1049,37 @@ namespace OBCAJASQL.Forms.Caja
             this.BtnBuscarTercer.Size = new System.Drawing.Size(56, 44);
             this.BtnBuscarTercer.TabIndex = 130;
             this.BtnBuscarTercer.UseVisualStyleBackColor = false;
+            this.BtnBuscarTercer.Click += new System.EventHandler(this.BtnBuscarTercer_Click);
             // 
-            // button2
+            // BtnEliminar
             // 
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.BackgroundImage = global::OBCAJASQL.Properties.Resources.icons8_eliminar_40;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(320, 484);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(55, 44);
-            this.button2.TabIndex = 128;
-            this.button2.UseVisualStyleBackColor = false;
+            this.BtnEliminar.BackColor = System.Drawing.Color.White;
+            this.BtnEliminar.BackgroundImage = global::OBCAJASQL.Properties.Resources.icons8_eliminar_40;
+            this.BtnEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BtnEliminar.FlatAppearance.BorderSize = 0;
+            this.BtnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.BtnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnEliminar.Location = new System.Drawing.Point(320, 484);
+            this.BtnEliminar.Name = "BtnEliminar";
+            this.BtnEliminar.Size = new System.Drawing.Size(55, 44);
+            this.BtnEliminar.TabIndex = 128;
+            this.BtnEliminar.UseVisualStyleBackColor = false;
+            this.BtnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
             // 
-            // button1
+            // BtnCopias
             // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.BackgroundImage = global::OBCAJASQL.Properties.Resources.icons8_imprimir_40;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(381, 484);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(50, 44);
-            this.button1.TabIndex = 126;
-            this.button1.UseVisualStyleBackColor = false;
+            this.BtnCopias.BackColor = System.Drawing.Color.White;
+            this.BtnCopias.BackgroundImage = global::OBCAJASQL.Properties.Resources.icons8_imprimir_40;
+            this.BtnCopias.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BtnCopias.FlatAppearance.BorderSize = 0;
+            this.BtnCopias.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.BtnCopias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCopias.Location = new System.Drawing.Point(381, 484);
+            this.BtnCopias.Name = "BtnCopias";
+            this.BtnCopias.Size = new System.Drawing.Size(50, 44);
+            this.BtnCopias.TabIndex = 126;
+            this.BtnCopias.UseVisualStyleBackColor = false;
+            this.BtnCopias.Click += new System.EventHandler(this.BtnCopias_Click);
             // 
             // BtnSalir
             // 
@@ -1091,25 +1096,13 @@ namespace OBCAJASQL.Forms.Caja
             this.BtnSalir.UseVisualStyleBackColor = false;
             this.BtnSalir.Click += new System.EventHandler(this.BtnSalir_Click);
             // 
-            // DtFechaRecibo
-            // 
-            this.DtFechaRecibo.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.DtFechaRecibo.CalendarTitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.DtFechaRecibo.CustomFormat = "dd-MMM-yyyy";
-            this.DtFechaRecibo.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DtFechaRecibo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DtFechaRecibo.Location = new System.Drawing.Point(590, 26);
-            this.DtFechaRecibo.Name = "DtFechaRecibo";
-            this.DtFechaRecibo.Size = new System.Drawing.Size(142, 22);
-            this.DtFechaRecibo.TabIndex = 20;
-            // 
             // FrmCajaGeneral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(738, 570);
+            this.ClientSize = new System.Drawing.Size(742, 570);
             this.ControlBox = false;
-            this.Controls.Add(this.textBox17);
+            this.Controls.Add(this.TxtNetoPaga);
             this.Controls.Add(this.label28);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
@@ -1122,9 +1115,9 @@ namespace OBCAJASQL.Forms.Caja
             this.Controls.Add(this.label20);
             this.Controls.Add(this.BtnBuscarTercer);
             this.Controls.Add(this.label19);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.BtnEliminar);
             this.Controls.Add(this.label18);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BtnCopias);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.BtnSalir);
             this.Controls.Add(this.TxtObservaCaja);
@@ -1209,9 +1202,9 @@ namespace OBCAJASQL.Forms.Caja
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button BtnSalir;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnCopias;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BtnEliminar;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Button BtnBuscarTercer;
         private System.Windows.Forms.Label label21;
@@ -1233,8 +1226,12 @@ namespace OBCAJASQL.Forms.Caja
         private System.Windows.Forms.Label lblCodigoUser;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.TextBox textBox17;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CódigoServi;
+        private System.Windows.Forms.TextBox TxtNetoPaga;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label LblNomCajAct;
+        private System.Windows.Forms.Label LblCodCajAct;
+        private System.Windows.Forms.DateTimePicker DtFechaRecibo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CodigoServi;
         private System.Windows.Forms.DataGridViewTextBoxColumn CuentaContable1;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreServi1;
         private System.Windows.Forms.DataGridViewComboBoxColumn CentroCuenta;
@@ -1248,9 +1245,5 @@ namespace OBCAJASQL.Forms.Caja
         private System.Windows.Forms.DataGridViewTextBoxColumn DigVerDeta;
         private System.Windows.Forms.DataGridViewTextBoxColumn SucTerDeta;
         private System.Windows.Forms.DataGridViewTextBoxColumn NitDosDeta;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label LblNomCajAct;
-        private System.Windows.Forms.Label LblCodCajAct;
-        private System.Windows.Forms.DateTimePicker DtFechaRecibo;
     }
 }

@@ -12,6 +12,7 @@ using System.Data.OleDb;
 using System.Data.SqlClient;
 using OBCAJASQL.Class;
 using OBCAJASQL.Forms.Caja;
+using OBCAJASQL.Forms.Caja.Reportes;
 
 namespace OBCAJASQL.Forms
 {
@@ -61,6 +62,7 @@ namespace OBCAJASQL.Forms
 
                     Utils.CenCosCaja = dr["CenCosCaja"].ToString();
                     Utils.CuenConta = dr["CuenConta"].ToString();
+                    Utils.CuentaContable = dr["CuenConaCoPa"].ToString();
 
                     Utils.TipoDocDebi = dr["TipoDocumEmp"].ToString();
                     Utils.NumDocDebi = dr["NitCCEmpresa"].ToString();
@@ -233,6 +235,24 @@ namespace OBCAJASQL.Forms
             FrmCajaGeneral frmCajaGeneral = new FrmCajaGeneral();
             frmCajaGeneral.ShowDialog();
 
+        }
+
+        private void pagosAFacturasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmPagosAFacturas frmPagosAFacturas = new FrmPagosAFacturas();
+            frmPagosAFacturas.ShowDialog();
+        }
+
+        private void depositosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCajaDepositos frmCajaDepositos = new FrmCajaDepositos();
+            frmCajaDepositos.ShowDialog();
+        }
+
+        private void ingresosDeCajaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmReporteIngresosPorCaja frmReporteIngresosPorCaja = new FrmReporteIngresosPorCaja();
+            frmReporteIngresosPorCaja.ShowDialog();
         }
     }
 }

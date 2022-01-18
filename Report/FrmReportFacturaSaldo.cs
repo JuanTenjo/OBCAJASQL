@@ -91,7 +91,6 @@ namespace OBCAJASQL.Report
                 Utils.Informa += "Error: " + ex.Message + " - " + ex.StackTrace;
                 MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
     }
 }
