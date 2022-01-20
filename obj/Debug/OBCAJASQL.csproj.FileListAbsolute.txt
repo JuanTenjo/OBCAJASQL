@@ -158,3 +158,4 @@ C:\OBCAJASQL\obj\Debug\OBCAJASQL.Forms.Caja.FrmCajaDepositos.resources
 C:\OBCAJASQL\obj\Debug\OBCAJASQL.Forms.Caja.Reportes.FrmReporteIngresosPorCaja.resources
 C:\OBCAJASQL\obj\Debug\OBCAJASQL.Forms.FrmInputBox.resources
 C:\OBCAJASQL\obj\Debug\OBCAJASQL.Report.FrmReportes.resources
+C:\OBCAJASQL\obj\Debug\OBCAJASQL.Forms.Caja.Reportes.FrmReportesGenerales.resources

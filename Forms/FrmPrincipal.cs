@@ -254,5 +254,11 @@ namespace OBCAJASQL.Forms
             FrmReporteIngresosPorCaja frmReporteIngresosPorCaja = new FrmReporteIngresosPorCaja();
             frmReporteIngresosPorCaja.ShowDialog();
         }
+
+        private void reportesGeneralesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmReportesGenerales frmReportesGenerales = new FrmReportesGenerales();
+            frmReportesGenerales.ShowDialog();
+        }
     }
 }

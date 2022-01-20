@@ -133,6 +133,12 @@
     <Compile Include="Forms\Caja\Reportes\FrmReporteIngresosPorCaja.Designer.cs">
       <DependentUpon>FrmReporteIngresosPorCaja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Caja\Reportes\FrmReportesGenerales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Caja\Reportes\FrmReportesGenerales.Designer.cs">
+      <DependentUpon>FrmReportesGenerales.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmInputBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -215,6 +221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Caja\Reportes\FrmReporteIngresosPorCaja.resx">
       <DependentUpon>FrmReporteIngresosPorCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Caja\Reportes\FrmReportesGenerales.resx">
+      <DependentUpon>FrmReportesGenerales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmInputBox.resx">
       <DependentUpon>FrmInputBox.cs</DependentUpon>
