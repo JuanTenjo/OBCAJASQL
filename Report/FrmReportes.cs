@@ -22,6 +22,56 @@ namespace OBCAJASQL.Report
         }
 
 
+
+        private string TotalPorFormaPagoUsa(string FP, int Anul, string CodRegis)
+        {
+            try
+            {
+
+                string Total = "";
+
+                string sqlDatos = "SELECT[Datos recibos de caja].TipoPagoCaja, Sum(([CantidadCaja] *[ValorUnitaCaja])) AS TolRecib, [Datos recibos de caja].CodRegis " +
+                                   " FROM[BDCAJASQL].[dbo].[Datos recibos de caja] INNER JOIN[BDCAJASQL].[dbo].[Datos detalles recibos de caja] ON[Datos recibos de caja].ReciboCaja = [Datos detalles recibos de caja].ReciboNum " +
+                                   $" WHERE ((([Datos recibos de caja].FechaPagoCaja) >= CONVERT(DATETIME, '{Utils.FechaInicial}', 102) And ([Datos recibos de caja].FechaPagoCaja) <= CONVERT(DATETIME, '{Utils.FechaFinal}', 102) ) and " +
+                                    " ([Datos recibos de caja].AnuladoRecibo) = " + Anul + ")  " +
+                                   " GROUP BY[Datos recibos de caja].TipoPagoCaja, [Datos recibos de caja].CodRegis " +
+                                   " HAVING((([Datos recibos de caja].TipoPagoCaja) =  '" + FP + "') AND " +
+                                   " (([Datos recibos de caja].CodRegis) = '" + CodRegis + "'));";
+
+
+
+                using (SqlConnection connection = new SqlConnection(Conexion.conexionSQL))
+                {
+                    SqlCommand command = new SqlCommand(sqlDatos, connection);
+                    command.Connection.Open();
+                    SqlDataReader TabTotales = command.ExecuteReader();
+
+                    if (TabTotales.HasRows)
+                    {
+                        TabTotales.Read();
+                        Total = TabTotales["TolRecib"].ToString();
+                    }
+                    else
+                    {
+                        Total = "";
+                    }
+                }
+
+                return Total;
+
+            }
+            catch (Exception ex)
+            {
+                Utils.Titulo01 = "Control de errores de ejecución";
+                Utils.Informa = "Lo siento pero se ha presentado un error" + "\r";
+                Utils.Informa += "en la funcion TotalPorFormaPagoUsa" + "\r";
+                Utils.Informa += "Error: " + ex.Message + " - " + ex.StackTrace;
+                MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return "";
+            }
+        }
+
+
         private string TotalPorFormaPago(string FP, int Anul)
         {
             try
@@ -77,6 +127,8 @@ namespace OBCAJASQL.Report
                 ReportDataSource dsDetalle = null;
                 ReportParameter[] parameters = null;
                 System.Data.DataSet infoSql;
+
+                string TotalEfec = "", TotalTarjetas = "", TotalCheque = "", TotalBonos = "";
 
                 string InfoEmpresaData = "SELECT * FROM [BDADMINSIG].[dbo].[Datos informacion de la empresa] WHERE [CodUnico] = '" + Utils.codUnicoEmpresa + "'";
 
@@ -176,7 +228,6 @@ namespace OBCAJASQL.Report
                         break;
                     case "Informe de caja por todos":
 
-                        string TotalEfec = "", TotalTarjetas = "", TotalCheque = "", TotalBonos = "";
 
                         Utils.SqlDatos = "SELECT [Datos detalles recibos de caja].ReciboNum, (Trim([Nombre1] + ' ' + [Nombre2]) + ' ' + (Trim([Apellido1] + ' ' + [Apellido2]))) AS Paciente,  " +
                         " [Datos proveedores].RazonSol, Sum(([CantidadCaja] *[ValorUnitaCaja])) AS TolReci, [Datos recibos de caja].FechaPagoCaja, [Datos recibos de caja].CodRegis,  " +
@@ -204,6 +255,110 @@ namespace OBCAJASQL.Report
                         parameters[3] = new ReportParameter("TotalTarjetas", TotalTarjetas);
                         parameters[4] = new ReportParameter("TotalCheque", TotalCheque);
                         parameters[5] = new ReportParameter("TotalBonos", TotalBonos);
+
+                        break;
+                    case "Informe recibos por digitadores":
+
+                        Utils.SqlDatos = "SELECT [Datos detalles recibos de caja].ReciboNum, (RTrim([Nombre1] + ' ' + [Nombre2]) + ' ' + (RTrim([Apellido1] + ' ' + [Apellido2]))) AS Paciente," +
+                        " [Datos proveedores].RazonSol, Sum(([CantidadCaja] *[ValorUnitaCaja])) AS TolReci, [Datos recibos de caja].FechaPagoCaja, [Datos recibos de caja].CodRegis," +
+                        " [Datos recibos de caja].AnuladoRecibo, RTrim([NombreUsa] + ' ' + [Apellido1Usa] + ' ' + [Apellido2Usa]) AS Cajero, [Datos recibos de caja].TipoPago, [Datos recibos de caja].CodiAnul" +
+                        " FROM [GEOGRAXPSQL].[dbo].[Datos proveedores] INNER JOIN(([DATUSIIGXPSQL].[dbo].[Datos usuarios de los aplicativos] RIGHT JOIN ([ACDATOXPSQL].[dbo].[Datos del Paciente] RIGHT JOIN [BDCAJASQL].[dbo].[Datos recibos de caja]" +
+                        " ON [Datos del Paciente].HistorPaci = [Datos recibos de caja].HistorPaciente) ON[Datos usuarios de los aplicativos].CodigoUsa = [Datos recibos de caja].CodRegis) " +
+                        " INNER JOIN[BDCAJASQL].[dbo].[Datos detalles recibos de caja] ON[Datos recibos de caja].ReciboCaja = [Datos detalles recibos de caja].ReciboNum) ON([Datos proveedores].TipoDocu = [Datos recibos de caja].TipoDocu)" +
+                        " AND ([Datos proveedores].IdenProve = [Datos recibos de caja].NumDocu) AND([Datos proveedores].SucurProv = [Datos recibos de caja].SucuDocu)" +
+                        $" WHERE [Datos recibos de caja].FechaPagoCaja >= CONVERT(DATETIME, '{Utils.FechaInicial}', 102) And  [Datos recibos de caja].FechaPagoCaja <= CONVERT(DATETIME, '{Utils.FechaFinal}', 102) AND [Datos recibos de caja].[AnuladoRecibo] = '{Utils.Anulado}' AND [Datos recibos de caja].[CodRegis] = '{Utils.CodRegis}'" +
+                        " GROUP BY[Datos detalles recibos de caja].ReciboNum, " +
+                        " (RTrim([Nombre1] + ' ' + [Nombre2]) + ' ' + (RTrim([Apellido1] + ' ' + [Apellido2]))), [Datos proveedores].RazonSol, [Datos recibos de caja].FechaPagoCaja, [Datos recibos de caja].CodRegis," +
+                        " [Datos recibos de caja].AnuladoRecibo, RTrim([NombreUsa] + ' ' + [Apellido1Usa] + ' ' + [Apellido2Usa]), " +
+                        " [Datos recibos de caja].TipoPago, [Datos recibos de caja].CodiAnul ORDER BY[Datos recibos de caja].FechaPagoCaja, [Datos recibos de caja].CodRegis;";
+
+                        infoSql = Conexion.SQLDataSet(Utils.SqlDatos);
+                        dsDetalle = new ReportDataSource("dsDetalle", infoSql.Tables[0]);
+                        parameters = new ReportParameter[6];
+
+                        TotalEfec = TotalPorFormaPagoUsa("EF", Utils.Anulado, Utils.CodRegis);
+                        TotalTarjetas = TotalPorFormaPagoUsa("TC", Utils.Anulado, Utils.CodRegis);
+                        TotalCheque = TotalPorFormaPagoUsa("CH", Utils.Anulado, Utils.CodRegis);
+                        TotalBonos = TotalPorFormaPagoUsa("BO", Utils.Anulado, Utils.CodRegis);
+
+                        parameters[0] = new ReportParameter("Fecha01", Utils.FechaInicial);
+                        parameters[1] = new ReportParameter("Fecha02", Utils.FechaFinal);
+                        parameters[2] = new ReportParameter("TotalEfec", TotalEfec);
+                        parameters[3] = new ReportParameter("TotalTarjetas", TotalTarjetas);
+                        parameters[4] = new ReportParameter("TotalCheque", TotalCheque);
+                        parameters[5] = new ReportParameter("TotalBonos", TotalBonos);
+
+
+
+                        break;
+
+                    case "Informe recaudos por cuentas":
+
+                        Utils.SqlDatos = "SELECT [Datos detalles recibos de caja].CuentaContable, [Datos ctas contables IPS].NomCConIPS, Sum(([CantidadCaja]*[ValorUnitaCaja])) AS TolReci,  " +
+                        " [Datos recibos de caja].AnuladoRecibo, Sum([Datos detalles recibos de caja].DebiCaja) AS SumaDeDebiCaja FROM[GEOGRAXPSQL].[dbo].[Datos ctas contables IPS] " +
+                        " INNER JOIN ([BDCAJASQL].[dbo].[Datos recibos de caja] INNER JOIN [BDCAJASQL].[dbo].[Datos detalles recibos de caja] ON[Datos recibos de caja].ReciboCaja = [Datos detalles recibos de caja].ReciboNum) " +
+                        " ON [Datos ctas contables IPS].CueContaIPS = [Datos detalles recibos de caja].CuentaContable " +
+                        $" WHERE [Datos recibos de caja].FechaPagoCaja >= CONVERT(DATETIME, '{Utils.FechaInicial}', 102) And  [Datos recibos de caja].FechaPagoCaja <= CONVERT(DATETIME, '{Utils.FechaFinal}', 102) AND [Datos recibos de caja].[AnuladoRecibo] = '{Utils.Anulado}' " +
+                        " GROUP BY[Datos detalles recibos de caja].CuentaContable, [Datos ctas contables IPS].NomCConIPS, " +
+                        " [Datos recibos de caja].AnuladoRecibo ORDER BY[Datos detalles recibos de caja].CuentaContable; ";
+                        
+                        infoSql = Conexion.SQLDataSet(Utils.SqlDatos);
+                        dsDetalle = new ReportDataSource("dsDetalle", infoSql.Tables[0]);
+
+                        parameters = new ReportParameter[2];
+
+                        parameters[0] = new ReportParameter("Fecha01", Utils.FechaInicial);
+                        parameters[1] = new ReportParameter("Fecha02", Utils.FechaFinal);
+
+
+                        break;
+                    case "Informe recibos por servicios":
+
+                        Utils.SqlDatos = "SELECT [Datos detalles recibos de caja].ReciboNum, [Datos proveedores].RazonSol, Sum(([CantidadCaja]*[ValorUnitaCaja])) AS TolReci, " +
+                        " [Datos recibos de caja].FechaPagoCaja, [Datos recibos de caja].AnuladoRecibo, [Datos detalles recibos de caja].CodServi,  " +
+                        " [Datos catalogo de servicios].NomServicio FROM[GEOGRAXPSQL].[dbo].[Datos proveedores] RIGHT JOIN([ACDATOXPSQL].[dbo].[Datos catalogo de servicios] " +
+                        " INNER JOIN ([BDCAJASQL].[dbo].[Datos recibos de caja] INNER JOIN [BDCAJASQL].[dbo].[Datos detalles recibos de caja] ON[Datos recibos de caja].ReciboCaja = [Datos detalles recibos de caja].ReciboNum) " +
+                        " ON [Datos catalogo de servicios].CodInterno = [Datos detalles recibos de caja].CodServi) ON([Datos proveedores].TipoDocu = [Datos recibos de caja].TipoDocu)  " +
+                        " AND ([Datos proveedores].IdenProve = [Datos recibos de caja].NumDocu) AND([Datos proveedores].SucurProv = [Datos recibos de caja].SucuDocu) " +
+                        $" WHERE [Datos recibos de caja].FechaPagoCaja >= CONVERT(DATETIME, '{Utils.FechaInicial}', 102) And  [Datos recibos de caja].FechaPagoCaja <= CONVERT(DATETIME, '{Utils.FechaFinal}', 102) AND [Datos recibos de caja].[AnuladoRecibo] = '{Utils.Anulado}' AND [Datos detalles recibos de caja].CodServi ='{Utils.CodiServi}'   " +
+                        " GROUP BY[Datos detalles recibos de caja].ReciboNum, [Datos proveedores].RazonSol, [Datos recibos de caja].FechaPagoCaja, [Datos recibos de caja].AnuladoRecibo, " +
+                        " [Datos detalles recibos de caja].CodServi, [Datos catalogo de servicios].NomServicio; ";
+
+                        infoSql = Conexion.SQLDataSet(Utils.SqlDatos);
+                        dsDetalle = new ReportDataSource("dsDetalle", infoSql.Tables[0]);
+
+                        parameters = new ReportParameter[2];
+
+                        parameters[0] = new ReportParameter("Fecha01", Utils.FechaInicial);
+                        parameters[1] = new ReportParameter("Fecha02", Utils.FechaFinal);
+
+
+                        break;
+                    case "Informe resumen caja":
+
+
+                        Utils.SqlDatos = "SELECT [Datos detalles recibos de caja].CuentaContable, [Datos ctas contables IPS].NomCConIPS, " +
+                        " [Datos detalles recibos de caja].CentroCosto, [Datos centros de costo].NomCentro, [Datos detalles recibos de caja].CodServi, " +
+                        " [Datos catalogo de servicios].NomServicio, Sum(([CantidadCaja] *[ValorUnitaCaja])) AS TolCaja, Sum([Datos detalles recibos de caja].DebiCaja) AS SumaDeDebiCaja, " +
+                        " [Datos recibos de caja].AnuladoRecibo, [Datos recibos de caja].CodRegis, RTrim([NombreUsa] + ' ' + [Apellido1Usa] + ' ' + [Apellido2Usa]) AS Digitador, " +
+                        " [Datos recibos de caja].CodiAnul FROM[GEOGRAXPSQL].[dbo].[Datos ctas contables IPS] INNER JOIN([DATUSIIGXPSQL].[dbo].[Datos usuarios de los aplicativos] " +
+                        " INNER JOIN ([BDCAJASQL].[dbo].[Datos recibos de caja] INNER JOIN ([ACDATOXPSQL].[dbo].[Datos catalogo de servicios] RIGHT JOIN ([ACDATOXPSQL].[dbo].[Datos centros de costo] " +
+                        " INNER JOIN [BDCAJASQL].[dbo].[Datos detalles recibos de caja] ON[Datos centros de costo].CodiCentro = [Datos detalles recibos de caja].CentroCosto) " +
+                        " ON[Datos catalogo de servicios].CodInterno = [Datos detalles recibos de caja].CodServi) ON[Datos recibos de caja].ReciboCaja = [Datos detalles recibos de caja].ReciboNum) " +
+                        " ON[Datos usuarios de los aplicativos].CodigoUsa = [Datos recibos de caja].CodRegis) ON[Datos ctas contables IPS].CueContaIPS = [Datos detalles recibos de caja].CuentaContable " +
+                        $" WHERE [Datos recibos de caja].FechaPagoCaja >= CONVERT(DATETIME, '{Utils.FechaInicial}', 102) And  [Datos recibos de caja].FechaPagoCaja <= CONVERT(DATETIME, '{Utils.FechaFinal}', 102) AND [Datos recibos de caja].[AnuladoRecibo] = '{Utils.Anulado}' AND [Datos recibos de caja].[CodRegis] = '{Utils.CodRegis}'  " +
+                        " GROUP BY[Datos detalles recibos de caja].CuentaContable, " +
+                        " [Datos ctas contables IPS].NomCConIPS, [Datos detalles recibos de caja].CentroCosto, [Datos centros de costo].NomCentro, [Datos detalles recibos de caja].CodServi, " +
+                        " [Datos catalogo de servicios].NomServicio, [Datos recibos de caja].AnuladoRecibo, " +
+                        " [Datos recibos de caja].CodRegis, RTrim([NombreUsa] + ' ' + [Apellido1Usa] + ' ' + [Apellido2Usa]), [Datos recibos de caja].CodiAnul; ";
+
+                        infoSql = Conexion.SQLDataSet(Utils.SqlDatos);
+                        dsDetalle = new ReportDataSource("dsDetalle", infoSql.Tables[0]);
+
+                        parameters = new ReportParameter[2];
+
+                        parameters[0] = new ReportParameter("Fecha01", Utils.FechaInicial);
+                        parameters[1] = new ReportParameter("Fecha02", Utils.FechaFinal);
 
                         break;
                     default:

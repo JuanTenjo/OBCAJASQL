@@ -258,9 +258,13 @@
     <EmbeddedResource Include="Report\Rdlc\Informe de caja por usuarios.rdlc" />
     <EmbeddedResource Include="Report\Rdlc\Informe facturas con saldos por entidades.rdlc" />
     <EmbeddedResource Include="Report\Rdlc\Informe facturas con saldos todas.rdlc" />
+    <EmbeddedResource Include="Report\Rdlc\Informe recaudos por cuentas.rdlc" />
     <EmbeddedResource Include="Report\Rdlc\Informe recibos de cajas contabilidad.rdlc" />
     <EmbeddedResource Include="Report\Rdlc\Informe recibos de cajas preformateado IngOp.rdlc" />
     <EmbeddedResource Include="Report\Rdlc\Informe recibos de cajas.rdlc" />
+    <EmbeddedResource Include="Report\Rdlc\Informe recibos por digitadores.rdlc" />
+    <EmbeddedResource Include="Report\Rdlc\Informe recibos por servicios.rdlc" />
+    <EmbeddedResource Include="Report\Rdlc\Informe resumen caja.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

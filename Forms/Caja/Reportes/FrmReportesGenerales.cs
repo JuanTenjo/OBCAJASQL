@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OBCAJASQL.Report;
 using OBCAJASQL.Class;
 using System.Data.SqlClient;
 
@@ -203,7 +204,17 @@ namespace OBCAJASQL.Forms.Caja.Reportes
             try
             {
 
-                Utils.SqlDatos = "Control para mostrar datos";
+                Utils.Titulo01 = "Control para mostrar datos";
+
+
+
+                string ND = "", RVal = "";
+
+                string F01 = Convert.ToString(DtFecInicial.Value.ToString("yyyy-MM-dd"));
+                string F0F = Convert.ToString(DtFecFinal.Value.ToString("yyyy-MM-dd"));
+
+                Utils.FechaInicial = F01;
+                Utils.FechaFinal = F0F;
 
 
                 if (string.IsNullOrWhiteSpace(LblCodCajAct.Text))
@@ -212,12 +223,118 @@ namespace OBCAJASQL.Forms.Caja.Reportes
                     Utils.Informa += "definida la identificación de la caja,";
                     Utils.Informa += "no se puede realizar este proceso.";
                     MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
 
-                
+                switch (MarVigenAnul)
+                {
+                    case 1:
+
+                        Utils.Anulado = 0;
+                        RVal = "recibos válidos";
+
+                        break;
+                    case 2:
+
+                        Utils.Anulado = 1;
+                        RVal = "recibos anulados";
+
+                        break;
+                    default:
+                        break;
+                }
+
+                switch (MarInfo)
+                {
+                    case 1: //Muestra por usuarios
+
+                        if(CboDigiNom.SelectedIndex == -1)
+                        {
+                            Utils.Informa = "Lo siento pero usted no ha seleccionado";
+                            Utils.Informa += "el nombre del digitador a mostrar";
+                            MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        Utils.CodRegis = CboDigiNom.SelectedValue.ToString();
+
+                  
+
+                        Utils.Informa = "¿Usted desea mostrar todo los " + RVal + "\r";
+                        Utils.Informa += "realizados por " + CboDigiNom.Text + "\r";
+                        Utils.Informa += "entre el " + Utils.FechaInicial + " y el " + Utils.FechaFinal + "?";
+       
+                        Utils.infNombreInforme = "Informe recibos por digitadores";
+
+                        
+
+                        break;
+                    case 2:
 
 
+                        Utils.Informa = "¿Usted desea mostrar todo los " + RVal + "\r";
+                        Utils.Informa += "que afectaron las cuentas contables" + "\r";
+                        Utils.Informa += "entre el " + Utils.FechaInicial + " y el " + Utils.FechaFinal + "?";
 
+                        Utils.infNombreInforme = "Informe recaudos por cuentas";
+
+
+                        break;
+                    case 3: //Muestra por servicios
+
+                        if (CboNomServi.SelectedIndex == -1)
+                        {
+                            Utils.Informa = "Lo siento pero usted no ha seleccionado";
+                            Utils.Informa += "el nombre del servicio a mostrar";
+                            MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        Utils.CodiServi = CboNomServi.SelectedValue.ToString();
+
+          
+
+                        Utils.Informa = "¿Usted desea mostrar todo los " + RVal + "\r";
+                        Utils.Informa += "con el servicio " + CboNomServi.Text + "\r";
+                        Utils.Informa += "entre el " + Utils.FechaInicial + " y el " + Utils.FechaFinal + "?";
+         
+                        Utils.infNombreInforme = "Informe recibos por servicios";
+                  
+                        break;
+                    case 4:
+
+                        if (CboDigiNom.SelectedIndex == -1)
+                        {
+                            Utils.Informa = "Lo siento pero usted no ha seleccionado";
+                            Utils.Informa += "el nombre del digitador a mostrar";
+                            MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        Utils.CodRegis = CboDigiNom.SelectedValue.ToString();
+
+               
+                        Utils.Informa = "¿Usted desea mostrar un resumen de los " + RVal + "\r";
+                        Utils.Informa += "realizados por " + CboDigiNom.Text + "\r";
+                        Utils.Informa += "entre el " + Utils.FechaInicial + " y el " + Utils.FechaFinal + "?" + "\r";
+
+                        Utils.infNombreInforme = "Informe resumen caja";
+                   
+                        break;
+
+
+                    default:
+                        break;
+                }
+
+
+                var res = MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if(res == DialogResult.Yes)
+                {
+                    FrmReportes frmReportes = new FrmReportes();
+                    frmReportes.ShowDialog();
+                }
 
 
             }

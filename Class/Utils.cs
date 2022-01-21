@@ -103,7 +103,9 @@ namespace OBCAJASQL.Class
         public static string FechaInicial { get; set; }
         public static string FechaFinal { get; set; }
         public static int Anulado { get; set; }
-
+        public static string CodRegis { get; set; }
+        public static string CodiServi { get; set; }
+        
 
     }
 }

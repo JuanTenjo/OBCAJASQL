@@ -300,6 +300,156 @@ GROUP BY BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum, Trim([Datos d
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="InformePorDigitadoresTableAdapter" GeneratorDataComponentClassName="InformePorDigitadoresTableAdapter" Name="InformePorDigitadores" UserDataComponentName="InformePorDigitadoresTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ACDATOXPSQLConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum, RTRIM([Datos del Paciente].Nombre1 + ' ' + [Datos del Paciente].Nombre2) + ' ' + RTRIM([Datos del Paciente].Apellido1 + ' ' + [Datos del Paciente].Apellido2) 
+                         AS Paciente, GEOGRAXPSQL.dbo.[Datos proveedores].RazonSol, SUM(BDCAJASQL.dbo.[Datos detalles recibos de caja].CantidadCaja * BDCAJASQL.dbo.[Datos detalles recibos de caja].ValorUnitaCaja) AS TolReci, 
+                         BDCAJASQL.dbo.[Datos recibos de caja].FechaPagoCaja, BDCAJASQL.dbo.[Datos recibos de caja].CodRegis, BDCAJASQL.dbo.[Datos recibos de caja].AnuladoRecibo, 
+                         RTRIM(DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].NombreUsa + ' ' + DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].Apellido1Usa + ' ' + DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].Apellido2Usa)
+                          AS Cajero, BDCAJASQL.dbo.[Datos recibos de caja].TipoPago, BDCAJASQL.dbo.[Datos recibos de caja].CodiAnul
+FROM            GEOGRAXPSQL.dbo.[Datos proveedores] INNER JOIN
+                         DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos] RIGHT OUTER JOIN
+                         [Datos del Paciente] RIGHT OUTER JOIN
+                         BDCAJASQL.dbo.[Datos recibos de caja] ON [Datos del Paciente].HistorPaci = BDCAJASQL.dbo.[Datos recibos de caja].HistorPaciente ON 
+                         DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].CodigoUsa = BDCAJASQL.dbo.[Datos recibos de caja].CodRegis INNER JOIN
+                         BDCAJASQL.dbo.[Datos detalles recibos de caja] ON BDCAJASQL.dbo.[Datos recibos de caja].ReciboCaja = BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum ON 
+                         GEOGRAXPSQL.dbo.[Datos proveedores].TipoDocu = BDCAJASQL.dbo.[Datos recibos de caja].TipoDocu AND GEOGRAXPSQL.dbo.[Datos proveedores].IdenProve = BDCAJASQL.dbo.[Datos recibos de caja].NumDocu AND 
+                         GEOGRAXPSQL.dbo.[Datos proveedores].SucurProv = BDCAJASQL.dbo.[Datos recibos de caja].SucuDocu
+GROUP BY BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum, RTRIM([Datos del Paciente].Nombre1 + ' ' + [Datos del Paciente].Nombre2) + ' ' + RTRIM([Datos del Paciente].Apellido1 + ' ' + [Datos del Paciente].Apellido2), 
+                         GEOGRAXPSQL.dbo.[Datos proveedores].RazonSol, BDCAJASQL.dbo.[Datos recibos de caja].FechaPagoCaja, BDCAJASQL.dbo.[Datos recibos de caja].CodRegis, BDCAJASQL.dbo.[Datos recibos de caja].AnuladoRecibo, 
+                         RTRIM(DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].NombreUsa + ' ' + DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].Apellido1Usa + ' ' + DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].Apellido2Usa),
+                          BDCAJASQL.dbo.[Datos recibos de caja].TipoPago, BDCAJASQL.dbo.[Datos recibos de caja].CodiAnul
+ORDER BY BDCAJASQL.dbo.[Datos recibos de caja].FechaPagoCaja, BDCAJASQL.dbo.[Datos recibos de caja].CodRegis; 
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ReciboNum" DataSetColumn="ReciboNum" />
+              <Mapping SourceColumn="Paciente" DataSetColumn="Paciente" />
+              <Mapping SourceColumn="RazonSol" DataSetColumn="RazonSol" />
+              <Mapping SourceColumn="TolReci" DataSetColumn="TolReci" />
+              <Mapping SourceColumn="FechaPagoCaja" DataSetColumn="FechaPagoCaja" />
+              <Mapping SourceColumn="CodRegis" DataSetColumn="CodRegis" />
+              <Mapping SourceColumn="AnuladoRecibo" DataSetColumn="AnuladoRecibo" />
+              <Mapping SourceColumn="Cajero" DataSetColumn="Cajero" />
+              <Mapping SourceColumn="TipoPago" DataSetColumn="TipoPago" />
+              <Mapping SourceColumn="CodiAnul" DataSetColumn="CodiAnul" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="InformeRecaudoCuentasTableAdapter" GeneratorDataComponentClassName="InformeRecaudoCuentasTableAdapter" Name="InformeRecaudoCuentas" UserDataComponentName="InformeRecaudoCuentasTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ACDATOXPSQLConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        BDCAJASQL.dbo.[Datos detalles recibos de caja].CuentaContable, GEOGRAXPSQL.dbo.[Datos ctas contables IPS].NomCConIPS, 
+                         SUM(BDCAJASQL.dbo.[Datos detalles recibos de caja].CantidadCaja * BDCAJASQL.dbo.[Datos detalles recibos de caja].ValorUnitaCaja) AS TolReci, BDCAJASQL.dbo.[Datos recibos de caja].AnuladoRecibo, 
+                         SUM(BDCAJASQL.dbo.[Datos detalles recibos de caja].DebiCaja) AS SumaDeDebiCaja
+FROM            GEOGRAXPSQL.dbo.[Datos ctas contables IPS] INNER JOIN
+                         BDCAJASQL.dbo.[Datos recibos de caja] INNER JOIN
+                         BDCAJASQL.dbo.[Datos detalles recibos de caja] ON BDCAJASQL.dbo.[Datos recibos de caja].ReciboCaja = BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum ON 
+                         GEOGRAXPSQL.dbo.[Datos ctas contables IPS].CueContaIPS = BDCAJASQL.dbo.[Datos detalles recibos de caja].CuentaContable
+GROUP BY BDCAJASQL.dbo.[Datos detalles recibos de caja].CuentaContable, GEOGRAXPSQL.dbo.[Datos ctas contables IPS].NomCConIPS, BDCAJASQL.dbo.[Datos recibos de caja].AnuladoRecibo
+ORDER BY BDCAJASQL.dbo.[Datos detalles recibos de caja].CuentaContable;  
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="CuentaContable" DataSetColumn="CuentaContable" />
+              <Mapping SourceColumn="NomCConIPS" DataSetColumn="NomCConIPS" />
+              <Mapping SourceColumn="TolReci" DataSetColumn="TolReci" />
+              <Mapping SourceColumn="AnuladoRecibo" DataSetColumn="AnuladoRecibo" />
+              <Mapping SourceColumn="SumaDeDebiCaja" DataSetColumn="SumaDeDebiCaja" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="InformePorServiciosTableAdapter" GeneratorDataComponentClassName="InformePorServiciosTableAdapter" Name="InformePorServicios" UserDataComponentName="InformePorServiciosTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ACDATOXPSQLConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum, GEOGRAXPSQL.dbo.[Datos proveedores].RazonSol, 
+                         SUM(BDCAJASQL.dbo.[Datos detalles recibos de caja].CantidadCaja * BDCAJASQL.dbo.[Datos detalles recibos de caja].ValorUnitaCaja) AS TolReci, BDCAJASQL.dbo.[Datos recibos de caja].FechaPagoCaja, 
+                         BDCAJASQL.dbo.[Datos recibos de caja].AnuladoRecibo, BDCAJASQL.dbo.[Datos detalles recibos de caja].CodServi, [Datos catalogo de servicios].NomServicio
+FROM            GEOGRAXPSQL.dbo.[Datos proveedores] RIGHT OUTER JOIN
+                         [Datos catalogo de servicios] INNER JOIN
+                         BDCAJASQL.dbo.[Datos recibos de caja] INNER JOIN
+                         BDCAJASQL.dbo.[Datos detalles recibos de caja] ON BDCAJASQL.dbo.[Datos recibos de caja].ReciboCaja = BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum ON 
+                         [Datos catalogo de servicios].CodInterno = BDCAJASQL.dbo.[Datos detalles recibos de caja].CodServi ON GEOGRAXPSQL.dbo.[Datos proveedores].TipoDocu = BDCAJASQL.dbo.[Datos recibos de caja].TipoDocu AND 
+                         GEOGRAXPSQL.dbo.[Datos proveedores].IdenProve = BDCAJASQL.dbo.[Datos recibos de caja].NumDocu AND GEOGRAXPSQL.dbo.[Datos proveedores].SucurProv = BDCAJASQL.dbo.[Datos recibos de caja].SucuDocu
+GROUP BY BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum, GEOGRAXPSQL.dbo.[Datos proveedores].RazonSol, BDCAJASQL.dbo.[Datos recibos de caja].FechaPagoCaja, 
+                         BDCAJASQL.dbo.[Datos recibos de caja].AnuladoRecibo, BDCAJASQL.dbo.[Datos detalles recibos de caja].CodServi, [Datos catalogo de servicios].NomServicio;  </CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ReciboNum" DataSetColumn="ReciboNum" />
+              <Mapping SourceColumn="RazonSol" DataSetColumn="RazonSol" />
+              <Mapping SourceColumn="TolReci" DataSetColumn="TolReci" />
+              <Mapping SourceColumn="FechaPagoCaja" DataSetColumn="FechaPagoCaja" />
+              <Mapping SourceColumn="AnuladoRecibo" DataSetColumn="AnuladoRecibo" />
+              <Mapping SourceColumn="CodServi" DataSetColumn="CodServi" />
+              <Mapping SourceColumn="NomServicio" DataSetColumn="NomServicio" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="InformeResumenCajaTableAdapter" GeneratorDataComponentClassName="InformeResumenCajaTableAdapter" Name="InformeResumenCaja" UserDataComponentName="InformeResumenCajaTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ACDATOXPSQLConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        BDCAJASQL.dbo.[Datos detalles recibos de caja].CuentaContable, GEOGRAXPSQL.dbo.[Datos ctas contables IPS].NomCConIPS, BDCAJASQL.dbo.[Datos detalles recibos de caja].CentroCosto, 
+                         [Datos centros de costo].NomCentro, BDCAJASQL.dbo.[Datos detalles recibos de caja].CodServi, [Datos catalogo de servicios].NomServicio, 
+                         SUM(BDCAJASQL.dbo.[Datos detalles recibos de caja].CantidadCaja * BDCAJASQL.dbo.[Datos detalles recibos de caja].ValorUnitaCaja) AS TolCaja, SUM(BDCAJASQL.dbo.[Datos detalles recibos de caja].DebiCaja) 
+                         AS SumaDeDebiCaja, BDCAJASQL.dbo.[Datos recibos de caja].AnuladoRecibo, BDCAJASQL.dbo.[Datos recibos de caja].CodRegis, 
+                         RTRIM(DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].NombreUsa + ' ' + DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].Apellido1Usa + ' ' + DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].Apellido2Usa)
+                          AS Digitador, BDCAJASQL.dbo.[Datos recibos de caja].CodiAnul
+FROM            GEOGRAXPSQL.dbo.[Datos ctas contables IPS] INNER JOIN
+                         DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos] INNER JOIN
+                         BDCAJASQL.dbo.[Datos recibos de caja] INNER JOIN
+                         [Datos catalogo de servicios] RIGHT OUTER JOIN
+                         [Datos centros de costo] INNER JOIN
+                         BDCAJASQL.dbo.[Datos detalles recibos de caja] ON [Datos centros de costo].CodiCentro = BDCAJASQL.dbo.[Datos detalles recibos de caja].CentroCosto ON 
+                         [Datos catalogo de servicios].CodInterno = BDCAJASQL.dbo.[Datos detalles recibos de caja].CodServi ON BDCAJASQL.dbo.[Datos recibos de caja].ReciboCaja = BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum ON 
+                         DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].CodigoUsa = BDCAJASQL.dbo.[Datos recibos de caja].CodRegis ON 
+                         GEOGRAXPSQL.dbo.[Datos ctas contables IPS].CueContaIPS = BDCAJASQL.dbo.[Datos detalles recibos de caja].CuentaContable
+GROUP BY BDCAJASQL.dbo.[Datos detalles recibos de caja].CuentaContable, GEOGRAXPSQL.dbo.[Datos ctas contables IPS].NomCConIPS, BDCAJASQL.dbo.[Datos detalles recibos de caja].CentroCosto, 
+                         [Datos centros de costo].NomCentro, BDCAJASQL.dbo.[Datos detalles recibos de caja].CodServi, [Datos catalogo de servicios].NomServicio, BDCAJASQL.dbo.[Datos recibos de caja].AnuladoRecibo, 
+                         BDCAJASQL.dbo.[Datos recibos de caja].CodRegis, 
+                         RTRIM(DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].NombreUsa + ' ' + DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].Apellido1Usa + ' ' + DATUSIIGXPSQL.dbo.[Datos usuarios de los aplicativos].Apellido2Usa),
+                          BDCAJASQL.dbo.[Datos recibos de caja].CodiAnul;  </CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="CuentaContable" DataSetColumn="CuentaContable" />
+              <Mapping SourceColumn="NomCConIPS" DataSetColumn="NomCConIPS" />
+              <Mapping SourceColumn="CentroCosto" DataSetColumn="CentroCosto" />
+              <Mapping SourceColumn="NomCentro" DataSetColumn="NomCentro" />
+              <Mapping SourceColumn="CodServi" DataSetColumn="CodServi" />
+              <Mapping SourceColumn="NomServicio" DataSetColumn="NomServicio" />
+              <Mapping SourceColumn="TolCaja" DataSetColumn="TolCaja" />
+              <Mapping SourceColumn="SumaDeDebiCaja" DataSetColumn="SumaDeDebiCaja" />
+              <Mapping SourceColumn="AnuladoRecibo" DataSetColumn="AnuladoRecibo" />
+              <Mapping SourceColumn="CodRegis" DataSetColumn="CodRegis" />
+              <Mapping SourceColumn="Digitador" DataSetColumn="Digitador" />
+              <Mapping SourceColumn="CodiAnul" DataSetColumn="CodiAnul" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -308,7 +458,7 @@ GROUP BY BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum, Trim([Datos d
   <xs:element name="dsReportes" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsReportes" msprop:Generator_UserDSName="dsReportes">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="InformeCajaPorUsuarioNew" msprop:Generator_TableClassName="InformeCajaPorUsuarioNewDataTable" msprop:Generator_TableVarName="tableInformeCajaPorUsuarioNew" msprop:Generator_RowChangedName="InformeCajaPorUsuarioNewRowChanged" msprop:Generator_TablePropName="InformeCajaPorUsuarioNew" msprop:Generator_RowDeletingName="InformeCajaPorUsuarioNewRowDeleting" msprop:Generator_RowChangingName="InformeCajaPorUsuarioNewRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaPorUsuarioNewRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaPorUsuarioNewRowDeleted" msprop:Generator_RowClassName="InformeCajaPorUsuarioNewRow" msprop:Generator_UserTableName="InformeCajaPorUsuarioNew" msprop:Generator_RowEvArgName="InformeCajaPorUsuarioNewRowChangeEvent">
+        <xs:element name="InformeCajaPorUsuarioNew" msprop:Generator_TableClassName="InformeCajaPorUsuarioNewDataTable" msprop:Generator_TableVarName="tableInformeCajaPorUsuarioNew" msprop:Generator_TablePropName="InformeCajaPorUsuarioNew" msprop:Generator_RowDeletingName="InformeCajaPorUsuarioNewRowDeleting" msprop:Generator_RowChangingName="InformeCajaPorUsuarioNewRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaPorUsuarioNewRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaPorUsuarioNewRowDeleted" msprop:Generator_UserTableName="InformeCajaPorUsuarioNew" msprop:Generator_RowChangedName="InformeCajaPorUsuarioNewRowChanged" msprop:Generator_RowEvArgName="InformeCajaPorUsuarioNewRowChangeEvent" msprop:Generator_RowClassName="InformeCajaPorUsuarioNewRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ReciboNum" msprop:Generator_ColumnVarNameInTable="columnReciboNum" msprop:Generator_ColumnPropNameInRow="ReciboNum" msprop:Generator_ColumnPropNameInTable="ReciboNumColumn" msprop:Generator_UserColumnName="ReciboNum">
@@ -356,7 +506,7 @@ GROUP BY BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum, Trim([Datos d
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="InformeCajaPorEntidades" msprop:Generator_TableClassName="InformeCajaPorEntidadesDataTable" msprop:Generator_TableVarName="tableInformeCajaPorEntidades" msprop:Generator_TablePropName="InformeCajaPorEntidades" msprop:Generator_RowDeletingName="InformeCajaPorEntidadesRowDeleting" msprop:Generator_RowChangingName="InformeCajaPorEntidadesRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaPorEntidadesRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaPorEntidadesRowDeleted" msprop:Generator_UserTableName="InformeCajaPorEntidades" msprop:Generator_RowChangedName="InformeCajaPorEntidadesRowChanged" msprop:Generator_RowEvArgName="InformeCajaPorEntidadesRowChangeEvent" msprop:Generator_RowClassName="InformeCajaPorEntidadesRow">
+        <xs:element name="InformeCajaPorEntidades" msprop:Generator_TableClassName="InformeCajaPorEntidadesDataTable" msprop:Generator_TableVarName="tableInformeCajaPorEntidades" msprop:Generator_RowChangedName="InformeCajaPorEntidadesRowChanged" msprop:Generator_TablePropName="InformeCajaPorEntidades" msprop:Generator_RowDeletingName="InformeCajaPorEntidadesRowDeleting" msprop:Generator_RowChangingName="InformeCajaPorEntidadesRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaPorEntidadesRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaPorEntidadesRowDeleted" msprop:Generator_RowClassName="InformeCajaPorEntidadesRow" msprop:Generator_UserTableName="InformeCajaPorEntidades" msprop:Generator_RowEvArgName="InformeCajaPorEntidadesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ReciboNum" msprop:Generator_ColumnVarNameInTable="columnReciboNum" msprop:Generator_ColumnPropNameInRow="ReciboNum" msprop:Generator_ColumnPropNameInTable="ReciboNumColumn" msprop:Generator_UserColumnName="ReciboNum">
@@ -418,7 +568,7 @@ GROUP BY BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum, Trim([Datos d
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="InformeCajaPorRegimen" msprop:Generator_TableClassName="InformeCajaPorRegimenDataTable" msprop:Generator_TableVarName="tableInformeCajaPorRegimen" msprop:Generator_RowChangedName="InformeCajaPorRegimenRowChanged" msprop:Generator_TablePropName="InformeCajaPorRegimen" msprop:Generator_RowDeletingName="InformeCajaPorRegimenRowDeleting" msprop:Generator_RowChangingName="InformeCajaPorRegimenRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaPorRegimenRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaPorRegimenRowDeleted" msprop:Generator_RowClassName="InformeCajaPorRegimenRow" msprop:Generator_UserTableName="InformeCajaPorRegimen" msprop:Generator_RowEvArgName="InformeCajaPorRegimenRowChangeEvent">
+        <xs:element name="InformeCajaPorRegimen" msprop:Generator_TableClassName="InformeCajaPorRegimenDataTable" msprop:Generator_TableVarName="tableInformeCajaPorRegimen" msprop:Generator_TablePropName="InformeCajaPorRegimen" msprop:Generator_RowDeletingName="InformeCajaPorRegimenRowDeleting" msprop:Generator_RowChangingName="InformeCajaPorRegimenRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaPorRegimenRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaPorRegimenRowDeleted" msprop:Generator_UserTableName="InformeCajaPorRegimen" msprop:Generator_RowChangedName="InformeCajaPorRegimenRowChanged" msprop:Generator_RowEvArgName="InformeCajaPorRegimenRowChangeEvent" msprop:Generator_RowClassName="InformeCajaPorRegimenRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ReciboNum" msprop:Generator_ColumnVarNameInTable="columnReciboNum" msprop:Generator_ColumnPropNameInRow="ReciboNum" msprop:Generator_ColumnPropNameInTable="ReciboNumColumn" msprop:Generator_UserColumnName="ReciboNum">
@@ -483,7 +633,7 @@ GROUP BY BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum, Trim([Datos d
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="InformeCajaPorPaciente" msprop:Generator_TableClassName="InformeCajaPorPacienteDataTable" msprop:Generator_TableVarName="tableInformeCajaPorPaciente" msprop:Generator_RowChangedName="InformeCajaPorPacienteRowChanged" msprop:Generator_TablePropName="InformeCajaPorPaciente" msprop:Generator_RowDeletingName="InformeCajaPorPacienteRowDeleting" msprop:Generator_RowChangingName="InformeCajaPorPacienteRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaPorPacienteRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaPorPacienteRowDeleted" msprop:Generator_RowClassName="InformeCajaPorPacienteRow" msprop:Generator_UserTableName="InformeCajaPorPaciente" msprop:Generator_RowEvArgName="InformeCajaPorPacienteRowChangeEvent">
+        <xs:element name="InformeCajaPorPaciente" msprop:Generator_TableClassName="InformeCajaPorPacienteDataTable" msprop:Generator_TableVarName="tableInformeCajaPorPaciente" msprop:Generator_TablePropName="InformeCajaPorPaciente" msprop:Generator_RowDeletingName="InformeCajaPorPacienteRowDeleting" msprop:Generator_RowChangingName="InformeCajaPorPacienteRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaPorPacienteRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaPorPacienteRowDeleted" msprop:Generator_UserTableName="InformeCajaPorPaciente" msprop:Generator_RowChangedName="InformeCajaPorPacienteRowChanged" msprop:Generator_RowEvArgName="InformeCajaPorPacienteRowChangeEvent" msprop:Generator_RowClassName="InformeCajaPorPacienteRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ReciboNum" msprop:Generator_ColumnVarNameInTable="columnReciboNum" msprop:Generator_ColumnPropNameInRow="ReciboNum" msprop:Generator_ColumnPropNameInTable="ReciboNumColumn" msprop:Generator_UserColumnName="ReciboNum">
@@ -529,7 +679,7 @@ GROUP BY BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum, Trim([Datos d
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="InformeCajaRegimenCosto" msprop:Generator_TableClassName="InformeCajaRegimenCostoDataTable" msprop:Generator_TableVarName="tableInformeCajaRegimenCosto" msprop:Generator_RowChangedName="InformeCajaRegimenCostoRowChanged" msprop:Generator_TablePropName="InformeCajaRegimenCosto" msprop:Generator_RowDeletingName="InformeCajaRegimenCostoRowDeleting" msprop:Generator_RowChangingName="InformeCajaRegimenCostoRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaRegimenCostoRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaRegimenCostoRowDeleted" msprop:Generator_RowClassName="InformeCajaRegimenCostoRow" msprop:Generator_UserTableName="InformeCajaRegimenCosto" msprop:Generator_RowEvArgName="InformeCajaRegimenCostoRowChangeEvent">
+        <xs:element name="InformeCajaRegimenCosto" msprop:Generator_TableClassName="InformeCajaRegimenCostoDataTable" msprop:Generator_TableVarName="tableInformeCajaRegimenCosto" msprop:Generator_TablePropName="InformeCajaRegimenCosto" msprop:Generator_RowDeletingName="InformeCajaRegimenCostoRowDeleting" msprop:Generator_RowChangingName="InformeCajaRegimenCostoRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaRegimenCostoRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaRegimenCostoRowDeleted" msprop:Generator_UserTableName="InformeCajaRegimenCosto" msprop:Generator_RowChangedName="InformeCajaRegimenCostoRowChanged" msprop:Generator_RowEvArgName="InformeCajaRegimenCostoRowChangeEvent" msprop:Generator_RowClassName="InformeCajaRegimenCostoRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="NomTipo" msprop:Generator_ColumnVarNameInTable="columnNomTipo" msprop:Generator_ColumnPropNameInRow="NomTipo" msprop:Generator_ColumnPropNameInTable="NomTipoColumn" msprop:Generator_UserColumnName="NomTipo" minOccurs="0">
@@ -573,7 +723,7 @@ GROUP BY BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum, Trim([Datos d
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="InformeCajaTodos" msprop:Generator_TableClassName="InformeCajaTodosDataTable" msprop:Generator_TableVarName="tableInformeCajaTodos" msprop:Generator_TablePropName="InformeCajaTodos" msprop:Generator_RowDeletingName="InformeCajaTodosRowDeleting" msprop:Generator_RowChangingName="InformeCajaTodosRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaTodosRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaTodosRowDeleted" msprop:Generator_UserTableName="InformeCajaTodos" msprop:Generator_RowChangedName="InformeCajaTodosRowChanged" msprop:Generator_RowEvArgName="InformeCajaTodosRowChangeEvent" msprop:Generator_RowClassName="InformeCajaTodosRow">
+        <xs:element name="InformeCajaTodos" msprop:Generator_TableClassName="InformeCajaTodosDataTable" msprop:Generator_TableVarName="tableInformeCajaTodos" msprop:Generator_RowChangedName="InformeCajaTodosRowChanged" msprop:Generator_TablePropName="InformeCajaTodos" msprop:Generator_RowDeletingName="InformeCajaTodosRowDeleting" msprop:Generator_RowChangingName="InformeCajaTodosRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaTodosRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaTodosRowDeleted" msprop:Generator_RowClassName="InformeCajaTodosRow" msprop:Generator_UserTableName="InformeCajaTodos" msprop:Generator_RowEvArgName="InformeCajaTodosRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ReciboNum" msprop:Generator_ColumnVarNameInTable="columnReciboNum" msprop:Generator_ColumnPropNameInRow="ReciboNum" msprop:Generator_ColumnPropNameInTable="ReciboNumColumn" msprop:Generator_UserColumnName="ReciboNum">
@@ -607,6 +757,196 @@ GROUP BY BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum, Trim([Datos d
                 </xs:simpleType>
               </xs:element>
               <xs:element name="AnuladoRecibo" msprop:Generator_ColumnVarNameInTable="columnAnuladoRecibo" msprop:Generator_ColumnPropNameInRow="AnuladoRecibo" msprop:Generator_ColumnPropNameInTable="AnuladoReciboColumn" msprop:Generator_UserColumnName="AnuladoRecibo" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="InformePorDigitadores" msprop:Generator_TableClassName="InformePorDigitadoresDataTable" msprop:Generator_TableVarName="tableInformePorDigitadores" msprop:Generator_TablePropName="InformePorDigitadores" msprop:Generator_RowDeletingName="InformePorDigitadoresRowDeleting" msprop:Generator_RowChangingName="InformePorDigitadoresRowChanging" msprop:Generator_RowEvHandlerName="InformePorDigitadoresRowChangeEventHandler" msprop:Generator_RowDeletedName="InformePorDigitadoresRowDeleted" msprop:Generator_UserTableName="InformePorDigitadores" msprop:Generator_RowChangedName="InformePorDigitadoresRowChanged" msprop:Generator_RowEvArgName="InformePorDigitadoresRowChangeEvent" msprop:Generator_RowClassName="InformePorDigitadoresRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReciboNum" msprop:Generator_ColumnVarNameInTable="columnReciboNum" msprop:Generator_ColumnPropNameInRow="ReciboNum" msprop:Generator_ColumnPropNameInTable="ReciboNumColumn" msprop:Generator_UserColumnName="ReciboNum">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Paciente" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPaciente" msprop:Generator_ColumnPropNameInRow="Paciente" msprop:Generator_ColumnPropNameInTable="PacienteColumn" msprop:Generator_UserColumnName="Paciente" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="103" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RazonSol" msprop:Generator_ColumnVarNameInTable="columnRazonSol" msprop:Generator_ColumnPropNameInRow="RazonSol" msprop:Generator_ColumnPropNameInTable="RazonSolColumn" msprop:Generator_UserColumnName="RazonSol">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TolReci" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTolReci" msprop:Generator_ColumnPropNameInRow="TolReci" msprop:Generator_ColumnPropNameInTable="TolReciColumn" msprop:Generator_UserColumnName="TolReci" type="xs:double" minOccurs="0" />
+              <xs:element name="FechaPagoCaja" msprop:Generator_ColumnVarNameInTable="columnFechaPagoCaja" msprop:Generator_ColumnPropNameInRow="FechaPagoCaja" msprop:Generator_ColumnPropNameInTable="FechaPagoCajaColumn" msprop:Generator_UserColumnName="FechaPagoCaja" type="xs:dateTime" />
+              <xs:element name="CodRegis" msprop:Generator_ColumnVarNameInTable="columnCodRegis" msprop:Generator_ColumnPropNameInRow="CodRegis" msprop:Generator_ColumnPropNameInTable="CodRegisColumn" msprop:Generator_UserColumnName="CodRegis">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AnuladoRecibo" msprop:Generator_ColumnVarNameInTable="columnAnuladoRecibo" msprop:Generator_ColumnPropNameInRow="AnuladoRecibo" msprop:Generator_ColumnPropNameInTable="AnuladoReciboColumn" msprop:Generator_UserColumnName="AnuladoRecibo" type="xs:boolean" />
+              <xs:element name="Cajero" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnCajero" msprop:Generator_ColumnPropNameInRow="Cajero" msprop:Generator_ColumnPropNameInTable="CajeroColumn" msprop:Generator_UserColumnName="Cajero" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="77" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TipoPago" msprop:Generator_ColumnVarNameInTable="columnTipoPago" msprop:Generator_ColumnPropNameInRow="TipoPago" msprop:Generator_ColumnPropNameInTable="TipoPagoColumn" msprop:Generator_UserColumnName="TipoPago">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CodiAnul" msprop:Generator_ColumnVarNameInTable="columnCodiAnul" msprop:Generator_ColumnPropNameInRow="CodiAnul" msprop:Generator_ColumnPropNameInTable="CodiAnulColumn" msprop:Generator_UserColumnName="CodiAnul" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="InformeRecaudoCuentas" msprop:Generator_TableClassName="InformeRecaudoCuentasDataTable" msprop:Generator_TableVarName="tableInformeRecaudoCuentas" msprop:Generator_RowChangedName="InformeRecaudoCuentasRowChanged" msprop:Generator_TablePropName="InformeRecaudoCuentas" msprop:Generator_RowDeletingName="InformeRecaudoCuentasRowDeleting" msprop:Generator_RowChangingName="InformeRecaudoCuentasRowChanging" msprop:Generator_RowEvHandlerName="InformeRecaudoCuentasRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeRecaudoCuentasRowDeleted" msprop:Generator_RowClassName="InformeRecaudoCuentasRow" msprop:Generator_UserTableName="InformeRecaudoCuentas" msprop:Generator_RowEvArgName="InformeRecaudoCuentasRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CuentaContable" msprop:Generator_ColumnVarNameInTable="columnCuentaContable" msprop:Generator_ColumnPropNameInRow="CuentaContable" msprop:Generator_ColumnPropNameInTable="CuentaContableColumn" msprop:Generator_UserColumnName="CuentaContable">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NomCConIPS" msprop:Generator_ColumnVarNameInTable="columnNomCConIPS" msprop:Generator_ColumnPropNameInRow="NomCConIPS" msprop:Generator_ColumnPropNameInTable="NomCConIPSColumn" msprop:Generator_UserColumnName="NomCConIPS">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="80" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TolReci" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTolReci" msprop:Generator_ColumnPropNameInRow="TolReci" msprop:Generator_ColumnPropNameInTable="TolReciColumn" msprop:Generator_UserColumnName="TolReci" type="xs:double" minOccurs="0" />
+              <xs:element name="AnuladoRecibo" msprop:Generator_ColumnVarNameInTable="columnAnuladoRecibo" msprop:Generator_ColumnPropNameInRow="AnuladoRecibo" msprop:Generator_ColumnPropNameInTable="AnuladoReciboColumn" msprop:Generator_UserColumnName="AnuladoRecibo" type="xs:boolean" />
+              <xs:element name="SumaDeDebiCaja" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSumaDeDebiCaja" msprop:Generator_ColumnPropNameInRow="SumaDeDebiCaja" msprop:Generator_ColumnPropNameInTable="SumaDeDebiCajaColumn" msprop:Generator_UserColumnName="SumaDeDebiCaja" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="InformePorServicios" msprop:Generator_TableClassName="InformePorServiciosDataTable" msprop:Generator_TableVarName="tableInformePorServicios" msprop:Generator_TablePropName="InformePorServicios" msprop:Generator_RowDeletingName="InformePorServiciosRowDeleting" msprop:Generator_RowChangingName="InformePorServiciosRowChanging" msprop:Generator_RowEvHandlerName="InformePorServiciosRowChangeEventHandler" msprop:Generator_RowDeletedName="InformePorServiciosRowDeleted" msprop:Generator_UserTableName="InformePorServicios" msprop:Generator_RowChangedName="InformePorServiciosRowChanged" msprop:Generator_RowEvArgName="InformePorServiciosRowChangeEvent" msprop:Generator_RowClassName="InformePorServiciosRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReciboNum" msprop:Generator_ColumnVarNameInTable="columnReciboNum" msprop:Generator_ColumnPropNameInRow="ReciboNum" msprop:Generator_ColumnPropNameInTable="ReciboNumColumn" msprop:Generator_UserColumnName="ReciboNum">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RazonSol" msprop:Generator_ColumnVarNameInTable="columnRazonSol" msprop:Generator_ColumnPropNameInRow="RazonSol" msprop:Generator_ColumnPropNameInTable="RazonSolColumn" msprop:Generator_UserColumnName="RazonSol" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TolReci" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTolReci" msprop:Generator_ColumnPropNameInRow="TolReci" msprop:Generator_ColumnPropNameInTable="TolReciColumn" msprop:Generator_UserColumnName="TolReci" type="xs:double" minOccurs="0" />
+              <xs:element name="FechaPagoCaja" msprop:Generator_ColumnVarNameInTable="columnFechaPagoCaja" msprop:Generator_ColumnPropNameInRow="FechaPagoCaja" msprop:Generator_ColumnPropNameInTable="FechaPagoCajaColumn" msprop:Generator_UserColumnName="FechaPagoCaja" type="xs:dateTime" />
+              <xs:element name="AnuladoRecibo" msprop:Generator_ColumnVarNameInTable="columnAnuladoRecibo" msprop:Generator_ColumnPropNameInRow="AnuladoRecibo" msprop:Generator_ColumnPropNameInTable="AnuladoReciboColumn" msprop:Generator_UserColumnName="AnuladoRecibo" type="xs:boolean" />
+              <xs:element name="CodServi" msprop:Generator_ColumnVarNameInTable="columnCodServi" msprop:Generator_ColumnPropNameInRow="CodServi" msprop:Generator_ColumnPropNameInTable="CodServiColumn" msprop:Generator_UserColumnName="CodServi" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="18" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NomServicio" msprop:Generator_ColumnVarNameInTable="columnNomServicio" msprop:Generator_ColumnPropNameInRow="NomServicio" msprop:Generator_ColumnPropNameInTable="NomServicioColumn" msprop:Generator_UserColumnName="NomServicio">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="InformeResumenCaja" msprop:Generator_TableClassName="InformeResumenCajaDataTable" msprop:Generator_TableVarName="tableInformeResumenCaja" msprop:Generator_TablePropName="InformeResumenCaja" msprop:Generator_RowDeletingName="InformeResumenCajaRowDeleting" msprop:Generator_RowChangingName="InformeResumenCajaRowChanging" msprop:Generator_RowEvHandlerName="InformeResumenCajaRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeResumenCajaRowDeleted" msprop:Generator_UserTableName="InformeResumenCaja" msprop:Generator_RowChangedName="InformeResumenCajaRowChanged" msprop:Generator_RowEvArgName="InformeResumenCajaRowChangeEvent" msprop:Generator_RowClassName="InformeResumenCajaRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CuentaContable" msprop:Generator_ColumnVarNameInTable="columnCuentaContable" msprop:Generator_ColumnPropNameInRow="CuentaContable" msprop:Generator_ColumnPropNameInTable="CuentaContableColumn" msprop:Generator_UserColumnName="CuentaContable">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NomCConIPS" msprop:Generator_ColumnVarNameInTable="columnNomCConIPS" msprop:Generator_ColumnPropNameInRow="NomCConIPS" msprop:Generator_ColumnPropNameInTable="NomCConIPSColumn" msprop:Generator_UserColumnName="NomCConIPS">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="80" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CentroCosto" msprop:Generator_ColumnVarNameInTable="columnCentroCosto" msprop:Generator_ColumnPropNameInRow="CentroCosto" msprop:Generator_ColumnPropNameInTable="CentroCostoColumn" msprop:Generator_UserColumnName="CentroCosto">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NomCentro" msprop:Generator_ColumnVarNameInTable="columnNomCentro" msprop:Generator_ColumnPropNameInRow="NomCentro" msprop:Generator_ColumnPropNameInTable="NomCentroColumn" msprop:Generator_UserColumnName="NomCentro">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="60" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CodServi" msprop:Generator_ColumnVarNameInTable="columnCodServi" msprop:Generator_ColumnPropNameInRow="CodServi" msprop:Generator_ColumnPropNameInTable="CodServiColumn" msprop:Generator_UserColumnName="CodServi" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="18" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NomServicio" msprop:Generator_ColumnVarNameInTable="columnNomServicio" msprop:Generator_ColumnPropNameInRow="NomServicio" msprop:Generator_ColumnPropNameInTable="NomServicioColumn" msprop:Generator_UserColumnName="NomServicio" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TolCaja" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTolCaja" msprop:Generator_ColumnPropNameInRow="TolCaja" msprop:Generator_ColumnPropNameInTable="TolCajaColumn" msprop:Generator_UserColumnName="TolCaja" type="xs:double" minOccurs="0" />
+              <xs:element name="SumaDeDebiCaja" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSumaDeDebiCaja" msprop:Generator_ColumnPropNameInRow="SumaDeDebiCaja" msprop:Generator_ColumnPropNameInTable="SumaDeDebiCajaColumn" msprop:Generator_UserColumnName="SumaDeDebiCaja" type="xs:double" minOccurs="0" />
+              <xs:element name="AnuladoRecibo" msprop:Generator_ColumnVarNameInTable="columnAnuladoRecibo" msprop:Generator_ColumnPropNameInRow="AnuladoRecibo" msprop:Generator_ColumnPropNameInTable="AnuladoReciboColumn" msprop:Generator_UserColumnName="AnuladoRecibo" type="xs:boolean" />
+              <xs:element name="CodRegis" msprop:Generator_ColumnVarNameInTable="columnCodRegis" msprop:Generator_ColumnPropNameInRow="CodRegis" msprop:Generator_ColumnPropNameInTable="CodRegisColumn" msprop:Generator_UserColumnName="CodRegis">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Digitador" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnDigitador" msprop:Generator_ColumnPropNameInRow="Digitador" msprop:Generator_ColumnPropNameInTable="DigitadorColumn" msprop:Generator_UserColumnName="Digitador" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="77" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CodiAnul" msprop:Generator_ColumnVarNameInTable="columnCodiAnul" msprop:Generator_ColumnPropNameInRow="CodiAnul" msprop:Generator_ColumnPropNameInTable="CodiAnulColumn" msprop:Generator_UserColumnName="CodiAnul" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
