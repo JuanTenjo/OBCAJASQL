@@ -29,7 +29,12 @@ namespace OBCAJASQL.Forms.Caja
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPagosAFacturas));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.DtFechaRecibo = new System.Windows.Forms.DateTimePicker();
             this.LblNomCajAct = new System.Windows.Forms.Label();
@@ -140,10 +145,16 @@ namespace OBCAJASQL.Forms.Caja
             this.BtnBuscarTercer = new System.Windows.Forms.Button();
             this.CboCancelaPor = new System.Windows.Forms.ComboBox();
             this.TxtTipoDocEnti = new System.Windows.Forms.TextBox();
+            this.timerGridFacturas = new System.Windows.Forms.Timer(this.components);
+            this.DataGridFacturas = new System.Windows.Forms.DataGridView();
+            this.Factura = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridFacturas)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -1036,7 +1047,7 @@ namespace OBCAJASQL.Forms.Caja
             this.label39.BackColor = System.Drawing.Color.White;
             this.label39.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label39.ForeColor = System.Drawing.Color.Black;
-            this.label39.Location = new System.Drawing.Point(50, 444);
+            this.label39.Location = new System.Drawing.Point(147, 446);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(67, 23);
             this.label39.TabIndex = 199;
@@ -1048,7 +1059,7 @@ namespace OBCAJASQL.Forms.Caja
             this.label40.BackColor = System.Drawing.Color.White;
             this.label40.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label40.ForeColor = System.Drawing.Color.Black;
-            this.label40.Location = new System.Drawing.Point(119, 444);
+            this.label40.Location = new System.Drawing.Point(216, 446);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(50, 23);
             this.label40.TabIndex = 201;
@@ -1060,7 +1071,7 @@ namespace OBCAJASQL.Forms.Caja
             this.label41.BackColor = System.Drawing.Color.White;
             this.label41.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label41.ForeColor = System.Drawing.Color.Black;
-            this.label41.Location = new System.Drawing.Point(175, 444);
+            this.label41.Location = new System.Drawing.Point(272, 446);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(50, 23);
             this.label41.TabIndex = 203;
@@ -1075,7 +1086,7 @@ namespace OBCAJASQL.Forms.Caja
             this.groupBox6.Controls.Add(this.label42);
             this.groupBox6.Controls.Add(this.label43);
             this.groupBox6.Controls.Add(this.label44);
-            this.groupBox6.Location = new System.Drawing.Point(308, 444);
+            this.groupBox6.Location = new System.Drawing.Point(471, 446);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(181, 66);
             this.groupBox6.TabIndex = 204;
@@ -1138,9 +1149,9 @@ namespace OBCAJASQL.Forms.Caja
             this.groupBox2.Controls.Add(this.lblNombreUser);
             this.groupBox2.Controls.Add(this.lblCodigoUser);
             this.groupBox2.Controls.Add(this.label45);
-            this.groupBox2.Location = new System.Drawing.Point(493, 444);
+            this.groupBox2.Location = new System.Drawing.Point(658, 444);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(158, 66);
+            this.groupBox2.Size = new System.Drawing.Size(240, 66);
             this.groupBox2.TabIndex = 205;
             this.groupBox2.TabStop = false;
             // 
@@ -1171,7 +1182,7 @@ namespace OBCAJASQL.Forms.Caja
             this.lblNombreUser.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombreUser.Location = new System.Drawing.Point(6, 24);
             this.lblNombreUser.Name = "lblNombreUser";
-            this.lblNombreUser.Size = new System.Drawing.Size(143, 40);
+            this.lblNombreUser.Size = new System.Drawing.Size(228, 40);
             this.lblNombreUser.TabIndex = 12;
             this.lblNombreUser.Text = "NombreUser";
             // 
@@ -1199,7 +1210,7 @@ namespace OBCAJASQL.Forms.Caja
             this.label46.BackColor = System.Drawing.Color.White;
             this.label46.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label46.ForeColor = System.Drawing.Color.Black;
-            this.label46.Location = new System.Drawing.Point(231, 439);
+            this.label46.Location = new System.Drawing.Point(328, 441);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(66, 33);
             this.label46.TabIndex = 207;
@@ -1215,7 +1226,7 @@ namespace OBCAJASQL.Forms.Caja
             this.BtnCrucedepositos.FlatAppearance.BorderSize = 0;
             this.BtnCrucedepositos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.BtnCrucedepositos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCrucedepositos.Location = new System.Drawing.Point(234, 464);
+            this.BtnCrucedepositos.Location = new System.Drawing.Point(331, 466);
             this.BtnCrucedepositos.Name = "BtnCrucedepositos";
             this.BtnCrucedepositos.Size = new System.Drawing.Size(63, 44);
             this.BtnCrucedepositos.TabIndex = 206;
@@ -1231,7 +1242,7 @@ namespace OBCAJASQL.Forms.Caja
             this.BtnSalir.FlatAppearance.BorderSize = 0;
             this.BtnSalir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.BtnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSalir.Location = new System.Drawing.Point(175, 466);
+            this.BtnSalir.Location = new System.Drawing.Point(272, 468);
             this.BtnSalir.Name = "BtnSalir";
             this.BtnSalir.Size = new System.Drawing.Size(50, 44);
             this.BtnSalir.TabIndex = 202;
@@ -1246,7 +1257,7 @@ namespace OBCAJASQL.Forms.Caja
             this.BtnCopiaRecibos.FlatAppearance.BorderSize = 0;
             this.BtnCopiaRecibos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.BtnCopiaRecibos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCopiaRecibos.Location = new System.Drawing.Point(119, 466);
+            this.BtnCopiaRecibos.Location = new System.Drawing.Point(216, 468);
             this.BtnCopiaRecibos.Name = "BtnCopiaRecibos";
             this.BtnCopiaRecibos.Size = new System.Drawing.Size(50, 44);
             this.BtnCopiaRecibos.TabIndex = 200;
@@ -1261,7 +1272,7 @@ namespace OBCAJASQL.Forms.Caja
             this.BtnRegistraCaja.FlatAppearance.BorderSize = 0;
             this.BtnRegistraCaja.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.BtnRegistraCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnRegistraCaja.Location = new System.Drawing.Point(53, 466);
+            this.BtnRegistraCaja.Location = new System.Drawing.Point(150, 468);
             this.BtnRegistraCaja.Name = "BtnRegistraCaja";
             this.BtnRegistraCaja.Size = new System.Drawing.Size(64, 44);
             this.BtnRegistraCaja.TabIndex = 198;
@@ -1305,12 +1316,85 @@ namespace OBCAJASQL.Forms.Caja
             this.TxtTipoDocEnti.Size = new System.Drawing.Size(39, 20);
             this.TxtTipoDocEnti.TabIndex = 209;
             // 
+            // timerGridFacturas
+            // 
+            this.timerGridFacturas.Enabled = true;
+            this.timerGridFacturas.Interval = 60000;
+            this.timerGridFacturas.Tick += new System.EventHandler(this.timerGridFacturas_Tick);
+            // 
+            // DataGridFacturas
+            // 
+            this.DataGridFacturas.AllowUserToAddRows = false;
+            this.DataGridFacturas.AllowUserToDeleteRows = false;
+            this.DataGridFacturas.AllowUserToResizeRows = false;
+            this.DataGridFacturas.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridFacturas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.DataGridFacturas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridFacturas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Factura,
+            this.Fecha,
+            this.Valor});
+            this.DataGridFacturas.Location = new System.Drawing.Point(657, 7);
+            this.DataGridFacturas.MultiSelect = false;
+            this.DataGridFacturas.Name = "DataGridFacturas";
+            this.DataGridFacturas.ReadOnly = true;
+            this.DataGridFacturas.RowHeadersVisible = false;
+            this.DataGridFacturas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DataGridFacturas.Size = new System.Drawing.Size(245, 431);
+            this.DataGridFacturas.TabIndex = 210;
+            this.DataGridFacturas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridFacturas_CellDoubleClick);
+            // 
+            // Factura
+            // 
+            this.Factura.DataPropertyName = "NumFactura";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Factura.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Factura.HeaderText = "Factura";
+            this.Factura.Name = "Factura";
+            this.Factura.ReadOnly = true;
+            this.Factura.Width = 80;
+            // 
+            // Fecha
+            // 
+            this.Fecha.DataPropertyName = "FechaFac";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Format = "d";
+            dataGridViewCellStyle3.NullValue = null;
+            this.Fecha.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
+            this.Fecha.Width = 80;
+            // 
+            // Valor
+            // 
+            this.Valor.DataPropertyName = "ValorTotal";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.Format = "C0";
+            dataGridViewCellStyle4.NullValue = null;
+            this.Valor.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Valor.HeaderText = "Valor";
+            this.Valor.Name = "Valor";
+            this.Valor.ReadOnly = true;
+            this.Valor.Width = 80;
+            // 
             // FrmPagosAFacturas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(652, 517);
+            this.ClientSize = new System.Drawing.Size(906, 517);
             this.ControlBox = false;
+            this.Controls.Add(this.DataGridFacturas);
             this.Controls.Add(this.TxtTipoDocEnti);
             this.Controls.Add(this.CboCancelaPor);
             this.Controls.Add(this.label46);
@@ -1414,6 +1498,7 @@ namespace OBCAJASQL.Forms.Caja
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridFacturas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1531,5 +1616,10 @@ namespace OBCAJASQL.Forms.Caja
         private System.Windows.Forms.Button BtnCrucedepositos;
         private System.Windows.Forms.ComboBox CboCancelaPor;
         private System.Windows.Forms.TextBox TxtTipoDocEnti;
+        private System.Windows.Forms.Timer timerGridFacturas;
+        private System.Windows.Forms.DataGridView DataGridFacturas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Factura;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Valor;
     }
 }

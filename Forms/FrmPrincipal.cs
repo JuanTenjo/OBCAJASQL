@@ -13,6 +13,7 @@ using System.Data.SqlClient;
 using OBCAJASQL.Class;
 using OBCAJASQL.Forms.Caja;
 using OBCAJASQL.Forms.Caja.Reportes;
+using OBCAJASQL.Forms.Pagares;
 
 namespace OBCAJASQL.Forms
 {
@@ -259,6 +260,18 @@ namespace OBCAJASQL.Forms
         {
             FrmReportesGenerales frmReportesGenerales = new FrmReportesGenerales();
             frmReportesGenerales.ShowDialog();
+        }
+
+        private void crucesPorDesositosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCruceDepositos frmCruceDepositos = new FrmCruceDepositos();
+            frmCruceDepositos.ShowDialog();
+        }
+
+        private void ingresarPagaresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmRegistroPagares frmRegistroPagares = new FrmRegistroPagares();
+            frmRegistroPagares.ShowDialog();
         }
     }
 }

@@ -2506,6 +2506,280 @@ namespace OBCAJASQL.Forms.Caja
         #endregion
 
         #region Texbox
+
+
+        private void CargarFactura()
+        {
+            try
+            {
+
+                string FB, SqlDatos, SqlFacturas, SqlReciCaja, CarFac = "", SqlEmpTer = "";
+
+                double ValFacTol = 0, ValDesFac = 0, ValPagosFac = 0;
+
+                Utils.Titulo01 = "Control para mostrar datos";
+
+                FB = TxtFacturaNo.Text;
+
+
+                string sqlFactura = "SELECT [Datos de las facturas realizadas].NumCuenFac, [Datos cuentas de consumos].HistoNum,  " +
+                " [Datos empresas y terceros].TipoDocu, [Datos empresas y terceros].NumDocu, " +
+                "  [Datos empresas y terceros].NomAdmin, [Datos de las facturas realizadas].NumFactura, " +
+                "  [Datos de las facturas realizadas].FechaFac, (RTrim([Apellido1] + ' ' + [Apellido2]) + ' ' + RTrim([Nombre1] + ' ' + [Nombre2])) AS NomPaci, [Datos de las facturas realizadas].ValorTotal,  " +
+                "  [Datos de las facturas realizadas].ValorFac, [Datos de las facturas realizadas].Copago, [Datos de las facturas realizadas].PorcTercero, [Datos de las facturas realizadas].NotaCredito, " +
+                "  [Datos de las facturas realizadas].PagoFac, [Datos de las facturas realizadas].CanceCopago, [Datos de las facturas realizadas].PagoConDepos, [Datos de las facturas realizadas].NotaDebito, " +
+                "  [Datos de las facturas realizadas].DesVarios, [Datos de las facturas realizadas].Retencion, [Datos de las facturas realizadas].DesTramite, [Datos de las facturas realizadas].OtrosDescuentos,  " +
+                "  [Datos de las facturas realizadas].AnuladaFac FROM[Datos empresas y terceros] INNER JOIN([Datos del Paciente] INNER JOIN ([Datos cuentas de consumos] INNER JOIN [Datos de las facturas realizadas] " +
+                "  ON [Datos cuentas de consumos].CuenNum = [Datos de las facturas realizadas].NumCuenFac) ON[Datos del Paciente].HistorPaci = [Datos cuentas de consumos].HistoNum) " +
+                "  ON [Datos empresas y terceros].CarAdmin = [Datos de las facturas realizadas].Cartercero " +
+                " WHERE ((([Datos de las facturas realizadas].AnuladaFac) = 'False')) AND [Datos de las facturas realizadas].NumFactura = '" + FB + "' ; ";
+
+                using (SqlConnection connection2 = new SqlConnection(Conexion.conexionSQL))
+                {
+
+                    SqlCommand command2 = new SqlCommand(sqlFactura, connection2);
+                    command2.Connection.Open();
+                    SqlDataReader TabCaja = command2.ExecuteReader();
+
+                    if (TabCaja.HasRows)
+                    {
+                        TabCaja.Read();
+                        TxtTipoDocEnti.Text = TabCaja["TipoDocu"].ToString();
+                        TxtNumeroTerceroFac.Text = TabCaja["NumDocu"].ToString();
+                        TxtNombreTercero2.Text = TabCaja["NomAdmin"].ToString();
+                        DtFechaFac.Value = Convert.ToDateTime(TabCaja["FechaFac"]);
+                        TxtHistoNumPaciente1.Text = TabCaja["HistoNum"].ToString();
+                        TxtNomPaci.Text = TabCaja["NomPaci"].ToString();
+                        TxtNúmeroCuentaFac.Text = TabCaja["NumCuenFac"].ToString();
+
+                        TxtValorTotal.Text = TabCaja["ValorTotal"].ToString();
+                        TxtValorFac1.Text = TabCaja["ValorFac"].ToString();
+
+                        TxtCopago1.Text = TabCaja["Copago"].ToString();
+                        TxtNotaDebito1.Text = TabCaja["NotaDebito"].ToString();
+                        TxtGranTotalFac.Text = Convert.ToString(Convert.ToDouble(TabCaja["ValorFac"]) + Convert.ToDouble(TabCaja["Copago"]) + Convert.ToDouble(TabCaja["NotaDebito"]));
+
+
+                        TxtPorcenTercero.Text = TabCaja["PorcTercero"].ToString();
+                        TxtPorceCopago.Text = Convert.ToString(100 - Convert.ToDouble(TabCaja["PorcTercero"]));
+                        TxtPorceDebito.Text = Convert.ToString(((Convert.ToDouble(TabCaja["NotaDebito"]) * 100) / Convert.ToDouble(TabCaja["ValorTotal"])));
+
+
+                        TxtPorceGran.Text = Convert.ToString(Convert.ToDouble(TxtPorcenTercero.Text) + Convert.ToDouble(TxtPorceCopago.Text) + Convert.ToDouble(TxtPorceDebito.Text));
+                        TxtPagoFac.Text = TabCaja["PagoFac"].ToString();
+
+                        TxtCanceCopago1.Text = TabCaja["CanceCopago"].ToString();
+                        TxtPagoConDepósito.Text = TabCaja["PagoConDepos"].ToString();
+
+                        TxtTotalPagosReal.Text = Convert.ToString(Convert.ToDouble(TabCaja["PagoFac"]) + Convert.ToDouble(TabCaja["CanceCopago"]) + Convert.ToDouble(TabCaja["PagoConDepos"]));
+
+                        Double Saldo = ((Convert.ToDouble(TxtGranTotalFac.Text) - Convert.ToDouble(TabCaja["Copago"])) - (Convert.ToDouble(TabCaja["NotaCredito"]) + Convert.ToDouble(TabCaja["DesVarios"]) + Convert.ToDouble(TabCaja["Retencion"]) + Convert.ToDouble(TabCaja["DesTramite"]) + Convert.ToDouble(TabCaja["OtrosDescuentos"]))) - (Convert.ToDouble(TxtTotalPagosReal.Text));
+
+                        TxtSaldoFac.Text = Saldo.ToString();
+
+                        TxtNotaCredito1.Text = TabCaja["NotaCredito"].ToString();
+                        TxtDescuentoVarios.Text = TabCaja["DesVarios"].ToString();
+                        TxtRetención.Text = TabCaja["Retencion"].ToString();
+                        TxtDescuentoTramite.Text = TabCaja["DesTramite"].ToString();
+                        TxtOtrosDescuentos.Text = TabCaja["OtrosDescuentos"].ToString();
+
+
+                    }
+
+
+
+                }
+
+                //Procedemos a buscar la factura en la base de datos
+
+                SqlFacturas = "SELECT * FROM [ACDATOXPSQL].[dbo].[Datos de las facturas realizadas] ";
+                SqlFacturas = SqlFacturas + "WHERE NumFactura='" + FB + "' ";
+                SqlFacturas = SqlFacturas + "ORDER BY NumFactura";
+
+
+                using (SqlConnection connection = new SqlConnection(Conexion.conexionSQL))
+                {
+
+                    SqlCommand command = new SqlCommand(SqlFacturas, connection);
+                    command.Connection.Open();
+                    SqlDataReader TabFacturas = command.ExecuteReader();
+
+
+                    if (TabFacturas.HasRows == false)
+                    {
+                        Utils.Informa = "Lo siento pero el número de factura";
+                        Utils.Informa += "digitado no existe en este sistema";
+                        Utils.Informa += "Por favor corrija el número o pulse";
+                        Utils.Informa += "la tecla [ESC] para continuar.";
+                        MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    else
+                    {
+                        //Revisamos si la factura está anulada o no
+
+                        TabFacturas.Read();
+
+
+                        if (Convert.ToBoolean(TabFacturas["AnuladaFac"]) == true)
+                        {
+                            Utils.Informa = "Lo siento pero el número de factura ";
+                            Utils.Informa += "digitado se encuentra anulado en este sistema ";
+                            Utils.Informa += "Por favor corrija el número o pulse ";
+                            Utils.Informa += "la tecla [ESC] para continuar.";
+                            MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        else
+                        {
+                            //Con base al cardinal de la factura, buscamos algunos datos de la empresa
+
+
+                            CarFac = TabFacturas["Cartercero"].ToString();
+
+                            //Implementada el 08/09/2021 en villavieja con el fin de evidenciar el recibo de caja
+                            SqlReciCaja = "SELECT * FROM [BDCAJASQL].[dbo].[Datos recibos de caja] ";
+                            SqlReciCaja = SqlReciCaja + "WHERE DocuCruce = '" + FB + "' ";
+
+                            using (SqlConnection connection2 = new SqlConnection(Conexion.conexionSQL))
+                            {
+
+                                SqlCommand command2 = new SqlCommand(SqlReciCaja, connection2);
+                                command2.Connection.Open();
+                                SqlDataReader TabReciCaja = command2.ExecuteReader();
+
+                                if (TabReciCaja.HasRows == false)
+                                {
+                                    TxtReciCaja.Clear();
+                                }
+                                else
+                                {
+                                    TabReciCaja.Read();
+
+                                    TxtReciCaja.Text = TabReciCaja["ReciboCaja"].ToString();
+                                }
+
+                            }
+
+
+                            SqlEmpTer = "SELECT * FROM [ACDATOXPSQL].[dbo].[Datos empresas y terceros] ";
+                            SqlEmpTer = SqlEmpTer + "WHERE CarAdmin = '" + CarFac + "' ";
+                            SqlEmpTer = SqlEmpTer + "ORDER BY CarAdmin";
+
+
+                            using (SqlConnection connection3 = new SqlConnection(Conexion.conexionSQL))
+                            {
+
+                                SqlCommand command3 = new SqlCommand(SqlEmpTer, connection3);
+                                command3.Connection.Open();
+                                SqlDataReader TabEmpTer = command3.ExecuteReader();
+
+                                if (TabEmpTer.HasRows == false)
+                                {
+                                    Utils.Informa = "Lo siento pero se ha presentado un error";
+                                    Utils.Informa += "fatal en el sistema, porque el cardinal";
+                                    Utils.Informa += "de la factura no se pudo encontrar en la";
+                                    Utils.Informa += "tabla de empresas y terceros.";
+                                    Utils.Informa += "Por favor corrija el número o pulse";
+                                    Utils.Informa += "la tecla [ESC] para continuar.";
+                                    MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return;
+                                }
+                                else
+                                {
+                                    TabEmpTer.Read();
+                                    //Muestre algunos datos
+
+                                    if (Convert.ToInt32(TabFacturas["Copago"]) == 0)
+                                    {
+                                        //Necesariamente va ha cancelar es una factura por el valor neto
+                                        //hace el metodo de cancelación neto
+                                        CboCancelaPor.SelectedIndex = 1;
+                                    }
+                                    else
+                                    {
+                                        CboCancelaPor.SelectedIndex = 2;
+                                    }
+
+
+                                    switch (CboCancelaPor.SelectedIndex)
+                                    {
+                                        case 1://Valor neto
+
+
+                                            CboCuentaContable.SelectedValue = TabEmpTer["CueContDeudaRad"].ToString();
+
+
+                                            if (TabEmpTer["TipoDocu"].ToString() == "NIT")
+                                            {
+                                                CboTipDocFac.SelectedValue = "NI";
+                                            }
+                                            else
+                                            {
+                                                CboTipDocFac.SelectedValue = TabEmpTer["TipoDocu"].ToString();
+                                            }
+
+
+                                            TxtNitCC.Text = TabEmpTer["NumDocu"].ToString();
+                                            TxtCardiRecibo.Text = TabEmpTer["SucuDoc"].ToString();
+                                            CboRegimUsua.SelectedValue = TabEmpTer["RegimenAdmin"].ToString();
+                                            TxtNombreTercero.Text = TabEmpTer["NomAdmin"].ToString();
+
+                                            ValFacTol = (Convert.ToDouble(TabFacturas["ValorFac"]) + Convert.ToDouble(TabFacturas["Copago"]) + Convert.ToDouble(TabFacturas["NotaDebito"]));
+                                            ValDesFac = (Convert.ToDouble(TabFacturas["NotaCredito"]) + Convert.ToDouble(TabFacturas["DesVarios"]) + Convert.ToDouble(TabFacturas["Retencion"]) + Convert.ToDouble(TabFacturas["DesTramite"]) + Convert.ToDouble(TabFacturas["OtrosDescuentos"]));
+                                            ValPagosFac = Convert.ToDouble(TabFacturas["PagoFac"]) + Convert.ToDouble(TabFacturas["CanceCopago"]) + Convert.ToDouble(TabFacturas["PagoConDepos"]);
+
+                                            double totalPagos = (ValFacTol - (ValDesFac + ValPagosFac));
+
+                                            TxtValorPagos.Text = totalPagos.ToString();
+
+
+
+                                            break;
+                                        case 2: //Valor copago
+
+                                            CboCuentaContable.SelectedValue = TabEmpTer["CueContDeudaRad"].ToString();
+
+
+                                            if (Utils.tipoDocEmp == "NIT")
+                                            {
+                                                CboTipDocFac.SelectedValue = "NI";
+                                            }
+                                            else
+                                            {
+                                                CboTipDocFac.SelectedValue = Utils.tipoDocEmp;
+                                            }
+
+                                            TxtNitCC.Text = Utils.NumDocPre;
+                                            TxtCardiRecibo.Text = Utils.SucurPre;
+
+                                            CboRegimUsua.SelectedValue = TabEmpTer["RegimenAdmin"].ToString();
+
+                                            double ValorTotal = (Convert.ToDouble(TabFacturas["Copago"]) + Convert.ToDouble(TabFacturas["ValorOtros"])) - (Convert.ToDouble(TabFacturas["CanceCopago"]) + Convert.ToDouble(TabFacturas["PagoConDepos"]));
+
+                                            TxtValorPagos.Text = ValorTotal.ToString();
+
+                                            TxtNombreTercero.Text = "PARTICULAR";
+
+
+                                            break;
+
+                                        default:
+                                            break;
+                                    }
+                                }
+                            }
+                        }//Factura Anulada
+                    }//TabFacturas
+                }//Using
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         private void TxtValorPagos_TextChanged(object sender, EventArgs e)
         {
             try
@@ -2585,267 +2859,10 @@ namespace OBCAJASQL.Forms.Caja
                     if (string.IsNullOrWhiteSpace(TxtFacturaNo.Text) == false)
                     {
 
-                       
-                        string FB, SqlDatos, SqlFacturas, SqlReciCaja, CarFac = "", SqlEmpTer = "";
+                        CargarFactura();
 
-                        double ValFacTol = 0, ValDesFac = 0, ValPagosFac = 0;
-
-                        Utils.Titulo01 = "Control para mostrar datos";
-
-                        FB = TxtFacturaNo.Text;
-
-
-                        string sqlFactura = "SELECT [Datos de las facturas realizadas].NumCuenFac, [Datos cuentas de consumos].HistoNum,  " +
-                        " [Datos empresas y terceros].TipoDocu, [Datos empresas y terceros].NumDocu, " +
-                        "  [Datos empresas y terceros].NomAdmin, [Datos de las facturas realizadas].NumFactura, " +
-                        "  [Datos de las facturas realizadas].FechaFac, (RTrim([Apellido1] + ' ' + [Apellido2]) + ' ' + RTrim([Nombre1] + ' ' + [Nombre2])) AS NomPaci, [Datos de las facturas realizadas].ValorTotal,  " +
-                        "  [Datos de las facturas realizadas].ValorFac, [Datos de las facturas realizadas].Copago, [Datos de las facturas realizadas].PorcTercero, [Datos de las facturas realizadas].NotaCredito, " +
-                        "  [Datos de las facturas realizadas].PagoFac, [Datos de las facturas realizadas].CanceCopago, [Datos de las facturas realizadas].PagoConDepos, [Datos de las facturas realizadas].NotaDebito, " +
-                        "  [Datos de las facturas realizadas].DesVarios, [Datos de las facturas realizadas].Retencion, [Datos de las facturas realizadas].DesTramite, [Datos de las facturas realizadas].OtrosDescuentos,  " +
-                        "  [Datos de las facturas realizadas].AnuladaFac FROM[Datos empresas y terceros] INNER JOIN([Datos del Paciente] INNER JOIN ([Datos cuentas de consumos] INNER JOIN [Datos de las facturas realizadas] " +
-                        "  ON [Datos cuentas de consumos].CuenNum = [Datos de las facturas realizadas].NumCuenFac) ON[Datos del Paciente].HistorPaci = [Datos cuentas de consumos].HistoNum) " +
-                        "  ON [Datos empresas y terceros].CarAdmin = [Datos de las facturas realizadas].Cartercero " +
-                        " WHERE ((([Datos de las facturas realizadas].AnuladaFac) = 'False')) AND [Datos de las facturas realizadas].NumFactura = '" + FB + "' ; ";
-
-                        using (SqlConnection connection2 = new SqlConnection(Conexion.conexionSQL))
-                        {
-
-                            SqlCommand command2 = new SqlCommand(sqlFactura, connection2);
-                            command2.Connection.Open();
-                            SqlDataReader TabCaja = command2.ExecuteReader();
-
-                            if (TabCaja.HasRows)
-                            {
-                                TabCaja.Read();
-                                TxtTipoDocEnti.Text = TabCaja["TipoDocu"].ToString();
-                                TxtNumeroTerceroFac.Text = TabCaja["NumDocu"].ToString();
-                                TxtNombreTercero2.Text = TabCaja["NomAdmin"].ToString();
-                                DtFechaFac.Value = Convert.ToDateTime(TabCaja["FechaFac"]);
-                                TxtHistoNumPaciente1.Text = TabCaja["HistoNum"].ToString();
-                                TxtNomPaci.Text = TabCaja["NomPaci"].ToString();
-                                TxtNúmeroCuentaFac.Text = TabCaja["NumCuenFac"].ToString();
-
-                                TxtValorTotal.Text = TabCaja["ValorTotal"].ToString();
-                                TxtValorFac1.Text = TabCaja["ValorFac"].ToString();
-
-                                TxtCopago1.Text = TabCaja["Copago"].ToString();
-                                TxtNotaDebito1.Text = TabCaja["NotaDebito"].ToString();
-                                TxtGranTotalFac.Text = Convert.ToString(Convert.ToDouble(TabCaja["ValorFac"]) + Convert.ToDouble(TabCaja["Copago"]) + Convert.ToDouble(TabCaja["NotaDebito"]));
-
-
-                                TxtPorcenTercero.Text = TabCaja["PorcTercero"].ToString();
-                                TxtPorceCopago.Text = Convert.ToString(100 - Convert.ToDouble(TabCaja["PorcTercero"]));
-                                TxtPorceDebito.Text = Convert.ToString(((Convert.ToDouble(TabCaja["NotaDebito"]) * 100) / Convert.ToDouble(TabCaja["ValorTotal"])));
-
-
-                                TxtPorceGran.Text = Convert.ToString(Convert.ToDouble(TxtPorcenTercero.Text) + Convert.ToDouble(TxtPorceCopago.Text) + Convert.ToDouble(TxtPorceDebito.Text));
-                                TxtPagoFac.Text = TabCaja["PagoFac"].ToString();
-
-                                TxtCanceCopago1.Text = TabCaja["CanceCopago"].ToString();
-                                TxtPagoConDepósito.Text = TabCaja["PagoConDepos"].ToString();
-
-                                TxtTotalPagosReal.Text = Convert.ToString(Convert.ToDouble(TabCaja["PagoFac"]) + Convert.ToDouble(TabCaja["CanceCopago"]) + Convert.ToDouble(TabCaja["PagoConDepos"]));
-
-                                Double Saldo = ((Convert.ToDouble(TxtGranTotalFac.Text) - Convert.ToDouble(TabCaja["Copago"])) - (Convert.ToDouble(TabCaja["NotaCredito"]) + Convert.ToDouble(TabCaja["DesVarios"]) + Convert.ToDouble(TabCaja["Retencion"]) + Convert.ToDouble(TabCaja["DesTramite"]) + Convert.ToDouble(TabCaja["OtrosDescuentos"]))) - (Convert.ToDouble(TxtTotalPagosReal.Text));
-
-                                TxtSaldoFac.Text = Saldo.ToString();
-
-                                TxtNotaCredito1.Text = TabCaja["NotaCredito"].ToString();
-                                TxtDescuentoVarios.Text = TabCaja["DesVarios"].ToString();
-                                TxtRetención.Text = TabCaja["Retencion"].ToString();
-                                TxtDescuentoTramite.Text = TabCaja["DesTramite"].ToString();
-                                TxtOtrosDescuentos.Text = TabCaja["OtrosDescuentos"].ToString();
-
-
-                            }
-
-
-
-                        }
-
-                        //Procedemos a buscar la factura en la base de datos
-
-                        SqlFacturas = "SELECT * FROM [ACDATOXPSQL].[dbo].[Datos de las facturas realizadas] ";
-                        SqlFacturas = SqlFacturas + "WHERE NumFactura='" + FB + "' ";
-                        SqlFacturas = SqlFacturas + "ORDER BY NumFactura";
-
-
-                        using (SqlConnection connection = new SqlConnection(Conexion.conexionSQL))
-                        {
-
-                            SqlCommand command = new SqlCommand(SqlFacturas, connection);
-                            command.Connection.Open();
-                            SqlDataReader TabFacturas = command.ExecuteReader();
-
-
-                            if (TabFacturas.HasRows == false)
-                            {
-                                Utils.Informa = "Lo siento pero el número de factura";
-                                Utils.Informa += "digitado no existe en este sistema";
-                                Utils.Informa += "Por favor corrija el número o pulse";
-                                Utils.Informa += "la tecla [ESC] para continuar.";
-                                MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            else
-                            {
-                                //Revisamos si la factura está anulada o no
-
-                                TabFacturas.Read();
-
-
-                                if (Convert.ToBoolean(TabFacturas["AnuladaFac"]) == true)
-                                {
-                                    Utils.Informa = "Lo siento pero el número de factura ";
-                                    Utils.Informa += "digitado se encuentra anulado en este sistema ";
-                                    Utils.Informa += "Por favor corrija el número o pulse ";
-                                    Utils.Informa += "la tecla [ESC] para continuar.";
-                                    MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                    return;
-                                }
-                                else
-                                {
-                                    //Con base al cardinal de la factura, buscamos algunos datos de la empresa
-
-
-                                    CarFac = TabFacturas["Cartercero"].ToString();
-
-                                    //Implementada el 08/09/2021 en villavieja con el fin de evidenciar el recibo de caja
-                                    SqlReciCaja = "SELECT * FROM [BDCAJASQL].[dbo].[Datos recibos de caja] ";
-                                    SqlReciCaja = SqlReciCaja + "WHERE DocuCruce = '" + FB + "' ";
-
-                                    using (SqlConnection connection2 = new SqlConnection(Conexion.conexionSQL))
-                                    {
-
-                                        SqlCommand command2 = new SqlCommand(SqlReciCaja, connection2);
-                                        command2.Connection.Open();
-                                        SqlDataReader TabReciCaja = command2.ExecuteReader();
-
-                                        if (TabReciCaja.HasRows == false)
-                                        {
-                                            TxtReciCaja.Clear();
-                                        }
-                                        else
-                                        {
-                                            TabReciCaja.Read();
-
-                                            TxtReciCaja.Text = TabReciCaja["ReciboCaja"].ToString();
-                                        }
-
-                                    }
-
-
-                                    SqlEmpTer = "SELECT * FROM [ACDATOXPSQL].[dbo].[Datos empresas y terceros] ";
-                                    SqlEmpTer = SqlEmpTer + "WHERE CarAdmin = '" + CarFac + "' ";
-                                    SqlEmpTer = SqlEmpTer + "ORDER BY CarAdmin";
-
-
-                                    using (SqlConnection connection3 = new SqlConnection(Conexion.conexionSQL))
-                                    {
-
-                                        SqlCommand command3 = new SqlCommand(SqlEmpTer, connection3);
-                                        command3.Connection.Open();
-                                        SqlDataReader TabEmpTer = command3.ExecuteReader();
-
-                                        if (TabEmpTer.HasRows == false)
-                                        {
-                                            Utils.Informa = "Lo siento pero se ha presentado un error";
-                                            Utils.Informa += "fatal en el sistema, porque el cardinal";
-                                            Utils.Informa += "de la factura no se pudo encontrar en la";
-                                            Utils.Informa += "tabla de empresas y terceros.";
-                                            Utils.Informa += "Por favor corrija el número o pulse";
-                                            Utils.Informa += "la tecla [ESC] para continuar.";
-                                            MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                            return;
-                                        }
-                                        else
-                                        {
-                                            TabEmpTer.Read();
-                                            //Muestre algunos datos
-
-                                            if (Convert.ToInt32(TabFacturas["Copago"]) == 0)
-                                            {
-                                                //Necesariamente va ha cancelar es una factura por el valor neto
-                                                //hace el metodo de cancelación neto
-                                                CboCancelaPor.SelectedIndex = 1;
-                                            }
-                                            else
-                                            {
-                                                CboCancelaPor.SelectedIndex = 2;
-                                            }
-
-
-                                            switch (CboCancelaPor.SelectedIndex)
-                                            {
-                                                case 1://Valor neto
-
-
-                                                    CboCuentaContable.SelectedValue = TabEmpTer["CueContDeudaRad"].ToString();
-
-
-                                                    if (TabEmpTer["TipoDocu"].ToString() == "NIT")
-                                                    {
-                                                        CboTipDocFac.SelectedValue = "NI";
-                                                    }
-                                                    else
-                                                    {
-                                                        CboTipDocFac.SelectedValue = TabEmpTer["TipoDocu"].ToString();
-                                                    }
-
-
-                                                    TxtNitCC.Text = TabEmpTer["NumDocu"].ToString();
-                                                    TxtCardiRecibo.Text = TabEmpTer["SucuDoc"].ToString();
-                                                    CboRegimUsua.SelectedValue = TabEmpTer["RegimenAdmin"].ToString();
-                                                    TxtNombreTercero.Text = TabEmpTer["NomAdmin"].ToString();
-
-                                                    ValFacTol = (Convert.ToDouble(TabFacturas["ValorFac"]) + Convert.ToDouble(TabFacturas["Copago"]) + Convert.ToDouble(TabFacturas["NotaDebito"]));
-                                                    ValDesFac = (Convert.ToDouble(TabFacturas["NotaCredito"]) + Convert.ToDouble(TabFacturas["DesVarios"]) + Convert.ToDouble(TabFacturas["Retencion"]) + Convert.ToDouble(TabFacturas["DesTramite"]) + Convert.ToDouble(TabFacturas["OtrosDescuentos"]));
-                                                    ValPagosFac = Convert.ToDouble(TabFacturas["PagoFac"]) + Convert.ToDouble(TabFacturas["CanceCopago"]) + Convert.ToDouble(TabFacturas["PagoConDepos"]);
-
-                                                    double totalPagos = (ValFacTol - (ValDesFac + ValPagosFac));
-
-                                                    TxtValorPagos.Text = totalPagos.ToString();
-
-
-
-                                                    break;
-                                                case 2: //Valor copago
-
-                                                    CboCuentaContable.SelectedValue = TabEmpTer["CueContDeudaRad"].ToString();
-
-
-                                                    if (Utils.tipoDocEmp == "NIT")
-                                                    {
-                                                        CboTipDocFac.SelectedValue = "NI";
-                                                    }
-                                                    else
-                                                    {
-                                                        CboTipDocFac.SelectedValue = Utils.tipoDocEmp;
-                                                    }
-
-                                                    TxtNitCC.Text = Utils.NumDocPre;
-                                                    TxtCardiRecibo.Text = Utils.SucurPre;
-
-                                                    CboRegimUsua.SelectedValue = TabEmpTer["RegimenAdmin"].ToString();
-
-                                                    double ValorTotal = (Convert.ToDouble(TabFacturas["Copago"]) + Convert.ToDouble(TabFacturas["ValorOtros"])) - (Convert.ToDouble(TabFacturas["CanceCopago"]) + Convert.ToDouble(TabFacturas["PagoConDepos"]));
-
-                                                    TxtValorPagos.Text = ValorTotal.ToString();
-
-                                                    TxtNombreTercero.Text = "PARTICULAR";
-
-
-                                                    break;
-
-                                                default:
-                                                    break;
-                                            }
-                                        }
-                                    }
-                                }//Factura Anulada
-                            }//TabFacturas
-                        }//Using
                     }//TxtNumfactura
+
                 }//KeyChar
             }
             catch (Exception ex)
@@ -2864,6 +2881,34 @@ namespace OBCAJASQL.Forms.Caja
         }
         #endregion
 
+
+        private void CargarGridFacturas()
+        {
+            try
+            {
+                string sqlFactura = "SELECT NumFactura, FechaFac, ValorTotal FROM [ACDATOXPSQL].[dbo].[Datos de las facturas realizadas] " +
+                " WHERE ((([Datos de las facturas realizadas].AnuladaFac) = 'False')) AND [Datos de las facturas realizadas].PagoFac = 0 AND [Datos de las facturas realizadas].CodiRegis = '" + Utils.codUsuario + "'; ";
+
+
+                DataSet dataSet = Conexion.SQLDataSet(sqlFactura);
+
+                if(dataSet.Tables[0].Rows.Count > 0)
+                {
+                    DataGridFacturas.DataSource = dataSet.Tables[0];
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Utils.Titulo01 = "Control de errores de ejecución";
+                Utils.Informa = "Lo siento pero se ha presentado un error" + "\r";
+                Utils.Informa += "en la funcion CargarGridFacturas" + "\r";
+                Utils.Informa += "Mensaje del error: " + ex.Message + " - " + ex.StackTrace;
+                MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
         int FormaPago = 1;
         private void FrmPagosAFacturas_Load(object sender, EventArgs e)
         {
@@ -2871,6 +2916,7 @@ namespace OBCAJASQL.Forms.Caja
             {
                 CargarCombobox();
                 CargarDatosUser();
+                CargarGridFacturas();
 
             }
             catch (Exception ex)
@@ -2940,6 +2986,24 @@ namespace OBCAJASQL.Forms.Caja
                 Utils.Informa += "Mensaje del error: " + ex.Message + " - " + ex.StackTrace;
                 MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void timerGridFacturas_Tick(object sender, EventArgs e)
+        {
+            CargarGridFacturas();
+        }
+
+        private void DataGridFacturas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if(DataGridFacturas.SelectedRows.Count > 0)
+            {
+                string NumFactura = DataGridFacturas.SelectedCells[0].Value.ToString();
+                TxtFacturaNo.Text = NumFactura;
+                CargarFactura();
+            }
+
+
         }
     }
 }

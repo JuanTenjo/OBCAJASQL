@@ -125,6 +125,11 @@ namespace OBCAJASQL.Report
             {
 
                 ReportDataSource dsDetalle = null;
+                ReportDataSource dsPagare = null;
+                ReportDataSource dsCuotas = null;
+                ReportDataSource dsProveedores = null;
+                ReportDataSource dsProveedoresCode = null;
+
                 ReportParameter[] parameters = null;
                 System.Data.DataSet infoSql;
 
@@ -361,12 +366,186 @@ namespace OBCAJASQL.Report
                         parameters[1] = new ReportParameter("Fecha02", Utils.FechaFinal);
 
                         break;
+                    case "Formato de los pagares":
+
+                        string TDR = "", NDR = "", SCR = "", TDC = "", NDC = "", SCC = "", SumLetPaga = "", CodRegisPa = "", SqlDigitador = "";
+                        decimal ValTolPaga = 0, ValCuota = 0;
+                        int NoCodeu = 0;
+                        parameters = new ReportParameter[12];
+
+
+                        Utils.SqlDatos = "SELECT * FROM  [BDCAJASQL].[dbo].[Datos registro de pagares] WHERE NumPaga = '"+ Utils.NumPagaGlo + "'";
+
+                        infoSql = Conexion.SQLDataSet(Utils.SqlDatos);
+                        dsPagare = new ReportDataSource("dsPagare", infoSql.Tables[0]);
+
+
+                        using (SqlConnection connection = new SqlConnection(Conexion.conexionSQL))
+                        {
+                            SqlCommand command = new SqlCommand(Utils.SqlDatos, connection);
+                            command.Connection.Open();
+                            SqlDataReader TabRegPaga = command.ExecuteReader();
+
+                            if (TabRegPaga.HasRows == false)
+                            {
+                                Utils.Titulo01 = "Contro de ejecución";
+                                Utils.Informa = "Lo siento pero el número del pagaré digitado no" + "\r";
+                                Utils.Informa += "se encuentra registrado en estee sistema, por lo" + "\r";
+                                Utils.Informa += "tanto no se puede mostrar el formato." + "\r";
+                                MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            else
+                            {
+                                TabRegPaga.Read();
+                                TDR = TabRegPaga["TDRespon"].ToString();
+                                NDR = TabRegPaga["NumTerPaga"].ToString();
+                                SCR = TabRegPaga["SucRespon"].ToString();
+
+                                CodRegisPa = TabRegPaga["CodRegis"].ToString();
+
+                                ValTolPaga = Convert.ToDecimal(TabRegPaga["ValorPaga"].ToString());
+                                SumLetPaga = Conversores.NumeroALetras(ValTolPaga);
+
+                                parameters[0] = new ReportParameter("SumLetPaga", SumLetPaga);
+
+                                parameters[1] = new ReportParameter("ValCuoP", "");
+                                parameters[2] = new ReportParameter("Fec1", "");
+                                parameters[3] = new ReportParameter("FecCuota1", "");
+                                parameters[4] = new ReportParameter("ValCuota1", "");
+                                parameters[5] = new ReportParameter("Fec2", "");
+                                parameters[6] = new ReportParameter("ValCuota2", "");
+                                parameters[7] = new ReportParameter("Fec3", "");
+                                parameters[8] = new ReportParameter("ValCuota3", "");
+                                parameters[9] = new ReportParameter("Fec4", "");
+                                parameters[10] = new ReportParameter("ValCuota4","");
+                                parameters[11] = new ReportParameter("NomCajero", "");
+
+                                if (!string.IsNullOrWhiteSpace(TabRegPaga["TDCodeudor"].ToString()) && !string.IsNullOrWhiteSpace(TabRegPaga["CodeuPaga"].ToString()) && !string.IsNullOrWhiteSpace(TabRegPaga["SucCodeu"].ToString()))
+                                {
+                                    TDC = TabRegPaga["TDCodeudor"].ToString();
+                                    NDC = TabRegPaga["CodeuPaga"].ToString();
+                                    SCC = TabRegPaga["SucCodeu"].ToString();
+                                    NoCodeu = 1;
+                                }
+                                else
+                                {
+                                    NoCodeu = 0;
+                                }
+
+                                Utils.SqlDatos = "SELECT * FROM  [BDCAJASQL].[dbo].[Datos registro cuotas pagares]  WHERE NumPaga = '" + Utils.NumPagaGlo + "'";
+
+                                infoSql = Conexion.SQLDataSet(Utils.SqlDatos);
+                                dsCuotas = new ReportDataSource("dsCuotas", infoSql.Tables[0]);
+
+                                using (SqlConnection connection2 = new SqlConnection(Conexion.conexionSQL))
+                                {
+                                    SqlCommand command2 = new SqlCommand(Utils.SqlDatos, connection2);
+                                    command2.Connection.Open();
+                                    SqlDataReader TabCuoPaga = command2.ExecuteReader();
+
+                                    if (TabCuoPaga.HasRows)
+                                    {
+                                        while (TabCuoPaga.Read())
+                                        {
+                                            switch (TabCuoPaga["CuoPaga"].ToString())
+                                            {
+                                                case "1":
+
+                                                    ValCuota = Convert.ToDecimal(TabCuoPaga["ValCuota"]);
+
+                                                    parameters[1] = new ReportParameter("ValCuoP", TabCuoPaga["ValCuota"].ToString());
+                                                    parameters[2] = new ReportParameter("Fec1", TabCuoPaga["FecVenCuota"].ToString());
+                                                    parameters[3] = new ReportParameter("FecCuota1", TabCuoPaga["FecVenCuota"].ToString());
+                                                    parameters[4] = new ReportParameter("ValCuota1", Conversores.NumeroALetras(ValCuota));
+
+                                                    break;
+                                                case "2":
+
+                                                    ValCuota = Convert.ToDecimal(TabCuoPaga["ValCuota"]);
+                                                    parameters[5] = new ReportParameter("Fec2", TabCuoPaga["FecVenCuota"].ToString());
+                                                    parameters[6] = new ReportParameter("ValCuota2", Conversores.NumeroALetras(ValCuota));
+
+
+                                                    break;
+                                                case "3":
+
+                                                    ValCuota = Convert.ToDecimal(TabCuoPaga["ValCuota"]);
+                                                    parameters[7] = new ReportParameter("Fec3", TabCuoPaga["FecVenCuota"].ToString());
+                                                    parameters[8] = new ReportParameter("ValCuota3", Conversores.NumeroALetras(ValCuota));
+
+                                                    break;
+                                                case "4":
+
+                                                    ValCuota = Convert.ToDecimal(TabCuoPaga["ValCuota"]);
+                                                    parameters[9] = new ReportParameter("Fec4", TabCuoPaga["FecVenCuota"].ToString());
+                                                    parameters[10] = new ReportParameter("ValCuota4", Conversores.NumeroALetras(ValCuota));
+
+                                                    break;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                Utils.SqlDatos = "SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1 " +
+                                " FROM[GEOGRAXPSQL].[dbo].[Datos proveedores] " +
+                                " WHERE TipoDocu = '" + TDR + "' AND IdenProve = '" + NDR + "' AND SucurProv = '" + SCR + "' " +
+                                " ORDER BY TipoDocu, IdenProve, SucurProv ";
+
+                                infoSql = Conexion.SQLDataSet(Utils.SqlDatos);
+                                dsProveedores = new ReportDataSource("dsProveedores", infoSql.Tables[0]);
+
+                                if(NoCodeu == 1)
+                                {
+
+                                }
+
+                                Utils.SqlDatos = "SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1 " +
+                                " FROM [GEOGRAXPSQL].[dbo].[Datos proveedores] " +
+                                " WHERE TipoDocu = '" + TDC + "' AND IdenProve = '" + NDC + "' AND SucurProv = '" + SCC + "' " +
+                                " ORDER BY TipoDocu, IdenProve, SucurProv ";
+
+                                infoSql = Conexion.SQLDataSet(Utils.SqlDatos);
+
+                                dsProveedoresCode = new ReportDataSource("dsProveedoresCode", infoSql.Tables[0]);
+
+                               
+
+
+                                SqlDigitador = "SELECT CodigoUsa, TipoDocUsa, IdentificUsa, NombreUsa, Apellido1Usa, Apellido2Usa ";
+                                SqlDigitador += "FROM [DATUSIIGXPSQL].[dbo].[Datos usuarios de los aplicativos]";
+                                SqlDigitador += "WHERE CodigoUsa = '" + CodRegisPa + "'";
+
+
+                                using (SqlConnection connection3 = new SqlConnection(Conexion.conexionSQL))
+                                {
+                                    SqlCommand command3 = new SqlCommand(SqlDigitador, connection3);
+                                    command3.Connection.Open();
+                                    SqlDataReader TabDigitador = command3.ExecuteReader();
+
+                                    if (TabDigitador.HasRows)
+                                    {
+                                        TabDigitador.Read();
+
+                                        string NomCajero = TabDigitador["NombreUsa"].ToString() + " " + TabDigitador["Apellido1Usa"].ToString() + " " + TabDigitador["Apellido2Usa"].ToString();
+
+                                        parameters[11] = new ReportParameter("NomCajero", NomCajero);
+                                    }
+                                    else
+                                    {
+                                        parameters[11] = new ReportParameter("NomCajero", "USUARIO DIGITADOR NO REGISTRADO");
+                                    }
+
+                                }      
+                            }
+                        }
+                            break;
                     default:
                         break;
 
                 }
 
-      
+                //TODO LOS DATA SET NO SE ESTAN ENVIANDO TODOS
 
                 this.reportViewer1.LocalReport.DataSources.Clear();
 
@@ -375,8 +554,19 @@ namespace OBCAJASQL.Report
                 this.reportViewer1.LocalReport.EnableExternalImages = true;
 
                 this.reportViewer1.LocalReport.DataSources.Add(dsEmpresa);
-
-                this.reportViewer1.LocalReport.DataSources.Add(dsDetalle);
+      
+         
+                if (Utils.infNombreInforme == "Formato de los pagares")
+                {
+                    this.reportViewer1.LocalReport.DataSources.Add(dsPagare);
+                    this.reportViewer1.LocalReport.DataSources.Add(dsCuotas);
+                    this.reportViewer1.LocalReport.DataSources.Add(dsProveedores);
+                    this.reportViewer1.LocalReport.DataSources.Add(dsProveedoresCode);
+                }
+                else
+                {
+                    this.reportViewer1.LocalReport.DataSources.Add(dsDetalle);
+                }
 
                 string reporte = "OBCAJASQL.Report.Rdlc." + Utils.infNombreInforme + ".rdlc";
 
@@ -398,7 +588,7 @@ namespace OBCAJASQL.Report
                 Utils.Titulo01 = "Control de errores de ejecución";
                 Utils.Informa = "Lo siento pero se ha presentado un error" + "\r";
                 Utils.Informa += "al abrir fomrulario de reportes" + "\r";
-                Utils.Informa += "Error: " + ex.Message + " - " + ex.StackTrace;
+                Utils.Informa += "Error: " + ex.Message + " - " + ex.StackTrace; 
                 MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

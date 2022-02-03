@@ -105,6 +105,7 @@ namespace OBCAJASQL.Class
         public static int Anulado { get; set; }
         public static string CodRegis { get; set; }
         public static string CodiServi { get; set; }
+        public static string NumPagaGlo { get; set; }
         
 
     }

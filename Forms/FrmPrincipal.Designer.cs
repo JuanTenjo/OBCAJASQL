@@ -177,6 +177,7 @@ namespace OBCAJASQL.Forms
             this.crucesPorDesositosToolStripMenuItem.Name = "crucesPorDesositosToolStripMenuItem";
             this.crucesPorDesositosToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.crucesPorDesositosToolStripMenuItem.Text = "&Cruces Por Depositos";
+            this.crucesPorDesositosToolStripMenuItem.Click += new System.EventHandler(this.crucesPorDesositosToolStripMenuItem_Click);
             // 
             // anularRecibosToolStripMenuItem
             // 
@@ -200,6 +201,7 @@ namespace OBCAJASQL.Forms
             this.ingresarPagaresToolStripMenuItem.Name = "ingresarPagaresToolStripMenuItem";
             this.ingresarPagaresToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.ingresarPagaresToolStripMenuItem.Text = "&Ingresar Pagares";
+            this.ingresarPagaresToolStripMenuItem.Click += new System.EventHandler(this.ingresarPagaresToolStripMenuItem_Click);
             // 
             // pagosDePagaresToolStripMenuItem
             // 
