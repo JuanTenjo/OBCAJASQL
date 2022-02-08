@@ -151,6 +151,12 @@
     <Compile Include="Forms\FrmPrincipal.Designer.cs">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pagares\FrmPagosPagare.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pagares\FrmPagosPagare.Designer.cs">
+      <DependentUpon>FrmPagosPagare.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pagares\FrmRegistroPagares.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -237,6 +243,9 @@
     <EmbeddedResource Include="Forms\FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pagares\FrmPagosPagare.resx">
+      <DependentUpon>FrmPagosPagare.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pagares\FrmRegistroPagares.resx">
       <DependentUpon>FrmRegistroPagares.cs</DependentUpon>
     </EmbeddedResource>
@@ -259,7 +268,9 @@
     <EmbeddedResource Include="Report\FrmReportFacturaSaldo.resx">
       <DependentUpon>FrmReportFacturaSaldo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\Rdlc\Formato de los pagares.rdlc" />
+    <EmbeddedResource Include="Report\Rdlc\Formato de los pagares.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\Rdlc\Informe de caja por entidades.rdlc" />
     <EmbeddedResource Include="Report\Rdlc\Informe de caja por pacientes.rdlc" />
     <EmbeddedResource Include="Report\Rdlc\Informe de caja por regimen costos.rdlc" />

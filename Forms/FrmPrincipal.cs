@@ -273,5 +273,11 @@ namespace OBCAJASQL.Forms
             FrmRegistroPagares frmRegistroPagares = new FrmRegistroPagares();
             frmRegistroPagares.ShowDialog();
         }
+
+        private void pagosDePagaresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmPagosPagare frmPagosPagare = new FrmPagosPagare();
+            frmPagosPagare.ShowDialog();
+        }
     }
 }

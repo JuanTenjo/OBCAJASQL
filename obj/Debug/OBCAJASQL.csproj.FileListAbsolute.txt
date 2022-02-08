@@ -160,3 +160,5 @@ C:\OBCAJASQL\obj\Debug\OBCAJASQL.Forms.FrmInputBox.resources
 C:\OBCAJASQL\obj\Debug\OBCAJASQL.Report.FrmReportes.resources
 C:\OBCAJASQL\obj\Debug\OBCAJASQL.Forms.Caja.Reportes.FrmReportesGenerales.resources
 C:\OBCAJASQL\obj\Debug\OBCAJASQL.Forms.Pagares.FrmRegistroPagares.resources
+C:\OBCAJASQL\bin\Debug\Report\Rdlc\Formato de los pagares.rdlc
+C:\OBCAJASQL\obj\Debug\OBCAJASQL.Forms.Pagares.FrmPagosPagare.resources

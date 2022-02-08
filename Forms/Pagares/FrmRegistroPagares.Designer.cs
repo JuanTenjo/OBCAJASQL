@@ -1065,6 +1065,7 @@ namespace OBCAJASQL.Forms.Pagares
             this.BtnCopias.Size = new System.Drawing.Size(50, 44);
             this.BtnCopias.TabIndex = 210;
             this.BtnCopias.UseVisualStyleBackColor = false;
+            this.BtnCopias.Click += new System.EventHandler(this.BtnCopias_Click);
             // 
             // label26
             // 
