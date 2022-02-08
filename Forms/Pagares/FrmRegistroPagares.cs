@@ -857,7 +857,7 @@ namespace OBCAJASQL.Forms.Pagares
                                 foreach (DataGridViewRow Row in GridDetalleRegistroCuotas.Rows)
                                 {
                                     patameters = new List<SqlParameter>
-                                {
+                                    {
                                     new SqlParameter("@NumPaga", SqlDbType.VarChar){ Value  = Row.Cells[4].Value.ToString() },
                                     new SqlParameter("@CuoPaga", SqlDbType.VarChar){ Value  = Row.Cells[0].Value.ToString() },
                                     new SqlParameter("@ValCuota", SqlDbType.VarChar){ Value  = Row.Cells[1].Value.ToString() },
@@ -865,10 +865,14 @@ namespace OBCAJASQL.Forms.Pagares
                                     new SqlParameter("@FecVenCuota", SqlDbType.VarChar){ Value  = Convert.ToDateTime(Row.Cells[3].Value).ToString("yyyy-MM-dd") },
                                     new SqlParameter("@CodRegis", SqlDbType.VarChar){ Value  = lblCodigoUser.Text },
                                     new SqlParameter("@FecRegis", SqlDbType.VarChar){ Value  = DateTime.Now.Date.ToString("yyyy-MM-dd") },
-                                };
+                                    };
+
+
+                                    Conexion.SqlInsert(Utils.SqlDatos, patameters);
+
                                 }
 
-                                Conexion.SqlInsert(Utils.SqlDatos, patameters);
+                                
 
 
                                 SqlDocPaga = "SELECT * FROM [BDCAJASQL].[dbo].[Datos documentos consecutivos] ";
@@ -1133,6 +1137,43 @@ namespace OBCAJASQL.Forms.Pagares
                 Utils.Titulo01 = "Control de errores de ejecución";
                 Utils.Informa = "Lo siento pero se ha presentado un error" + "\r";
                 Utils.Informa += "al buscar el codeudor" + "\r";
+                Utils.Informa += "Mensaje del error: " + ex.Message + " - " + ex.StackTrace;
+                MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void BtnCopias_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                Utils.Titulo01 = "Expedir copias de un pagaré";
+
+                FrmInputBox frmInputBox = new FrmInputBox();
+
+                Utils.TextoInputBox = "Por favor digite el número del pagaré, al cual le desea sacar copias";
+
+                frmInputBox.ShowDialog();
+
+                if (string.IsNullOrWhiteSpace(Utils.ValueInput))
+                {
+                    //No digito anda
+                }
+                else
+                {
+                    Utils.infNombreInforme = "Formato de los pagares";
+                    Utils.NumPagaGlo = Utils.ValueInput;
+                    FrmReportes frmReportes = new FrmReportes();
+                    frmReportes.ShowDialog();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Utils.Titulo01 = "Control de errores de ejecución";
+                Utils.Informa = "Lo siento pero se ha presentado un error" + "\r";
+                Utils.Informa += "al dar click en copias" + "\r";
                 Utils.Informa += "Mensaje del error: " + ex.Message + " - " + ex.StackTrace;
                 MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

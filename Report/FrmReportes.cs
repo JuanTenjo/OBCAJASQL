@@ -371,7 +371,7 @@ namespace OBCAJASQL.Report
                         string TDR = "", NDR = "", SCR = "", TDC = "", NDC = "", SCC = "", SumLetPaga = "", CodRegisPa = "", SqlDigitador = "";
                         decimal ValTolPaga = 0, ValCuota = 0;
                         int NoCodeu = 0;
-                        parameters = new ReportParameter[12];
+                        parameters = new ReportParameter[11];
 
 
                         Utils.SqlDatos = "SELECT * FROM  [BDCAJASQL].[dbo].[Datos registro de pagares] WHERE NumPaga = '"+ Utils.NumPagaGlo + "'";
@@ -407,19 +407,19 @@ namespace OBCAJASQL.Report
                                 ValTolPaga = Convert.ToDecimal(TabRegPaga["ValorPaga"].ToString());
                                 SumLetPaga = Conversores.NumeroALetras(ValTolPaga);
 
-                                parameters[0] = new ReportParameter("SumLetPaga", SumLetPaga);
-
-                                parameters[1] = new ReportParameter("ValCuoP", "");
-                                parameters[2] = new ReportParameter("Fec1", "");
-                                parameters[3] = new ReportParameter("FecCuota1", "");
-                                parameters[4] = new ReportParameter("ValCuota1", "");
-                                parameters[5] = new ReportParameter("Fec2", "");
-                                parameters[6] = new ReportParameter("ValCuota2", "");
+                                parameters[0] = new ReportParameter("ValCuota1", "");
+                                parameters[1] = new ReportParameter("ValCuota2", "");
+                                parameters[2] = new ReportParameter("ValCuota3", "");
+                                parameters[3] = new ReportParameter("ValCuota4", "");
+                                parameters[4] = new ReportParameter("ValCuoP", "");
+                                parameters[5] = new ReportParameter("Fec1", "");
+                                parameters[6] = new ReportParameter("Fec2", "");
                                 parameters[7] = new ReportParameter("Fec3", "");
-                                parameters[8] = new ReportParameter("ValCuota3", "");
-                                parameters[9] = new ReportParameter("Fec4", "");
-                                parameters[10] = new ReportParameter("ValCuota4","");
-                                parameters[11] = new ReportParameter("NomCajero", "");
+                                parameters[8] = new ReportParameter("Fec4", "");
+                                parameters[9] = new ReportParameter("NomCajero", "");
+                                parameters[10] = new ReportParameter("SumLetPaga", SumLetPaga);
+
+
 
                                 if (!string.IsNullOrWhiteSpace(TabRegPaga["TDCodeudor"].ToString()) && !string.IsNullOrWhiteSpace(TabRegPaga["CodeuPaga"].ToString()) && !string.IsNullOrWhiteSpace(TabRegPaga["SucCodeu"].ToString()))
                                 {
@@ -454,32 +454,33 @@ namespace OBCAJASQL.Report
 
                                                     ValCuota = Convert.ToDecimal(TabCuoPaga["ValCuota"]);
 
-                                                    parameters[1] = new ReportParameter("ValCuoP", TabCuoPaga["ValCuota"].ToString());
-                                                    parameters[2] = new ReportParameter("Fec1", TabCuoPaga["FecVenCuota"].ToString());
-                                                    parameters[3] = new ReportParameter("FecCuota1", TabCuoPaga["FecVenCuota"].ToString());
-                                                    parameters[4] = new ReportParameter("ValCuota1", Conversores.NumeroALetras(ValCuota));
+                                                    parameters[0] = new ReportParameter("ValCuota1", Conversores.NumeroALetras(ValCuota));
+
+                                                    parameters[4] = new ReportParameter("ValCuoP", TabCuoPaga["ValCuota"].ToString());
+                                                    parameters[5] = new ReportParameter("Fec1", TabCuoPaga["FecVenCuota"].ToString());
+                                                   // parameters[3] = new ReportParameter("FecCuota1", TabCuoPaga["FecVenCuota"].ToString());
 
                                                     break;
                                                 case "2":
 
+                                                    parameters[1] = new ReportParameter("ValCuota2", Conversores.NumeroALetras(ValCuota));
                                                     ValCuota = Convert.ToDecimal(TabCuoPaga["ValCuota"]);
-                                                    parameters[5] = new ReportParameter("Fec2", TabCuoPaga["FecVenCuota"].ToString());
-                                                    parameters[6] = new ReportParameter("ValCuota2", Conversores.NumeroALetras(ValCuota));
+                                                    parameters[6] = new ReportParameter("Fec2", TabCuoPaga["FecVenCuota"].ToString());
 
 
                                                     break;
                                                 case "3":
 
                                                     ValCuota = Convert.ToDecimal(TabCuoPaga["ValCuota"]);
+                                                    parameters[2] = new ReportParameter("ValCuota3", Conversores.NumeroALetras(ValCuota));
                                                     parameters[7] = new ReportParameter("Fec3", TabCuoPaga["FecVenCuota"].ToString());
-                                                    parameters[8] = new ReportParameter("ValCuota3", Conversores.NumeroALetras(ValCuota));
 
                                                     break;
                                                 case "4":
 
                                                     ValCuota = Convert.ToDecimal(TabCuoPaga["ValCuota"]);
-                                                    parameters[9] = new ReportParameter("Fec4", TabCuoPaga["FecVenCuota"].ToString());
-                                                    parameters[10] = new ReportParameter("ValCuota4", Conversores.NumeroALetras(ValCuota));
+                                                    parameters[3] = new ReportParameter("ValCuota4", Conversores.NumeroALetras(ValCuota));
+                                                    parameters[8] = new ReportParameter("Fec4", TabCuoPaga["FecVenCuota"].ToString());
 
                                                     break;
                                             }
@@ -529,11 +530,11 @@ namespace OBCAJASQL.Report
 
                                         string NomCajero = TabDigitador["NombreUsa"].ToString() + " " + TabDigitador["Apellido1Usa"].ToString() + " " + TabDigitador["Apellido2Usa"].ToString();
 
-                                        parameters[11] = new ReportParameter("NomCajero", NomCajero);
+                                        parameters[9] = new ReportParameter("NomCajero", NomCajero);
                                     }
                                     else
                                     {
-                                        parameters[11] = new ReportParameter("NomCajero", "USUARIO DIGITADOR NO REGISTRADO");
+                                        parameters[9] = new ReportParameter("NomCajero", "USUARIO DIGITADOR NO REGISTRADO");
                                     }
 
                                 }      

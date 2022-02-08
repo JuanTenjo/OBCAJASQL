@@ -695,6 +695,7 @@ namespace OBCAJASQL.Forms.Caja
             // 
             this.TxtCtaConD.Location = new System.Drawing.Point(278, 23);
             this.TxtCtaConD.Name = "TxtCtaConD";
+            this.TxtCtaConD.ReadOnly = true;
             this.TxtCtaConD.Size = new System.Drawing.Size(77, 21);
             this.TxtCtaConD.TabIndex = 23;
             // 
@@ -714,6 +715,7 @@ namespace OBCAJASQL.Forms.Caja
             // 
             this.TxtCenCajaD.Location = new System.Drawing.Point(99, 23);
             this.TxtCenCajaD.Name = "TxtCenCajaD";
+            this.TxtCenCajaD.ReadOnly = true;
             this.TxtCenCajaD.Size = new System.Drawing.Size(75, 21);
             this.TxtCenCajaD.TabIndex = 20;
             // 

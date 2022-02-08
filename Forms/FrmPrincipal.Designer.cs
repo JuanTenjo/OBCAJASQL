@@ -199,15 +199,16 @@ namespace OBCAJASQL.Forms
             // ingresarPagaresToolStripMenuItem
             // 
             this.ingresarPagaresToolStripMenuItem.Name = "ingresarPagaresToolStripMenuItem";
-            this.ingresarPagaresToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.ingresarPagaresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ingresarPagaresToolStripMenuItem.Text = "&Ingresar Pagares";
             this.ingresarPagaresToolStripMenuItem.Click += new System.EventHandler(this.ingresarPagaresToolStripMenuItem_Click);
             // 
             // pagosDePagaresToolStripMenuItem
             // 
             this.pagosDePagaresToolStripMenuItem.Name = "pagosDePagaresToolStripMenuItem";
-            this.pagosDePagaresToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.pagosDePagaresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.pagosDePagaresToolStripMenuItem.Text = "&Pagos De Pagares";
+            this.pagosDePagaresToolStripMenuItem.Click += new System.EventHandler(this.pagosDePagaresToolStripMenuItem_Click);
             // 
             // reportesToolStripMenuItem1
             // 
@@ -215,7 +216,7 @@ namespace OBCAJASQL.Forms
             this.pagosYSaldosDePagareToolStripMenuItem,
             this.pagaresRegistradosToolStripMenuItem});
             this.reportesToolStripMenuItem1.Name = "reportesToolStripMenuItem1";
-            this.reportesToolStripMenuItem1.Size = new System.Drawing.Size(167, 22);
+            this.reportesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.reportesToolStripMenuItem1.Text = "&Reportes";
             // 
             // pagosYSaldosDePagareToolStripMenuItem
@@ -233,7 +234,7 @@ namespace OBCAJASQL.Forms
             // anularPagaresToolStripMenuItem
             // 
             this.anularPagaresToolStripMenuItem.Name = "anularPagaresToolStripMenuItem";
-            this.anularPagaresToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.anularPagaresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.anularPagaresToolStripMenuItem.Text = "&Anular Pagares";
             // 
             // parametroToolStripMenuItem
