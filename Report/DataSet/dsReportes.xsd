@@ -881,6 +881,144 @@ SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="InformeSaldosPagaresTableAdapter" GeneratorDataComponentClassName="InformeSaldosPagaresTableAdapter" Name="InformeSaldosPagares" UserDataComponentName="InformeSaldosPagaresTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ACDATOXPSQLConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        BDCAJASQL.dbo.[Datos registro de pagares].NumPaga, BDCAJASQL.dbo.[Datos registro de pagares].ValorPaga, BDCAJASQL.dbo.[Datos registro de pagares].FecPagare, 
+                         BDCAJASQL.dbo.[Datos registro de pagares].NumFacPaga, BDCAJASQL.dbo.[Datos registro cuotas pagares].ValCuota, BDCAJASQL.dbo.[Datos registro cuotas pagares].CuoPaga, 
+                         BDCAJASQL.dbo.[Datos registro cuotas pagares].FecVenCuota, BDCAJASQL.dbo.[Datos registro cuotas pagares].FecPaCuota, BDCAJASQL.dbo.[Datos registro cuotas pagares].ValPagado, 
+                         BDCAJASQL.dbo.[Datos registro cuotas pagares].ValCuota - BDCAJASQL.dbo.[Datos registro cuotas pagares].ValPagado AS TOTAL, BDCAJASQL.dbo.[Datos registro de pagares].HistoriaPaga, 
+                         Trim([Datos del Paciente].Nombre1 + ' ' + [Datos del Paciente].Nombre2) + ' ' + Trim([Datos del Paciente].Apellido1 + ' ' + [Datos del Paciente].Apellido2) AS Paciente, BDCAJASQL.dbo.[Datos registro de pagares].NumTerPaga, 
+                         BDCAJASQL.dbo.[Datos terceros].NomAdmin, BDCAJASQL.dbo.[Datos registro de pagares].AnuladoRecibo
+FROM            BDCAJASQL.dbo.[Datos terceros] INNER JOIN
+                         [Datos del Paciente] INNER JOIN
+                         BDCAJASQL.dbo.[Datos registro de pagares] INNER JOIN
+                         BDCAJASQL.dbo.[Datos registro cuotas pagares] ON BDCAJASQL.dbo.[Datos registro de pagares].NumPaga = BDCAJASQL.dbo.[Datos registro cuotas pagares].NumPaga ON 
+                         [Datos del Paciente].HistorPaci = BDCAJASQL.dbo.[Datos registro de pagares].HistoriaPaga ON BDCAJASQL.dbo.[Datos terceros].NumDocu = BDCAJASQL.dbo.[Datos registro de pagares].NumTerPaga
+ORDER BY BDCAJASQL.dbo.[Datos registro de pagares].NumPaga;  
+
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="NumPaga" DataSetColumn="NumPaga" />
+              <Mapping SourceColumn="ValorPaga" DataSetColumn="ValorPaga" />
+              <Mapping SourceColumn="FecPagare" DataSetColumn="FecPagare" />
+              <Mapping SourceColumn="NumFacPaga" DataSetColumn="NumFacPaga" />
+              <Mapping SourceColumn="ValCuota" DataSetColumn="ValCuota" />
+              <Mapping SourceColumn="CuoPaga" DataSetColumn="CuoPaga" />
+              <Mapping SourceColumn="FecVenCuota" DataSetColumn="FecVenCuota" />
+              <Mapping SourceColumn="FecPaCuota" DataSetColumn="FecPaCuota" />
+              <Mapping SourceColumn="ValPagado" DataSetColumn="ValPagado" />
+              <Mapping SourceColumn="TOTAL" DataSetColumn="TOTAL" />
+              <Mapping SourceColumn="HistoriaPaga" DataSetColumn="HistoriaPaga" />
+              <Mapping SourceColumn="Paciente" DataSetColumn="Paciente" />
+              <Mapping SourceColumn="NumTerPaga" DataSetColumn="NumTerPaga" />
+              <Mapping SourceColumn="NomAdmin" DataSetColumn="NomAdmin" />
+              <Mapping SourceColumn="AnuladoRecibo" DataSetColumn="AnuladoRecibo" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Informe pagares abonos por cajaTableAdapter" GeneratorDataComponentClassName="Informe_pagares_abonos_por_cajaTableAdapter" Name="Informe pagares abonos por caja" UserDataComponentName="Informe pagares abonos por cajaTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ACDATOXPSQLConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        BDCAJASQL.dbo.[Datos registro de pagares].NumPaga, BDCAJASQL.dbo.[Datos registro de pagares].HistoriaPaga, RTRIM([Datos del Paciente].Nombre1 + ' ' + [Datos del Paciente].Nombre2) 
+                         + ' ' + RTRIM([Datos del Paciente].Apellido1 + ' ' + [Datos del Paciente].Apellido2) AS Paciente, BDCAJASQL.dbo.[Datos registro de pagares].NumTerPaga, BDCAJASQL.dbo.[Datos terceros].TipoDocu, 
+                         BDCAJASQL.dbo.[Datos registro de pagares].NumTerPaga AS Expr1, BDCAJASQL.dbo.[Datos terceros].NomAdmin, BDCAJASQL.dbo.[Datos registro de pagares].FecPagare, 
+                         BDCAJASQL.dbo.[Datos registro de pagares].ValorPaga, BDCAJASQL.dbo.[Datos recibos de caja].ReciboCaja, BDCAJASQL.dbo.[Datos recibos de caja].FechaPagoCaja, 
+                         SUM(BDCAJASQL.dbo.[Datos detalles recibos de caja].ValorUnitaCaja) AS SumaDeValorUnitaCaja, BDCAJASQL.dbo.[Datos detalles recibos de caja].DetaPagoCaja, 
+                         BDCAJASQL.dbo.[Datos registro de pagares].AnuladoRecibo
+FROM            [Datos del Paciente] INNER JOIN
+                         BDCAJASQL.dbo.[Datos terceros] INNER JOIN
+                         BDCAJASQL.dbo.[Datos registro de pagares] INNER JOIN
+                         BDCAJASQL.dbo.[Datos recibos de caja] INNER JOIN
+                         BDCAJASQL.dbo.[Datos detalles recibos de caja] ON BDCAJASQL.dbo.[Datos recibos de caja].ReciboCaja = BDCAJASQL.dbo.[Datos detalles recibos de caja].ReciboNum ON 
+                         BDCAJASQL.dbo.[Datos registro de pagares].NumPaga = BDCAJASQL.dbo.[Datos recibos de caja].DocuCruce ON BDCAJASQL.dbo.[Datos terceros].NumDocu = BDCAJASQL.dbo.[Datos registro de pagares].NumTerPaga ON 
+                         [Datos del Paciente].HistorPaci = BDCAJASQL.dbo.[Datos registro de pagares].HistoriaPaga
+WHERE        (BDCAJASQL.dbo.[Datos detalles recibos de caja].NatuMovi = 'C')
+GROUP BY BDCAJASQL.dbo.[Datos registro de pagares].NumPaga, BDCAJASQL.dbo.[Datos registro de pagares].HistoriaPaga, RTRIM([Datos del Paciente].Nombre1 + ' ' + [Datos del Paciente].Nombre2) 
+                         + ' ' + RTRIM([Datos del Paciente].Apellido1 + ' ' + [Datos del Paciente].Apellido2), BDCAJASQL.dbo.[Datos registro de pagares].NumTerPaga, BDCAJASQL.dbo.[Datos terceros].TipoDocu, 
+                         BDCAJASQL.dbo.[Datos registro de pagares].NumTerPaga, BDCAJASQL.dbo.[Datos terceros].NomAdmin, BDCAJASQL.dbo.[Datos registro de pagares].FecPagare, BDCAJASQL.dbo.[Datos registro de pagares].ValorPaga, 
+                         BDCAJASQL.dbo.[Datos recibos de caja].ReciboCaja, BDCAJASQL.dbo.[Datos recibos de caja].FechaPagoCaja, BDCAJASQL.dbo.[Datos detalles recibos de caja].DetaPagoCaja, 
+                         BDCAJASQL.dbo.[Datos registro de pagares].AnuladoRecibo
+ORDER BY BDCAJASQL.dbo.[Datos registro de pagares].NumPaga;    </CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="NumPaga" DataSetColumn="NumPaga" />
+              <Mapping SourceColumn="HistoriaPaga" DataSetColumn="HistoriaPaga" />
+              <Mapping SourceColumn="Paciente" DataSetColumn="Paciente" />
+              <Mapping SourceColumn="NumTerPaga" DataSetColumn="NumTerPaga" />
+              <Mapping SourceColumn="TipoDocu" DataSetColumn="TipoDocu" />
+              <Mapping SourceColumn="Expr1" DataSetColumn="Expr1" />
+              <Mapping SourceColumn="NomAdmin" DataSetColumn="NomAdmin" />
+              <Mapping SourceColumn="FecPagare" DataSetColumn="FecPagare" />
+              <Mapping SourceColumn="ValorPaga" DataSetColumn="ValorPaga" />
+              <Mapping SourceColumn="ReciboCaja" DataSetColumn="ReciboCaja" />
+              <Mapping SourceColumn="FechaPagoCaja" DataSetColumn="FechaPagoCaja" />
+              <Mapping SourceColumn="SumaDeValorUnitaCaja" DataSetColumn="SumaDeValorUnitaCaja" />
+              <Mapping SourceColumn="DetaPagoCaja" DataSetColumn="DetaPagoCaja" />
+              <Mapping SourceColumn="AnuladoRecibo" DataSetColumn="AnuladoRecibo" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="InformeAbonosElectronicosTableAdapter" GeneratorDataComponentClassName="InformeAbonosElectronicosTableAdapter" Name="InformeAbonosElectronicos" UserDataComponentName="InformeAbonosElectronicosTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ACDATOXPSQLConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        BDCAJASQL.dbo.[Datos registro de pagares].NumPaga, BDCAJASQL.dbo.[Datos registro de pagares].HistoriaPaga, Trim([Datos del Paciente].Nombre1 + ' ' + [Datos del Paciente].Nombre2) 
+                         + ' ' + Trim([Datos del Paciente].Apellido1 + ' ' + [Datos del Paciente].Apellido2) AS Paciente, BDCAJASQL.dbo.[Datos terceros].TipoDocu, BDCAJASQL.dbo.[Datos registro de pagares].NumTerPaga, 
+                         BDCAJASQL.dbo.[Datos terceros].NomAdmin, BDCAJASQL.dbo.[Datos registro de pagares].FecPagare, BDCAJASQL.dbo.[Datos registro de pagares].ValorPaga, BDCAJASQL.dbo.[Datos registro de pagares].AnuladoRecibo, 
+                         GEOGRAXPSQL.dbo.[Datos de los bancos].NomBanco, BDCAJASQL.dbo.[Datos abonos electronicos a pagares].NumConsig_Elect, BDCAJASQL.dbo.[Datos abonos electronicos a pagares].FecConsig_Elect, 
+                         BDCAJASQL.dbo.[Datos abonos electronicos a pagares].ValPago_Elect, BDCAJASQL.dbo.[Datos abonos electronicos a pagares].Descripcion_Elect, BDCAJASQL.dbo.[Datos abonos electronicos a pagares].FecRegis_Elect
+FROM            GEOGRAXPSQL.dbo.[Datos de los bancos] INNER JOIN
+                         [Datos del Paciente] INNER JOIN
+                         BDCAJASQL.dbo.[Datos terceros] INNER JOIN
+                         BDCAJASQL.dbo.[Datos registro de pagares] ON BDCAJASQL.dbo.[Datos terceros].NumDocu = BDCAJASQL.dbo.[Datos registro de pagares].NumTerPaga ON 
+                         [Datos del Paciente].HistorPaci = BDCAJASQL.dbo.[Datos registro de pagares].HistoriaPaga INNER JOIN
+                         BDCAJASQL.dbo.[Datos abonos electronicos a pagares] ON BDCAJASQL.dbo.[Datos registro de pagares].NumPaga = BDCAJASQL.dbo.[Datos abonos electronicos a pagares].NumPagare_Elect ON 
+                         GEOGRAXPSQL.dbo.[Datos de los bancos].CodiBanco = BDCAJASQL.dbo.[Datos abonos electronicos a pagares].EntidConsig_Elect
+GROUP BY BDCAJASQL.dbo.[Datos registro de pagares].NumPaga, BDCAJASQL.dbo.[Datos registro de pagares].HistoriaPaga, Trim([Datos del Paciente].Nombre1 + ' ' + [Datos del Paciente].Nombre2) 
+                         + ' ' + Trim([Datos del Paciente].Apellido1 + ' ' + [Datos del Paciente].Apellido2), BDCAJASQL.dbo.[Datos terceros].TipoDocu, BDCAJASQL.dbo.[Datos registro de pagares].NumTerPaga, 
+                         BDCAJASQL.dbo.[Datos terceros].NomAdmin, BDCAJASQL.dbo.[Datos registro de pagares].FecPagare, BDCAJASQL.dbo.[Datos registro de pagares].ValorPaga, BDCAJASQL.dbo.[Datos registro de pagares].AnuladoRecibo, 
+                         GEOGRAXPSQL.dbo.[Datos de los bancos].NomBanco, BDCAJASQL.dbo.[Datos abonos electronicos a pagares].NumConsig_Elect, BDCAJASQL.dbo.[Datos abonos electronicos a pagares].FecConsig_Elect, 
+                         BDCAJASQL.dbo.[Datos abonos electronicos a pagares].ValPago_Elect, BDCAJASQL.dbo.[Datos abonos electronicos a pagares].Descripcion_Elect, BDCAJASQL.dbo.[Datos abonos electronicos a pagares].FecRegis_Elect
+ORDER BY BDCAJASQL.dbo.[Datos registro de pagares].NumPaga;  </CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="NumPaga" DataSetColumn="NumPaga" />
+              <Mapping SourceColumn="HistoriaPaga" DataSetColumn="HistoriaPaga" />
+              <Mapping SourceColumn="Paciente" DataSetColumn="Paciente" />
+              <Mapping SourceColumn="TipoDocu" DataSetColumn="TipoDocu" />
+              <Mapping SourceColumn="NumTerPaga" DataSetColumn="NumTerPaga" />
+              <Mapping SourceColumn="NomAdmin" DataSetColumn="NomAdmin" />
+              <Mapping SourceColumn="FecPagare" DataSetColumn="FecPagare" />
+              <Mapping SourceColumn="ValorPaga" DataSetColumn="ValorPaga" />
+              <Mapping SourceColumn="AnuladoRecibo" DataSetColumn="AnuladoRecibo" />
+              <Mapping SourceColumn="NomBanco" DataSetColumn="NomBanco" />
+              <Mapping SourceColumn="NumConsig_Elect" DataSetColumn="NumConsig_Elect" />
+              <Mapping SourceColumn="FecConsig_Elect" DataSetColumn="FecConsig_Elect" />
+              <Mapping SourceColumn="ValPago_Elect" DataSetColumn="ValPago_Elect" />
+              <Mapping SourceColumn="Descripcion_Elect" DataSetColumn="Descripcion_Elect" />
+              <Mapping SourceColumn="FecRegis_Elect" DataSetColumn="FecRegis_Elect" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -889,7 +1027,7 @@ SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1
   <xs:element name="dsReportes" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsReportes" msprop:Generator_UserDSName="dsReportes">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="InformeCajaPorUsuarioNew" msprop:Generator_TableClassName="InformeCajaPorUsuarioNewDataTable" msprop:Generator_TableVarName="tableInformeCajaPorUsuarioNew" msprop:Generator_RowChangedName="InformeCajaPorUsuarioNewRowChanged" msprop:Generator_TablePropName="InformeCajaPorUsuarioNew" msprop:Generator_RowDeletingName="InformeCajaPorUsuarioNewRowDeleting" msprop:Generator_RowChangingName="InformeCajaPorUsuarioNewRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaPorUsuarioNewRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaPorUsuarioNewRowDeleted" msprop:Generator_RowClassName="InformeCajaPorUsuarioNewRow" msprop:Generator_UserTableName="InformeCajaPorUsuarioNew" msprop:Generator_RowEvArgName="InformeCajaPorUsuarioNewRowChangeEvent">
+        <xs:element name="InformeCajaPorUsuarioNew" msprop:Generator_TableClassName="InformeCajaPorUsuarioNewDataTable" msprop:Generator_TableVarName="tableInformeCajaPorUsuarioNew" msprop:Generator_TablePropName="InformeCajaPorUsuarioNew" msprop:Generator_RowDeletingName="InformeCajaPorUsuarioNewRowDeleting" msprop:Generator_RowChangingName="InformeCajaPorUsuarioNewRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaPorUsuarioNewRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaPorUsuarioNewRowDeleted" msprop:Generator_UserTableName="InformeCajaPorUsuarioNew" msprop:Generator_RowChangedName="InformeCajaPorUsuarioNewRowChanged" msprop:Generator_RowEvArgName="InformeCajaPorUsuarioNewRowChangeEvent" msprop:Generator_RowClassName="InformeCajaPorUsuarioNewRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ReciboNum" msprop:Generator_ColumnVarNameInTable="columnReciboNum" msprop:Generator_ColumnPropNameInRow="ReciboNum" msprop:Generator_ColumnPropNameInTable="ReciboNumColumn" msprop:Generator_UserColumnName="ReciboNum">
@@ -937,7 +1075,7 @@ SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="InformeCajaPorEntidades" msprop:Generator_TableClassName="InformeCajaPorEntidadesDataTable" msprop:Generator_TableVarName="tableInformeCajaPorEntidades" msprop:Generator_TablePropName="InformeCajaPorEntidades" msprop:Generator_RowDeletingName="InformeCajaPorEntidadesRowDeleting" msprop:Generator_RowChangingName="InformeCajaPorEntidadesRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaPorEntidadesRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaPorEntidadesRowDeleted" msprop:Generator_UserTableName="InformeCajaPorEntidades" msprop:Generator_RowChangedName="InformeCajaPorEntidadesRowChanged" msprop:Generator_RowEvArgName="InformeCajaPorEntidadesRowChangeEvent" msprop:Generator_RowClassName="InformeCajaPorEntidadesRow">
+        <xs:element name="InformeCajaPorEntidades" msprop:Generator_TableClassName="InformeCajaPorEntidadesDataTable" msprop:Generator_TableVarName="tableInformeCajaPorEntidades" msprop:Generator_RowChangedName="InformeCajaPorEntidadesRowChanged" msprop:Generator_TablePropName="InformeCajaPorEntidades" msprop:Generator_RowDeletingName="InformeCajaPorEntidadesRowDeleting" msprop:Generator_RowChangingName="InformeCajaPorEntidadesRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaPorEntidadesRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaPorEntidadesRowDeleted" msprop:Generator_RowClassName="InformeCajaPorEntidadesRow" msprop:Generator_UserTableName="InformeCajaPorEntidades" msprop:Generator_RowEvArgName="InformeCajaPorEntidadesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ReciboNum" msprop:Generator_ColumnVarNameInTable="columnReciboNum" msprop:Generator_ColumnPropNameInRow="ReciboNum" msprop:Generator_ColumnPropNameInTable="ReciboNumColumn" msprop:Generator_UserColumnName="ReciboNum">
@@ -999,7 +1137,7 @@ SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="InformeCajaPorRegimen" msprop:Generator_TableClassName="InformeCajaPorRegimenDataTable" msprop:Generator_TableVarName="tableInformeCajaPorRegimen" msprop:Generator_RowChangedName="InformeCajaPorRegimenRowChanged" msprop:Generator_TablePropName="InformeCajaPorRegimen" msprop:Generator_RowDeletingName="InformeCajaPorRegimenRowDeleting" msprop:Generator_RowChangingName="InformeCajaPorRegimenRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaPorRegimenRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaPorRegimenRowDeleted" msprop:Generator_RowClassName="InformeCajaPorRegimenRow" msprop:Generator_UserTableName="InformeCajaPorRegimen" msprop:Generator_RowEvArgName="InformeCajaPorRegimenRowChangeEvent">
+        <xs:element name="InformeCajaPorRegimen" msprop:Generator_TableClassName="InformeCajaPorRegimenDataTable" msprop:Generator_TableVarName="tableInformeCajaPorRegimen" msprop:Generator_TablePropName="InformeCajaPorRegimen" msprop:Generator_RowDeletingName="InformeCajaPorRegimenRowDeleting" msprop:Generator_RowChangingName="InformeCajaPorRegimenRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaPorRegimenRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaPorRegimenRowDeleted" msprop:Generator_UserTableName="InformeCajaPorRegimen" msprop:Generator_RowChangedName="InformeCajaPorRegimenRowChanged" msprop:Generator_RowEvArgName="InformeCajaPorRegimenRowChangeEvent" msprop:Generator_RowClassName="InformeCajaPorRegimenRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ReciboNum" msprop:Generator_ColumnVarNameInTable="columnReciboNum" msprop:Generator_ColumnPropNameInRow="ReciboNum" msprop:Generator_ColumnPropNameInTable="ReciboNumColumn" msprop:Generator_UserColumnName="ReciboNum">
@@ -1064,7 +1202,7 @@ SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="InformeCajaPorPaciente" msprop:Generator_TableClassName="InformeCajaPorPacienteDataTable" msprop:Generator_TableVarName="tableInformeCajaPorPaciente" msprop:Generator_RowChangedName="InformeCajaPorPacienteRowChanged" msprop:Generator_TablePropName="InformeCajaPorPaciente" msprop:Generator_RowDeletingName="InformeCajaPorPacienteRowDeleting" msprop:Generator_RowChangingName="InformeCajaPorPacienteRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaPorPacienteRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaPorPacienteRowDeleted" msprop:Generator_RowClassName="InformeCajaPorPacienteRow" msprop:Generator_UserTableName="InformeCajaPorPaciente" msprop:Generator_RowEvArgName="InformeCajaPorPacienteRowChangeEvent">
+        <xs:element name="InformeCajaPorPaciente" msprop:Generator_TableClassName="InformeCajaPorPacienteDataTable" msprop:Generator_TableVarName="tableInformeCajaPorPaciente" msprop:Generator_TablePropName="InformeCajaPorPaciente" msprop:Generator_RowDeletingName="InformeCajaPorPacienteRowDeleting" msprop:Generator_RowChangingName="InformeCajaPorPacienteRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaPorPacienteRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaPorPacienteRowDeleted" msprop:Generator_UserTableName="InformeCajaPorPaciente" msprop:Generator_RowChangedName="InformeCajaPorPacienteRowChanged" msprop:Generator_RowEvArgName="InformeCajaPorPacienteRowChangeEvent" msprop:Generator_RowClassName="InformeCajaPorPacienteRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ReciboNum" msprop:Generator_ColumnVarNameInTable="columnReciboNum" msprop:Generator_ColumnPropNameInRow="ReciboNum" msprop:Generator_ColumnPropNameInTable="ReciboNumColumn" msprop:Generator_UserColumnName="ReciboNum">
@@ -1110,7 +1248,7 @@ SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="InformeCajaRegimenCosto" msprop:Generator_TableClassName="InformeCajaRegimenCostoDataTable" msprop:Generator_TableVarName="tableInformeCajaRegimenCosto" msprop:Generator_RowChangedName="InformeCajaRegimenCostoRowChanged" msprop:Generator_TablePropName="InformeCajaRegimenCosto" msprop:Generator_RowDeletingName="InformeCajaRegimenCostoRowDeleting" msprop:Generator_RowChangingName="InformeCajaRegimenCostoRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaRegimenCostoRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaRegimenCostoRowDeleted" msprop:Generator_RowClassName="InformeCajaRegimenCostoRow" msprop:Generator_UserTableName="InformeCajaRegimenCosto" msprop:Generator_RowEvArgName="InformeCajaRegimenCostoRowChangeEvent">
+        <xs:element name="InformeCajaRegimenCosto" msprop:Generator_TableClassName="InformeCajaRegimenCostoDataTable" msprop:Generator_TableVarName="tableInformeCajaRegimenCosto" msprop:Generator_TablePropName="InformeCajaRegimenCosto" msprop:Generator_RowDeletingName="InformeCajaRegimenCostoRowDeleting" msprop:Generator_RowChangingName="InformeCajaRegimenCostoRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaRegimenCostoRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaRegimenCostoRowDeleted" msprop:Generator_UserTableName="InformeCajaRegimenCosto" msprop:Generator_RowChangedName="InformeCajaRegimenCostoRowChanged" msprop:Generator_RowEvArgName="InformeCajaRegimenCostoRowChangeEvent" msprop:Generator_RowClassName="InformeCajaRegimenCostoRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="NomTipo" msprop:Generator_ColumnVarNameInTable="columnNomTipo" msprop:Generator_ColumnPropNameInRow="NomTipo" msprop:Generator_ColumnPropNameInTable="NomTipoColumn" msprop:Generator_UserColumnName="NomTipo" minOccurs="0">
@@ -1154,7 +1292,7 @@ SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="InformeCajaTodos" msprop:Generator_TableClassName="InformeCajaTodosDataTable" msprop:Generator_TableVarName="tableInformeCajaTodos" msprop:Generator_TablePropName="InformeCajaTodos" msprop:Generator_RowDeletingName="InformeCajaTodosRowDeleting" msprop:Generator_RowChangingName="InformeCajaTodosRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaTodosRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaTodosRowDeleted" msprop:Generator_UserTableName="InformeCajaTodos" msprop:Generator_RowChangedName="InformeCajaTodosRowChanged" msprop:Generator_RowEvArgName="InformeCajaTodosRowChangeEvent" msprop:Generator_RowClassName="InformeCajaTodosRow">
+        <xs:element name="InformeCajaTodos" msprop:Generator_TableClassName="InformeCajaTodosDataTable" msprop:Generator_TableVarName="tableInformeCajaTodos" msprop:Generator_RowChangedName="InformeCajaTodosRowChanged" msprop:Generator_TablePropName="InformeCajaTodos" msprop:Generator_RowDeletingName="InformeCajaTodosRowDeleting" msprop:Generator_RowChangingName="InformeCajaTodosRowChanging" msprop:Generator_RowEvHandlerName="InformeCajaTodosRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeCajaTodosRowDeleted" msprop:Generator_RowClassName="InformeCajaTodosRow" msprop:Generator_UserTableName="InformeCajaTodos" msprop:Generator_RowEvArgName="InformeCajaTodosRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ReciboNum" msprop:Generator_ColumnVarNameInTable="columnReciboNum" msprop:Generator_ColumnPropNameInRow="ReciboNum" msprop:Generator_ColumnPropNameInTable="ReciboNumColumn" msprop:Generator_UserColumnName="ReciboNum">
@@ -1191,7 +1329,7 @@ SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="InformePorDigitadores" msprop:Generator_TableClassName="InformePorDigitadoresDataTable" msprop:Generator_TableVarName="tableInformePorDigitadores" msprop:Generator_RowChangedName="InformePorDigitadoresRowChanged" msprop:Generator_TablePropName="InformePorDigitadores" msprop:Generator_RowDeletingName="InformePorDigitadoresRowDeleting" msprop:Generator_RowChangingName="InformePorDigitadoresRowChanging" msprop:Generator_RowEvHandlerName="InformePorDigitadoresRowChangeEventHandler" msprop:Generator_RowDeletedName="InformePorDigitadoresRowDeleted" msprop:Generator_RowClassName="InformePorDigitadoresRow" msprop:Generator_UserTableName="InformePorDigitadores" msprop:Generator_RowEvArgName="InformePorDigitadoresRowChangeEvent">
+        <xs:element name="InformePorDigitadores" msprop:Generator_TableClassName="InformePorDigitadoresDataTable" msprop:Generator_TableVarName="tableInformePorDigitadores" msprop:Generator_TablePropName="InformePorDigitadores" msprop:Generator_RowDeletingName="InformePorDigitadoresRowDeleting" msprop:Generator_RowChangingName="InformePorDigitadoresRowChanging" msprop:Generator_RowEvHandlerName="InformePorDigitadoresRowChangeEventHandler" msprop:Generator_RowDeletedName="InformePorDigitadoresRowDeleted" msprop:Generator_UserTableName="InformePorDigitadores" msprop:Generator_RowChangedName="InformePorDigitadoresRowChanged" msprop:Generator_RowEvArgName="InformePorDigitadoresRowChangeEvent" msprop:Generator_RowClassName="InformePorDigitadoresRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ReciboNum" msprop:Generator_ColumnVarNameInTable="columnReciboNum" msprop:Generator_ColumnPropNameInRow="ReciboNum" msprop:Generator_ColumnPropNameInTable="ReciboNumColumn" msprop:Generator_UserColumnName="ReciboNum">
@@ -1249,7 +1387,7 @@ SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="InformeRecaudoCuentas" msprop:Generator_TableClassName="InformeRecaudoCuentasDataTable" msprop:Generator_TableVarName="tableInformeRecaudoCuentas" msprop:Generator_TablePropName="InformeRecaudoCuentas" msprop:Generator_RowDeletingName="InformeRecaudoCuentasRowDeleting" msprop:Generator_RowChangingName="InformeRecaudoCuentasRowChanging" msprop:Generator_RowEvHandlerName="InformeRecaudoCuentasRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeRecaudoCuentasRowDeleted" msprop:Generator_UserTableName="InformeRecaudoCuentas" msprop:Generator_RowChangedName="InformeRecaudoCuentasRowChanged" msprop:Generator_RowEvArgName="InformeRecaudoCuentasRowChangeEvent" msprop:Generator_RowClassName="InformeRecaudoCuentasRow">
+        <xs:element name="InformeRecaudoCuentas" msprop:Generator_TableClassName="InformeRecaudoCuentasDataTable" msprop:Generator_TableVarName="tableInformeRecaudoCuentas" msprop:Generator_RowChangedName="InformeRecaudoCuentasRowChanged" msprop:Generator_TablePropName="InformeRecaudoCuentas" msprop:Generator_RowDeletingName="InformeRecaudoCuentasRowDeleting" msprop:Generator_RowChangingName="InformeRecaudoCuentasRowChanging" msprop:Generator_RowEvHandlerName="InformeRecaudoCuentasRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeRecaudoCuentasRowDeleted" msprop:Generator_RowClassName="InformeRecaudoCuentasRow" msprop:Generator_UserTableName="InformeRecaudoCuentas" msprop:Generator_RowEvArgName="InformeRecaudoCuentasRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="CuentaContable" msprop:Generator_ColumnVarNameInTable="columnCuentaContable" msprop:Generator_ColumnPropNameInRow="CuentaContable" msprop:Generator_ColumnPropNameInTable="CuentaContableColumn" msprop:Generator_UserColumnName="CuentaContable">
@@ -1272,7 +1410,7 @@ SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="InformePorServicios" msprop:Generator_TableClassName="InformePorServiciosDataTable" msprop:Generator_TableVarName="tableInformePorServicios" msprop:Generator_RowChangedName="InformePorServiciosRowChanged" msprop:Generator_TablePropName="InformePorServicios" msprop:Generator_RowDeletingName="InformePorServiciosRowDeleting" msprop:Generator_RowChangingName="InformePorServiciosRowChanging" msprop:Generator_RowEvHandlerName="InformePorServiciosRowChangeEventHandler" msprop:Generator_RowDeletedName="InformePorServiciosRowDeleted" msprop:Generator_RowClassName="InformePorServiciosRow" msprop:Generator_UserTableName="InformePorServicios" msprop:Generator_RowEvArgName="InformePorServiciosRowChangeEvent">
+        <xs:element name="InformePorServicios" msprop:Generator_TableClassName="InformePorServiciosDataTable" msprop:Generator_TableVarName="tableInformePorServicios" msprop:Generator_TablePropName="InformePorServicios" msprop:Generator_RowDeletingName="InformePorServiciosRowDeleting" msprop:Generator_RowChangingName="InformePorServiciosRowChanging" msprop:Generator_RowEvHandlerName="InformePorServiciosRowChangeEventHandler" msprop:Generator_RowDeletedName="InformePorServiciosRowDeleted" msprop:Generator_UserTableName="InformePorServicios" msprop:Generator_RowChangedName="InformePorServiciosRowChanged" msprop:Generator_RowEvArgName="InformePorServiciosRowChangeEvent" msprop:Generator_RowClassName="InformePorServiciosRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ReciboNum" msprop:Generator_ColumnVarNameInTable="columnReciboNum" msprop:Generator_ColumnPropNameInRow="ReciboNum" msprop:Generator_ColumnPropNameInTable="ReciboNumColumn" msprop:Generator_UserColumnName="ReciboNum">
@@ -1309,7 +1447,7 @@ SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="InformeResumenCaja" msprop:Generator_TableClassName="InformeResumenCajaDataTable" msprop:Generator_TableVarName="tableInformeResumenCaja" msprop:Generator_RowChangedName="InformeResumenCajaRowChanged" msprop:Generator_TablePropName="InformeResumenCaja" msprop:Generator_RowDeletingName="InformeResumenCajaRowDeleting" msprop:Generator_RowChangingName="InformeResumenCajaRowChanging" msprop:Generator_RowEvHandlerName="InformeResumenCajaRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeResumenCajaRowDeleted" msprop:Generator_RowClassName="InformeResumenCajaRow" msprop:Generator_UserTableName="InformeResumenCaja" msprop:Generator_RowEvArgName="InformeResumenCajaRowChangeEvent">
+        <xs:element name="InformeResumenCaja" msprop:Generator_TableClassName="InformeResumenCajaDataTable" msprop:Generator_TableVarName="tableInformeResumenCaja" msprop:Generator_TablePropName="InformeResumenCaja" msprop:Generator_RowDeletingName="InformeResumenCajaRowDeleting" msprop:Generator_RowChangingName="InformeResumenCajaRowChanging" msprop:Generator_RowEvHandlerName="InformeResumenCajaRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeResumenCajaRowDeleted" msprop:Generator_UserTableName="InformeResumenCaja" msprop:Generator_RowChangedName="InformeResumenCajaRowChanged" msprop:Generator_RowEvArgName="InformeResumenCajaRowChangeEvent" msprop:Generator_RowClassName="InformeResumenCajaRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="CuentaContable" msprop:Generator_ColumnVarNameInTable="columnCuentaContable" msprop:Generator_ColumnPropNameInRow="CuentaContable" msprop:Generator_ColumnPropNameInTable="CuentaContableColumn" msprop:Generator_UserColumnName="CuentaContable">
@@ -1381,7 +1519,7 @@ SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="RegistroPagare" msprop:Generator_TableClassName="RegistroPagareDataTable" msprop:Generator_TableVarName="tableRegistroPagare" msprop:Generator_TablePropName="RegistroPagare" msprop:Generator_RowDeletingName="RegistroPagareRowDeleting" msprop:Generator_RowChangingName="RegistroPagareRowChanging" msprop:Generator_RowEvHandlerName="RegistroPagareRowChangeEventHandler" msprop:Generator_RowDeletedName="RegistroPagareRowDeleted" msprop:Generator_UserTableName="RegistroPagare" msprop:Generator_RowChangedName="RegistroPagareRowChanged" msprop:Generator_RowEvArgName="RegistroPagareRowChangeEvent" msprop:Generator_RowClassName="RegistroPagareRow">
+        <xs:element name="RegistroPagare" msprop:Generator_TableClassName="RegistroPagareDataTable" msprop:Generator_TableVarName="tableRegistroPagare" msprop:Generator_RowChangedName="RegistroPagareRowChanged" msprop:Generator_TablePropName="RegistroPagare" msprop:Generator_RowDeletingName="RegistroPagareRowDeleting" msprop:Generator_RowChangingName="RegistroPagareRowChanging" msprop:Generator_RowEvHandlerName="RegistroPagareRowChangeEventHandler" msprop:Generator_RowDeletedName="RegistroPagareRowDeleted" msprop:Generator_RowClassName="RegistroPagareRow" msprop:Generator_UserTableName="RegistroPagare" msprop:Generator_RowEvArgName="RegistroPagareRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="NumPaga" msprop:Generator_ColumnVarNameInTable="columnNumPaga" msprop:Generator_ColumnPropNameInRow="NumPaga" msprop:Generator_ColumnPropNameInTable="NumPagaColumn" msprop:Generator_UserColumnName="NumPaga">
@@ -1513,7 +1651,7 @@ SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="RegistroCuotasPagare" msprop:Generator_TableClassName="RegistroCuotasPagareDataTable" msprop:Generator_TableVarName="tableRegistroCuotasPagare" msprop:Generator_TablePropName="RegistroCuotasPagare" msprop:Generator_RowDeletingName="RegistroCuotasPagareRowDeleting" msprop:Generator_RowChangingName="RegistroCuotasPagareRowChanging" msprop:Generator_RowEvHandlerName="RegistroCuotasPagareRowChangeEventHandler" msprop:Generator_RowDeletedName="RegistroCuotasPagareRowDeleted" msprop:Generator_UserTableName="RegistroCuotasPagare" msprop:Generator_RowChangedName="RegistroCuotasPagareRowChanged" msprop:Generator_RowEvArgName="RegistroCuotasPagareRowChangeEvent" msprop:Generator_RowClassName="RegistroCuotasPagareRow">
+        <xs:element name="RegistroCuotasPagare" msprop:Generator_TableClassName="RegistroCuotasPagareDataTable" msprop:Generator_TableVarName="tableRegistroCuotasPagare" msprop:Generator_RowChangedName="RegistroCuotasPagareRowChanged" msprop:Generator_TablePropName="RegistroCuotasPagare" msprop:Generator_RowDeletingName="RegistroCuotasPagareRowDeleting" msprop:Generator_RowChangingName="RegistroCuotasPagareRowChanging" msprop:Generator_RowEvHandlerName="RegistroCuotasPagareRowChangeEventHandler" msprop:Generator_RowDeletedName="RegistroCuotasPagareRowDeleted" msprop:Generator_RowClassName="RegistroCuotasPagareRow" msprop:Generator_UserTableName="RegistroCuotasPagare" msprop:Generator_RowEvArgName="RegistroCuotasPagareRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="NumPaga" msprop:Generator_ColumnVarNameInTable="columnNumPaga" msprop:Generator_ColumnPropNameInRow="NumPaga" msprop:Generator_ColumnPropNameInTable="NumPagaColumn" msprop:Generator_UserColumnName="NumPaga">
@@ -1554,7 +1692,7 @@ SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="DatosProveedores" msprop:Generator_TableClassName="DatosProveedoresDataTable" msprop:Generator_TableVarName="tableDatosProveedores" msprop:Generator_TablePropName="DatosProveedores" msprop:Generator_RowDeletingName="DatosProveedoresRowDeleting" msprop:Generator_RowChangingName="DatosProveedoresRowChanging" msprop:Generator_RowEvHandlerName="DatosProveedoresRowChangeEventHandler" msprop:Generator_RowDeletedName="DatosProveedoresRowDeleted" msprop:Generator_UserTableName="DatosProveedores" msprop:Generator_RowChangedName="DatosProveedoresRowChanged" msprop:Generator_RowEvArgName="DatosProveedoresRowChangeEvent" msprop:Generator_RowClassName="DatosProveedoresRow">
+        <xs:element name="DatosProveedores" msprop:Generator_TableClassName="DatosProveedoresDataTable" msprop:Generator_TableVarName="tableDatosProveedores" msprop:Generator_RowChangedName="DatosProveedoresRowChanged" msprop:Generator_TablePropName="DatosProveedores" msprop:Generator_RowDeletingName="DatosProveedoresRowDeleting" msprop:Generator_RowChangingName="DatosProveedoresRowChanging" msprop:Generator_RowEvHandlerName="DatosProveedoresRowChangeEventHandler" msprop:Generator_RowDeletedName="DatosProveedoresRowDeleted" msprop:Generator_RowClassName="DatosProveedoresRow" msprop:Generator_UserTableName="DatosProveedores" msprop:Generator_RowEvArgName="DatosProveedoresRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="RazonSol" msprop:Generator_ColumnVarNameInTable="columnRazonSol" msprop:Generator_ColumnPropNameInRow="RazonSol" msprop:Generator_ColumnPropNameInTable="RazonSolColumn" msprop:Generator_UserColumnName="RazonSol">
@@ -1616,7 +1754,7 @@ SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="DatosProveedoresCode" msprop:Generator_TableClassName="DatosProveedoresCodeDataTable" msprop:Generator_TableVarName="tableDatosProveedoresCode" msprop:Generator_TablePropName="DatosProveedoresCode" msprop:Generator_RowDeletingName="DatosProveedoresCodeRowDeleting" msprop:Generator_RowChangingName="DatosProveedoresCodeRowChanging" msprop:Generator_RowEvHandlerName="DatosProveedoresCodeRowChangeEventHandler" msprop:Generator_RowDeletedName="DatosProveedoresCodeRowDeleted" msprop:Generator_UserTableName="DatosProveedoresCode" msprop:Generator_RowChangedName="DatosProveedoresCodeRowChanged" msprop:Generator_RowEvArgName="DatosProveedoresCodeRowChangeEvent" msprop:Generator_RowClassName="DatosProveedoresCodeRow">
+        <xs:element name="DatosProveedoresCode" msprop:Generator_TableClassName="DatosProveedoresCodeDataTable" msprop:Generator_TableVarName="tableDatosProveedoresCode" msprop:Generator_RowChangedName="DatosProveedoresCodeRowChanged" msprop:Generator_TablePropName="DatosProveedoresCode" msprop:Generator_RowDeletingName="DatosProveedoresCodeRowDeleting" msprop:Generator_RowChangingName="DatosProveedoresCodeRowChanging" msprop:Generator_RowEvHandlerName="DatosProveedoresCodeRowChangeEventHandler" msprop:Generator_RowDeletedName="DatosProveedoresCodeRowDeleted" msprop:Generator_RowClassName="DatosProveedoresCodeRow" msprop:Generator_UserTableName="DatosProveedoresCode" msprop:Generator_RowEvArgName="DatosProveedoresCodeRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="RazonSol" msprop:Generator_ColumnVarNameInTable="columnRazonSol" msprop:Generator_ColumnPropNameInRow="RazonSol" msprop:Generator_ColumnPropNameInTable="RazonSolColumn" msprop:Generator_UserColumnName="RazonSol">
@@ -1675,6 +1813,212 @@ SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="InformeSaldosPagares" msprop:Generator_TableClassName="InformeSaldosPagaresDataTable" msprop:Generator_TableVarName="tableInformeSaldosPagares" msprop:Generator_TablePropName="InformeSaldosPagares" msprop:Generator_RowDeletingName="InformeSaldosPagaresRowDeleting" msprop:Generator_RowChangingName="InformeSaldosPagaresRowChanging" msprop:Generator_RowEvHandlerName="InformeSaldosPagaresRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeSaldosPagaresRowDeleted" msprop:Generator_UserTableName="InformeSaldosPagares" msprop:Generator_RowChangedName="InformeSaldosPagaresRowChanged" msprop:Generator_RowEvArgName="InformeSaldosPagaresRowChangeEvent" msprop:Generator_RowClassName="InformeSaldosPagaresRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NumPaga" msprop:Generator_ColumnVarNameInTable="columnNumPaga" msprop:Generator_ColumnPropNameInRow="NumPaga" msprop:Generator_ColumnPropNameInTable="NumPagaColumn" msprop:Generator_UserColumnName="NumPaga">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ValorPaga" msprop:Generator_ColumnVarNameInTable="columnValorPaga" msprop:Generator_ColumnPropNameInRow="ValorPaga" msprop:Generator_ColumnPropNameInTable="ValorPagaColumn" msprop:Generator_UserColumnName="ValorPaga" type="xs:double" />
+              <xs:element name="FecPagare" msprop:Generator_ColumnVarNameInTable="columnFecPagare" msprop:Generator_ColumnPropNameInRow="FecPagare" msprop:Generator_ColumnPropNameInTable="FecPagareColumn" msprop:Generator_UserColumnName="FecPagare" type="xs:dateTime" />
+              <xs:element name="NumFacPaga" msprop:Generator_ColumnVarNameInTable="columnNumFacPaga" msprop:Generator_ColumnPropNameInRow="NumFacPaga" msprop:Generator_ColumnPropNameInTable="NumFacPagaColumn" msprop:Generator_UserColumnName="NumFacPaga">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ValCuota" msprop:Generator_ColumnVarNameInTable="columnValCuota" msprop:Generator_ColumnPropNameInRow="ValCuota" msprop:Generator_ColumnPropNameInTable="ValCuotaColumn" msprop:Generator_UserColumnName="ValCuota" type="xs:int" />
+              <xs:element name="CuoPaga" msprop:Generator_ColumnVarNameInTable="columnCuoPaga" msprop:Generator_ColumnPropNameInRow="CuoPaga" msprop:Generator_ColumnPropNameInTable="CuoPagaColumn" msprop:Generator_UserColumnName="CuoPaga" type="xs:int" />
+              <xs:element name="FecVenCuota" msprop:Generator_ColumnVarNameInTable="columnFecVenCuota" msprop:Generator_ColumnPropNameInRow="FecVenCuota" msprop:Generator_ColumnPropNameInTable="FecVenCuotaColumn" msprop:Generator_UserColumnName="FecVenCuota" type="xs:dateTime" />
+              <xs:element name="FecPaCuota" msprop:Generator_ColumnVarNameInTable="columnFecPaCuota" msprop:Generator_ColumnPropNameInRow="FecPaCuota" msprop:Generator_ColumnPropNameInTable="FecPaCuotaColumn" msprop:Generator_UserColumnName="FecPaCuota" type="xs:dateTime" />
+              <xs:element name="ValPagado" msprop:Generator_ColumnVarNameInTable="columnValPagado" msprop:Generator_ColumnPropNameInRow="ValPagado" msprop:Generator_ColumnPropNameInTable="ValPagadoColumn" msprop:Generator_UserColumnName="ValPagado" type="xs:long" />
+              <xs:element name="TOTAL" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTOTAL" msprop:Generator_ColumnPropNameInRow="TOTAL" msprop:Generator_ColumnPropNameInTable="TOTALColumn" msprop:Generator_UserColumnName="TOTAL" type="xs:long" minOccurs="0" />
+              <xs:element name="HistoriaPaga" msprop:Generator_ColumnVarNameInTable="columnHistoriaPaga" msprop:Generator_ColumnPropNameInRow="HistoriaPaga" msprop:Generator_ColumnPropNameInTable="HistoriaPagaColumn" msprop:Generator_UserColumnName="HistoriaPaga" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Paciente" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPaciente" msprop:Generator_ColumnPropNameInRow="Paciente" msprop:Generator_ColumnPropNameInTable="PacienteColumn" msprop:Generator_UserColumnName="Paciente" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="103" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NumTerPaga" msprop:Generator_ColumnVarNameInTable="columnNumTerPaga" msprop:Generator_ColumnPropNameInRow="NumTerPaga" msprop:Generator_ColumnPropNameInTable="NumTerPagaColumn" msprop:Generator_UserColumnName="NumTerPaga">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NomAdmin" msprop:Generator_ColumnVarNameInTable="columnNomAdmin" msprop:Generator_ColumnPropNameInRow="NomAdmin" msprop:Generator_ColumnPropNameInTable="NomAdminColumn" msprop:Generator_UserColumnName="NomAdmin">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AnuladoRecibo" msprop:Generator_ColumnVarNameInTable="columnAnuladoRecibo" msprop:Generator_ColumnPropNameInRow="AnuladoRecibo" msprop:Generator_ColumnPropNameInTable="AnuladoReciboColumn" msprop:Generator_UserColumnName="AnuladoRecibo" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Informe_x0020_pagares_x0020_abonos_x0020_por_x0020_caja" msprop:Generator_TableClassName="Informe_pagares_abonos_por_cajaDataTable" msprop:Generator_TableVarName="tableInforme_pagares_abonos_por_caja" msprop:Generator_RowChangedName="Informe_pagares_abonos_por_cajaRowChanged" msprop:Generator_TablePropName="Informe_pagares_abonos_por_caja" msprop:Generator_RowDeletingName="Informe_pagares_abonos_por_cajaRowDeleting" msprop:Generator_RowChangingName="Informe_pagares_abonos_por_cajaRowChanging" msprop:Generator_RowEvHandlerName="Informe_pagares_abonos_por_cajaRowChangeEventHandler" msprop:Generator_RowDeletedName="Informe_pagares_abonos_por_cajaRowDeleted" msprop:Generator_RowClassName="Informe_pagares_abonos_por_cajaRow" msprop:Generator_UserTableName="Informe pagares abonos por caja" msprop:Generator_RowEvArgName="Informe_pagares_abonos_por_cajaRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NumPaga" msprop:Generator_ColumnVarNameInTable="columnNumPaga" msprop:Generator_ColumnPropNameInRow="NumPaga" msprop:Generator_ColumnPropNameInTable="NumPagaColumn" msprop:Generator_UserColumnName="NumPaga">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HistoriaPaga" msprop:Generator_ColumnVarNameInTable="columnHistoriaPaga" msprop:Generator_ColumnPropNameInRow="HistoriaPaga" msprop:Generator_ColumnPropNameInTable="HistoriaPagaColumn" msprop:Generator_UserColumnName="HistoriaPaga" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Paciente" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPaciente" msprop:Generator_ColumnPropNameInRow="Paciente" msprop:Generator_ColumnPropNameInTable="PacienteColumn" msprop:Generator_UserColumnName="Paciente" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="103" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NumTerPaga" msprop:Generator_ColumnVarNameInTable="columnNumTerPaga" msprop:Generator_ColumnPropNameInRow="NumTerPaga" msprop:Generator_ColumnPropNameInTable="NumTerPagaColumn" msprop:Generator_UserColumnName="NumTerPaga">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TipoDocu" msprop:Generator_ColumnVarNameInTable="columnTipoDocu" msprop:Generator_ColumnPropNameInRow="TipoDocu" msprop:Generator_ColumnPropNameInTable="TipoDocuColumn" msprop:Generator_UserColumnName="TipoDocu">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Expr1" msprop:Generator_ColumnVarNameInTable="columnExpr1" msprop:Generator_ColumnPropNameInRow="Expr1" msprop:Generator_ColumnPropNameInTable="Expr1Column" msprop:Generator_UserColumnName="Expr1">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NomAdmin" msprop:Generator_ColumnVarNameInTable="columnNomAdmin" msprop:Generator_ColumnPropNameInRow="NomAdmin" msprop:Generator_ColumnPropNameInTable="NomAdminColumn" msprop:Generator_UserColumnName="NomAdmin">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FecPagare" msprop:Generator_ColumnVarNameInTable="columnFecPagare" msprop:Generator_ColumnPropNameInRow="FecPagare" msprop:Generator_ColumnPropNameInTable="FecPagareColumn" msprop:Generator_UserColumnName="FecPagare" type="xs:dateTime" />
+              <xs:element name="ValorPaga" msprop:Generator_ColumnVarNameInTable="columnValorPaga" msprop:Generator_ColumnPropNameInRow="ValorPaga" msprop:Generator_ColumnPropNameInTable="ValorPagaColumn" msprop:Generator_UserColumnName="ValorPaga" type="xs:double" />
+              <xs:element name="ReciboCaja" msprop:Generator_ColumnVarNameInTable="columnReciboCaja" msprop:Generator_ColumnPropNameInRow="ReciboCaja" msprop:Generator_ColumnPropNameInTable="ReciboCajaColumn" msprop:Generator_UserColumnName="ReciboCaja">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FechaPagoCaja" msprop:Generator_ColumnVarNameInTable="columnFechaPagoCaja" msprop:Generator_ColumnPropNameInRow="FechaPagoCaja" msprop:Generator_ColumnPropNameInTable="FechaPagoCajaColumn" msprop:Generator_UserColumnName="FechaPagoCaja" type="xs:dateTime" />
+              <xs:element name="SumaDeValorUnitaCaja" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSumaDeValorUnitaCaja" msprop:Generator_ColumnPropNameInRow="SumaDeValorUnitaCaja" msprop:Generator_ColumnPropNameInTable="SumaDeValorUnitaCajaColumn" msprop:Generator_UserColumnName="SumaDeValorUnitaCaja" type="xs:double" minOccurs="0" />
+              <xs:element name="DetaPagoCaja" msprop:Generator_ColumnVarNameInTable="columnDetaPagoCaja" msprop:Generator_ColumnPropNameInRow="DetaPagoCaja" msprop:Generator_ColumnPropNameInTable="DetaPagoCajaColumn" msprop:Generator_UserColumnName="DetaPagoCaja">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AnuladoRecibo" msprop:Generator_ColumnVarNameInTable="columnAnuladoRecibo" msprop:Generator_ColumnPropNameInRow="AnuladoRecibo" msprop:Generator_ColumnPropNameInTable="AnuladoReciboColumn" msprop:Generator_UserColumnName="AnuladoRecibo" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="InformeAbonosElectronicos" msprop:Generator_TableClassName="InformeAbonosElectronicosDataTable" msprop:Generator_TableVarName="tableInformeAbonosElectronicos" msprop:Generator_TablePropName="InformeAbonosElectronicos" msprop:Generator_RowDeletingName="InformeAbonosElectronicosRowDeleting" msprop:Generator_RowChangingName="InformeAbonosElectronicosRowChanging" msprop:Generator_RowEvHandlerName="InformeAbonosElectronicosRowChangeEventHandler" msprop:Generator_RowDeletedName="InformeAbonosElectronicosRowDeleted" msprop:Generator_UserTableName="InformeAbonosElectronicos" msprop:Generator_RowChangedName="InformeAbonosElectronicosRowChanged" msprop:Generator_RowEvArgName="InformeAbonosElectronicosRowChangeEvent" msprop:Generator_RowClassName="InformeAbonosElectronicosRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NumPaga" msprop:Generator_ColumnVarNameInTable="columnNumPaga" msprop:Generator_ColumnPropNameInRow="NumPaga" msprop:Generator_ColumnPropNameInTable="NumPagaColumn" msprop:Generator_UserColumnName="NumPaga">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HistoriaPaga" msprop:Generator_ColumnVarNameInTable="columnHistoriaPaga" msprop:Generator_ColumnPropNameInRow="HistoriaPaga" msprop:Generator_ColumnPropNameInTable="HistoriaPagaColumn" msprop:Generator_UserColumnName="HistoriaPaga" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Paciente" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPaciente" msprop:Generator_ColumnPropNameInRow="Paciente" msprop:Generator_ColumnPropNameInTable="PacienteColumn" msprop:Generator_UserColumnName="Paciente" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="103" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TipoDocu" msprop:Generator_ColumnVarNameInTable="columnTipoDocu" msprop:Generator_ColumnPropNameInRow="TipoDocu" msprop:Generator_ColumnPropNameInTable="TipoDocuColumn" msprop:Generator_UserColumnName="TipoDocu">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NumTerPaga" msprop:Generator_ColumnVarNameInTable="columnNumTerPaga" msprop:Generator_ColumnPropNameInRow="NumTerPaga" msprop:Generator_ColumnPropNameInTable="NumTerPagaColumn" msprop:Generator_UserColumnName="NumTerPaga">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NomAdmin" msprop:Generator_ColumnVarNameInTable="columnNomAdmin" msprop:Generator_ColumnPropNameInRow="NomAdmin" msprop:Generator_ColumnPropNameInTable="NomAdminColumn" msprop:Generator_UserColumnName="NomAdmin">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FecPagare" msprop:Generator_ColumnVarNameInTable="columnFecPagare" msprop:Generator_ColumnPropNameInRow="FecPagare" msprop:Generator_ColumnPropNameInTable="FecPagareColumn" msprop:Generator_UserColumnName="FecPagare" type="xs:dateTime" />
+              <xs:element name="ValorPaga" msprop:Generator_ColumnVarNameInTable="columnValorPaga" msprop:Generator_ColumnPropNameInRow="ValorPaga" msprop:Generator_ColumnPropNameInTable="ValorPagaColumn" msprop:Generator_UserColumnName="ValorPaga" type="xs:double" />
+              <xs:element name="AnuladoRecibo" msprop:Generator_ColumnVarNameInTable="columnAnuladoRecibo" msprop:Generator_ColumnPropNameInRow="AnuladoRecibo" msprop:Generator_ColumnPropNameInTable="AnuladoReciboColumn" msprop:Generator_UserColumnName="AnuladoRecibo" type="xs:boolean" />
+              <xs:element name="NomBanco" msprop:Generator_ColumnVarNameInTable="columnNomBanco" msprop:Generator_ColumnPropNameInRow="NomBanco" msprop:Generator_ColumnPropNameInTable="NomBancoColumn" msprop:Generator_UserColumnName="NomBanco">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NumConsig_Elect" msprop:Generator_ColumnVarNameInTable="columnNumConsig_Elect" msprop:Generator_ColumnPropNameInRow="NumConsig_Elect" msprop:Generator_ColumnPropNameInTable="NumConsig_ElectColumn" msprop:Generator_UserColumnName="NumConsig_Elect">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FecConsig_Elect" msprop:Generator_ColumnVarNameInTable="columnFecConsig_Elect" msprop:Generator_ColumnPropNameInRow="FecConsig_Elect" msprop:Generator_ColumnPropNameInTable="FecConsig_ElectColumn" msprop:Generator_UserColumnName="FecConsig_Elect" type="xs:dateTime" />
+              <xs:element name="ValPago_Elect" msprop:Generator_ColumnVarNameInTable="columnValPago_Elect" msprop:Generator_ColumnPropNameInRow="ValPago_Elect" msprop:Generator_ColumnPropNameInTable="ValPago_ElectColumn" msprop:Generator_UserColumnName="ValPago_Elect" type="xs:double" />
+              <xs:element name="Descripcion_Elect" msprop:Generator_ColumnVarNameInTable="columnDescripcion_Elect" msprop:Generator_ColumnPropNameInRow="Descripcion_Elect" msprop:Generator_ColumnPropNameInTable="Descripcion_ElectColumn" msprop:Generator_UserColumnName="Descripcion_Elect" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FecRegis_Elect" msprop:Generator_ColumnVarNameInTable="columnFecRegis_Elect" msprop:Generator_ColumnPropNameInRow="FecRegis_Elect" msprop:Generator_ColumnPropNameInTable="FecRegis_ElectColumn" msprop:Generator_UserColumnName="FecRegis_Elect" type="xs:dateTime" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -1700,6 +2044,15 @@ SELECT RazonSol, SucurProv, TipoDocu, DireProve, CityProve, DptoProve, TelProve1
       <xs:field xpath="mstns:SucurProv" />
       <xs:field xpath="mstns:TipoDocu" />
       <xs:field xpath="mstns:IdenProve" />
+    </xs:unique>
+    <xs:unique name="Informe_x0020_pagares_x0020_abonos_x0020_por_x0020_caja_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Informe_x0020_pagares_x0020_abonos_x0020_por_x0020_caja" />
+      <xs:field xpath="mstns:NumPaga" />
+      <xs:field xpath="mstns:ReciboCaja" />
+    </xs:unique>
+    <xs:unique name="InformeAbonosElectronicos_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:InformeAbonosElectronicos" />
+      <xs:field xpath="mstns:NumPaga" />
     </xs:unique>
   </xs:element>
 </xs:schema>

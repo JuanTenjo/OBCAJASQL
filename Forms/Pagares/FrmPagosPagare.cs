@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using OBCAJASQL.Report;
 using System.Windows.Forms;
 
 namespace OBCAJASQL.Forms.Pagares
@@ -128,6 +129,217 @@ namespace OBCAJASQL.Forms.Pagares
             }
         }
 
+
+        private void cargarPago()
+        {
+            try
+            {
+                string f = "", Enrutadatos = "", Sql2 = "", TDRes = "", NDRes = "", TDCodeu = "", NDCodeu = "", TNP = "";
+                DialogResult res;
+
+                f = TxtPagaNum.Text;
+
+                Utils.Titulo01 = "Control para mostrar datos";
+
+                string Sql1 = "SELECT * FROM [BDCAJASQL].[dbo].[Datos registro de pagares] WHERE NumPaga='" + f + "' ORDER BY NumPaga ";
+
+
+
+
+                using (SqlConnection connection = new SqlConnection(Conexion.conexionSQL))
+                {
+                    SqlCommand command = new SqlCommand(Sql1, connection);
+                    command.Connection.Open();
+                    SqlDataReader Rst1 = command.ExecuteReader();
+
+
+                    if (Rst1.HasRows == false)
+                    {
+                        Utils.Informa = "Lo siento pero el número del pagare o letra" + "\r";
+                        Utils.Informa += "digitado no existe en este sistema." + "\r";
+                        MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        //Muestre los datos del pagaré encontrado
+                        Rst1.Read();
+
+                        if (Convert.ToBoolean(Rst1["AnuladoRecibo"]) == true)
+                        {
+                            Utils.Informa = "Lo siento pero el número del pagare o letra " + "\r";
+                            Utils.Informa += "Nro. " + f + " digitado se encuentra anulado." + "\r";
+                            Utils.Informa += "Por tanto no se pueden registrar pagos." + "\r";
+                            Utils.Informa += "Por favor presione la tecla Esc para anular la entrada." + "\r";
+                            MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        else
+                        {
+                            TxtHisPaga.Text = Rst1["HistoriaPaga"].ToString();
+                            TxtNomUsua.Text = Rst1["NomUsaR"].ToString();
+                            TxtValTolPaga.Text = Rst1["ValorPaga"].ToString();
+                            DtVenPaga.Value = Convert.ToDateTime(Rst1["FecVenPaga"].ToString());
+                            TxtTDR.Text = Rst1["TDRespon"].ToString();
+                            TxtNDR.Text = Rst1["NumTerPaga"].ToString();
+                            TDRes = Rst1["TDRespon"].ToString();
+                            NDRes = Rst1["NumTerPaga"].ToString();
+
+                            TxtCtaConta.Text = Rst1["CuentaConta"].ToString();
+                            TxtTDC.Text = Rst1["TDCodeudor"].ToString();
+                            TxtNDC.Text = Rst1["CodeuPaga"].ToString();
+
+                            TxtTolAbo.Text = Rst1["PagoPaga"].ToString();
+
+                            double s = Convert.ToDouble(Rst1["ValorPaga"]) - Convert.ToDouble(Rst1["PagoPaga"]);
+
+                            TxtSalPaga.Text = s.ToString();
+
+                            if (String.IsNullOrWhiteSpace(TxtNDC.Text))
+                            {
+                                //no busca nda
+                            }
+                            else
+                            {
+                                if (string.IsNullOrWhiteSpace(TxtNDC.Text))
+                                {
+                                    //El pagaré se registró sin codeudor
+                                }
+                                else
+                                {
+                                    //Proceda a buscar el nombre del codeudor
+                                    TDCodeu = Rst1["TDCodeudor"].ToString();
+                                    NDCodeu = Rst1["CodeuPaga"].ToString();
+
+                                    Sql2 = "SELECT * FROM [BDCAJASQL].[dbo].[Datos terceros] WHERE TipoDocu='" + TDCodeu + "' AND NumDocu='" + NDCodeu + "' ORDER BY TipoDocu";
+
+                                    using (SqlConnection connection2 = new SqlConnection(Conexion.conexionSQL))
+                                    {
+                                        SqlCommand command2 = new SqlCommand(Sql2, connection2);
+                                        command2.Connection.Open();
+                                        SqlDataReader Rst2 = command2.ExecuteReader();
+
+                                        if (Rst2.HasRows == false)
+                                        {
+                                            //no se encontró el nombre del codeudor
+                                            TxtNCC.Text = "";
+                                        }
+                                        else
+                                        {
+                                            Rst2.Read();
+                                            TxtNCC.Text = Rst2["NomAdmin"].ToString();
+                                        }
+
+
+                                    }
+
+                                }
+                            }
+
+                        }
+
+                    }
+                }
+
+                Sql2 = "SELECT * FROM [BDCAJASQL].[dbo].[Datos terceros] WHERE TipoDocu='" + TDRes + "' AND NumDocu='" + NDRes + "' ORDER BY TipoDocu";
+
+
+                using (SqlConnection connection = new SqlConnection(Conexion.conexionSQL))
+                {
+                    SqlCommand command = new SqlCommand(Sql2, connection);
+                    command.Connection.Open();
+                    SqlDataReader Rst2 = command.ExecuteReader();
+
+                    if (Rst2.HasRows == false)
+                    {
+                        //no se encontró el nombre del responsable
+                        TxtNCR.Text = "";
+
+                    }
+                    else
+                    {
+                        Rst2.Read();
+                        TxtNCR.Text = Rst2["NomAdmin"].ToString();
+                    }
+
+                }
+
+
+                string Sql3 = "SELECT * FROM [BDCAJASQL].[dbo].[Datos registro cuotas pagares] WHERE NumPaga='" + f + "' ORDER BY NumPaga";
+
+                using (SqlConnection connection = new SqlConnection(Conexion.conexionSQL))
+                {
+                    SqlCommand command = new SqlCommand(Sql3, connection);
+                    command.Connection.Open();
+                    SqlDataReader Rst3 = command.ExecuteReader();
+
+                    if (Rst3.HasRows == false)
+                    {
+                        Utils.Informa = "Lo siento pero el pagare digitado, no " + "\r";
+                        Utils.Informa += "tiene las cuotas de pagos registradas." + "\r";
+                        Utils.Informa += "Por favor comunicarle este problema" + "\r";
+                        Utils.Informa += "al administrador del sistema." + "\r";
+                        MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    else
+                    {
+
+                        double ValCuota = 0, ValPagado = 0, DesVarios = 0, DesComi = 0, ValInteres = 0, ValInMora = 0, ValorPaga = 0;
+                        string FecVenCuota, date;
+                        DateTime FecVenCuotaDate, dateD;
+                        GridDetaCuotas.Rows.Clear();
+
+                        while (Rst3.Read())
+                        {
+
+                            ValCuota = Convert.ToDouble(Rst3["ValCuota"]);
+                            ValPagado = Convert.ToDouble(Rst3["ValPagado"]);
+                            DesVarios = Convert.ToDouble(Rst3["DesVarios"]);
+                            DesComi = Convert.ToDouble(Rst3["DesComi"]);
+                            FecVenCuota = Convert.ToDateTime(Rst3["FecVenCuota"]).ToString("dd-MM-yyyy");
+                            date = DateTime.Now.Date.ToString("dd-MM-yyyy");
+                            FecVenCuotaDate = Convert.ToDateTime(FecVenCuota);
+                            dateD = Convert.ToDateTime(date);
+
+                            ValorPaga = ValCuota - (DesComi + DesVarios + ValPagado);
+
+
+                            if (ValCuota > (ValPagado + DesComi + DesVarios))
+                            {
+                                //Copiela porque aún no se ha pagado
+
+                                ValInteres = ((ValCuota * Convert.ToDouble(Rst3["IntAplicado"])) / 100);
+
+
+                                if (FecVenCuotaDate < dateD)
+                                {
+                                    //Cuando la cuota pasa de la fecha de pago cobre interes de mora
+                                    ValInMora = ((ValCuota * Convert.ToDouble(Rst3["InterMora"])) / 100);
+
+                                    GridDetaCuotas.Rows.Add(Rst3["CuoPaga"].ToString(), Rst3["ValCuota"].ToString(), ValInteres, Rst3["IntAplicado"].ToString(), Rst3["InterMora"].ToString(), ValInMora, Rst3["FecVenCuota"].ToString(), Rst3["DesComi"].ToString(), Rst3["DesVarios"].ToString(), Rst3["ValPagado"].ToString(), ValorPaga);
+
+                                }
+                                else
+                                {
+
+                                    GridDetaCuotas.Rows.Add(Rst3["CuoPaga"].ToString(), Rst3["ValCuota"].ToString(), ValInteres, Rst3["IntAplicado"].ToString(), 0, 0, Rst3["FecVenCuota"].ToString(), Rst3["DesComi"].ToString(), Rst3["DesVarios"].ToString(), Rst3["ValPagado"].ToString(), ValorPaga);
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.Titulo01 = "Control de errores de ejecución";
+                Utils.Informa = "Lo siento pero se ha presentado un error" + "\r";
+                Utils.Informa += "en la funcion cargarPagos" + "\r";
+                Utils.Informa += "Error: " + ex.Message + " - " + ex.StackTrace;
+                MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void TxtFacNum_KeyPress(object sender, KeyPressEventArgs e)
         {
             try
@@ -136,202 +348,7 @@ namespace OBCAJASQL.Forms.Pagares
                 {
                     if (string.IsNullOrWhiteSpace(TxtPagaNum.Text) == false)
                     {
-
-                        string f = "", Enrutadatos = "", Sql2 = "", TDRes = "", NDRes = "", TDCodeu = "", NDCodeu = "", TNP = "";
-                        DialogResult res;
-
-                        f = TxtPagaNum.Text;
-
-                        Utils.Titulo01 = "Control para mostrar datos";
-
-                        string Sql1 = "SELECT * FROM [BDCAJASQL].[dbo].[Datos registro de pagares] WHERE NumPaga='" + f + "' ORDER BY NumPaga ";
-
-
-
-
-                        using (SqlConnection connection = new SqlConnection(Conexion.conexionSQL))
-                        {
-                            SqlCommand command = new SqlCommand(Sql1, connection);
-                            command.Connection.Open();
-                            SqlDataReader Rst1 = command.ExecuteReader();
-
-
-                            if(Rst1.HasRows == false)
-                            {
-                                Utils.Informa = "Lo siento pero el número del pagare o letra" + "\r";
-                                Utils.Informa += "digitado no existe en este sistema." + "\r";
-                                MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            }
-                            else
-                            {
-                                //Muestre los datos del pagaré encontrado
-                                Rst1.Read();
-
-                                if (Convert.ToBoolean(Rst1["AnuladoRecibo"]) == true)
-                                {
-                                    Utils.Informa = "Lo siento pero el número del pagare o letra " + "\r";
-                                    Utils.Informa += "Nro. " + f + " digitado se encuentra anulado." + "\r";
-                                    Utils.Informa += "Por tanto no se pueden registrar pagos." + "\r";
-                                    Utils.Informa += "Por favor presione la tecla Esc para anular la entrada." + "\r";
-                                    MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                    return;
-                                }
-                                else
-                                {
-                                    TxtHisPaga.Text = Rst1["HistoriaPaga"].ToString();
-                                    TxtNomUsua.Text = Rst1["NomUsaR"].ToString();
-                                    TxtValTolPaga.Text = Rst1["ValorPaga"].ToString();
-                                    DtVenPaga.Value =  Convert.ToDateTime(Rst1["FecVenPaga"].ToString());
-                                    TxtTDR.Text = Rst1["TDRespon"].ToString();
-                                    TxtNDR.Text = Rst1["NumTerPaga"].ToString();
-                                    TDRes = Rst1["TDRespon"].ToString();
-                                    NDRes = Rst1["NumTerPaga"].ToString();
-
-                                    TxtCtaConta.Text = Rst1["CuentaConta"].ToString();
-                                    TxtTDC.Text = Rst1["TDCodeudor"].ToString();
-                                    TxtNDC.Text = Rst1["CodeuPaga"].ToString();
-
-                                    TxtTolAbo.Text = Rst1["PagoPaga"].ToString();
-
-                                    double s = Convert.ToDouble(Rst1["ValorPaga"]) - Convert.ToDouble(Rst1["PagoPaga"]);
-
-                                    TxtSalPaga.Text = s.ToString();
-
-                                    if (String.IsNullOrWhiteSpace(TxtNDC.Text))
-                                    {
-                                        //no busca nda
-                                    }
-                                    else
-                                    {
-                                        if (string.IsNullOrWhiteSpace(TxtNDC.Text))
-                                        {
-                                            //El pagaré se registró sin codeudor
-                                        }
-                                        else
-                                        {
-                                            //Proceda a buscar el nombre del codeudor
-                                            TDCodeu = Rst1["TDCodeudor"].ToString();
-                                            NDCodeu = Rst1["CodeuPaga"].ToString();
-
-                                            Sql2 = "SELECT * FROM [BDCAJASQL].[dbo].[Datos terceros] WHERE TipoDocu='" + TDCodeu + "' AND NumDocu='" + NDCodeu + "' ORDER BY TipoDocu";
-
-                                            using (SqlConnection connection2 = new SqlConnection(Conexion.conexionSQL))
-                                            {
-                                                SqlCommand command2 = new SqlCommand(Sql2, connection2);
-                                                command2.Connection.Open();
-                                                SqlDataReader Rst2 = command2.ExecuteReader();
-
-                                                if (Rst2.HasRows == false)
-                                                {
-                                                    //no se encontró el nombre del codeudor
-                                                    TxtNCC.Text = "";
-                                                }
-                                                else
-                                                {
-                                                    Rst2.Read();
-                                                    TxtNCC.Text = Rst2["NomAdmin"].ToString();
-                                                }
-
-
-                                            }
-
-                                        }
-                                    }
-
-                                }
-
-                            }
-                        }
-
-                        Sql2 = "SELECT * FROM [BDCAJASQL].[dbo].[Datos terceros] WHERE TipoDocu='" + TDRes + "' AND NumDocu='" + NDRes + "' ORDER BY TipoDocu";
-
-
-                        using (SqlConnection connection = new SqlConnection(Conexion.conexionSQL))
-                        {
-                            SqlCommand command = new SqlCommand(Sql2, connection);
-                            command.Connection.Open();
-                            SqlDataReader Rst2 = command.ExecuteReader();
-
-                            if(Rst2.HasRows == false)
-                            {
-                                //no se encontró el nombre del responsable
-                                TxtNCR.Text = "";
-
-                            }
-                            else
-                            {
-                                Rst2.Read();
-                                TxtNCR.Text = Rst2["NomAdmin"].ToString();      
-                            }
-
-                        }
-
-
-                        string Sql3 = "SELECT * FROM [BDCAJASQL].[dbo].[Datos registro cuotas pagares] WHERE NumPaga='" + f + "' ORDER BY NumPaga";
-
-                        using (SqlConnection connection = new SqlConnection(Conexion.conexionSQL))
-                        {
-                            SqlCommand command = new SqlCommand(Sql3, connection);
-                            command.Connection.Open();
-                            SqlDataReader Rst3 = command.ExecuteReader();
-
-                            if(Rst3.HasRows == false)
-                            {
-                                Utils.Informa = "Lo siento pero el pagare digitado, no " + "\r";
-                                Utils.Informa += "tiene las cuotas de pagos registradas." + "\r";
-                                Utils.Informa += "Por favor comunicarle este problema" + "\r";
-                                Utils.Informa += "al administrador del sistema." + "\r";
-                                MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            else
-                            {
-
-                                double ValCuota = 0, ValPagado = 0, DesVarios = 0, DesComi = 0, ValInteres = 0, ValInMora = 0, ValorPaga = 0;
-                                string FecVenCuota, date;
-                                DateTime FecVenCuotaDate, dateD;
-                                GridDetaCuotas.Rows.Clear();
-
-                                while (Rst3.Read())
-                                {
-
-                                    ValCuota = Convert.ToDouble(Rst3["ValCuota"]);
-                                    ValPagado = Convert.ToDouble(Rst3["ValPagado"]);
-                                    DesVarios = Convert.ToDouble(Rst3["DesVarios"]);
-                                    DesComi = Convert.ToDouble(Rst3["DesComi"]);
-                                    FecVenCuota = Convert.ToDateTime(Rst3["FecVenCuota"]).ToString("dd-MM-yyyy");
-                                    date = DateTime.Now.Date.ToString("dd-MM-yyyy");
-                                    FecVenCuotaDate = Convert.ToDateTime(FecVenCuota);
-                                    dateD = Convert.ToDateTime(date);
-
-                                    ValorPaga = ValCuota - (DesComi + DesVarios + ValPagado);
-
-
-                                    if (ValCuota > (ValPagado + DesComi + DesVarios))
-                                    {
-                                        //Copiela porque aún no se ha pagado
-
-                                        ValInteres = ((ValCuota * Convert.ToDouble(Rst3["IntAplicado"])) / 100);
-
-
-                                        if (FecVenCuotaDate < dateD)
-                                        {
-                                            //Cuando la cuota pasa de la fecha de pago cobre interes de mora
-                                           ValInMora = ((ValCuota * Convert.ToDouble(Rst3["InterMora"])) / 100);
-
-                                           GridDetaCuotas.Rows.Add(Rst3["CuoPaga"].ToString(), Rst3["ValCuota"].ToString(), ValInteres, Rst3["IntAplicado"].ToString(),  Rst3["InterMora"].ToString(), ValInMora, Rst3["FecVenCuota"].ToString(), Rst3["DesComi"].ToString(), Rst3["DesVarios"].ToString(), Rst3["ValPagado"].ToString(), ValorPaga);
-
-                                        }
-                                        else
-                                        {
-
-                                            GridDetaCuotas.Rows.Add(Rst3["CuoPaga"].ToString(), Rst3["ValCuota"].ToString(), ValInteres, Rst3["IntAplicado"].ToString(), 0, 0, Rst3["FecVenCuota"].ToString(), Rst3["DesComi"].ToString(), Rst3["DesVarios"].ToString(), Rst3["ValPagado"].ToString(), ValorPaga);
-
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        cargarPago();
                     }
                     else
                     {
@@ -699,8 +716,7 @@ namespace OBCAJASQL.Forms.Pagares
                         {
                             Utils.Informa = "Lo siento pero usted no tiene permiso" + "\r";
                             Utils.Informa += "para afectar pagos a pagares por " + "\r";
-                            Utils.Informa += "para afectar pagos a pagares por " + "\r";
-                            Utils.Informa += "para afectar pagos a pagares por " + "\r";
+                            Utils.Informa += "consignacion electronicas. " + "\r";
                             MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
@@ -958,7 +974,29 @@ namespace OBCAJASQL.Forms.Pagares
 
                             //Proceda a expedir el recibo de caja respectivo
 
-                            Utils.infNombreInforme = "Informe recibos de cajas preformateado";
+                            Utils.Condicion = "[BDCAJASQL].[dbo].[Datos recibos de caja].[ReciboCaja] = '" + FunReciNum + "'";
+
+                            Utils.SqlDatos = "SELECT [Datos recibos de caja].ReciboCaja, [Datos recibos de caja].HistorPaciente, " +
+                            " Trim([Apellido1] + ' ' + [Apellido2]) + ' ' + Trim([Nombre1] + ' ' + [Nombre2]) AS Paciente, " +
+                            " [Datos recibos de caja].TipoDocu, [Datos recibos de caja].NumDocu, [Datos recibos de caja].SucuDocu, " +
+                            " [Datos proveedores].RazonSol, [Datos recibos de caja].DocumNumero, [Datos recibos de caja].EntidadDocumen, " +
+                            " [Datos recibos de caja].FechaPagoCaja, [Datos recibos de caja].CodRegis, [Datos detalles recibos de caja].CodServi, " +
+                            " [Datos detalles recibos de caja].DetaPagoCaja, [Datos detalles recibos de caja].CantidadCaja, [Datos detalles recibos de caja].ValorUnitaCaja, " +
+                            " ([CuentaContable] + '-' + [CentroCosto]) AS CuenCenT, ([CantidadCaja]*[ValorUnitaCaja]) AS VT, [Datos recibos de caja].AnuladoRecibo, " +
+                            " [Datos recibos de caja].FechAnulado, [Datos recibos de caja].CodiAnul, [Datos recibos de caja].RazonAnula, " +
+                            " [Datos recibos de caja].ObserCaja FROM [GEOGRAXPSQL].[dbo].[Datos proveedores] INNER JOIN (([ACDATOXPSQL].[dbo].[Datos del Paciente] " +
+                            " INNER JOIN [BDCAJASQL].[dbo].[Datos recibos de caja] ON [Datos del Paciente].HistorPaci = [Datos recibos de caja].HistorPaciente) " +
+                            " INNER JOIN [BDCAJASQL].[dbo].[Datos detalles recibos de caja] ON [Datos recibos de caja].ReciboCaja = [BDCAJASQL].[dbo].[Datos detalles recibos de caja].ReciboNum) " +
+                            " ON ([Datos proveedores].TipoDocu = [Datos recibos de caja].TipoDocu) AND ([Datos proveedores].IdenProve = [Datos recibos de caja].NumDocu) " +
+                            " AND ([Datos proveedores].SucurProv = [Datos recibos de caja].SucuDocu) " +
+                            " WHERE ((([Datos detalles recibos de caja].ValorUnitaCaja) > 0)) AND "+ Utils.Condicion + " AND [BDCAJASQL].[dbo].[Datos detalles recibos de caja].NatuMovi = 'C' ORDER BY [Datos recibos de caja].ReciboCaja; ";
+
+
+
+                            Utils.infNombreInforme = "Informe recibos de cajas preformateado IngOp";
+                            FrmReciboDeCajas frmReciboDeCajas = new FrmReciboDeCajas();
+                            frmReciboDeCajas.ShowDialog();
+
 
                         }
                         else
@@ -1130,6 +1168,9 @@ namespace OBCAJASQL.Forms.Pagares
                         }
                     }
                 }
+
+                cargarPago();
+
             }
             catch (Exception ex)
             {
@@ -1378,5 +1419,34 @@ namespace OBCAJASQL.Forms.Pagares
 
         }
 
+        private void BtnCopias_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Utils.TextoInputBox = "Por favor digite el número del pagaré, al cual le desea sacar copias";
+                Utils.infNombreInforme = "Formato de los pagares";
+                FrmInputBox frmInputBox = new FrmInputBox();
+                frmInputBox.ShowDialog();
+
+                Utils.NumPagaGlo = Utils.ValueInput;
+                if (!string.IsNullOrWhiteSpace(Utils.NumPagaGlo))
+                {
+
+                    FrmReportes frmReportes = new FrmReportes();
+                    frmReportes.ShowDialog();
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Utils.Titulo01 = "Control de errores de ejecución";
+                Utils.Informa = "Lo siento pero se ha presentado un error" + "\r";
+                Utils.Informa += "al darle click al boton copias." + "\r";
+                Utils.Informa += "Mensaje del error: " + ex.Message + " - " + ex.StackTrace;
+                MessageBox.Show(Utils.Informa, Utils.Titulo01, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

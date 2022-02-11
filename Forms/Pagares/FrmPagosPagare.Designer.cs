@@ -149,7 +149,7 @@ namespace OBCAJASQL.Forms.Pagares
             this.LblNomCajAct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.LblNomCajAct.Location = new System.Drawing.Point(234, 11);
             this.LblNomCajAct.Name = "LblNomCajAct";
-            this.LblNomCajAct.Size = new System.Drawing.Size(363, 20);
+            this.LblNomCajAct.Size = new System.Drawing.Size(447, 20);
             this.LblNomCajAct.TabIndex = 22;
             this.LblNomCajAct.Text = "NomCajAct";
             this.LblNomCajAct.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -769,6 +769,7 @@ namespace OBCAJASQL.Forms.Pagares
             this.BtnCopias.Size = new System.Drawing.Size(50, 44);
             this.BtnCopias.TabIndex = 187;
             this.BtnCopias.UseVisualStyleBackColor = false;
+            this.BtnCopias.Click += new System.EventHandler(this.BtnCopias_Click);
             // 
             // label21
             // 

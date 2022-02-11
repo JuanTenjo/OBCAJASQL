@@ -510,7 +510,6 @@ namespace OBCAJASQL.Report
 
                                 dsProveedoresCode = new ReportDataSource("dsProveedoresCode", infoSql.Tables[0]);
 
-                               
 
 
                                 SqlDigitador = "SELECT CodigoUsa, TipoDocUsa, IdentificUsa, NombreUsa, Apellido1Usa, Apellido2Usa ";
@@ -541,6 +540,78 @@ namespace OBCAJASQL.Report
                             }
                         }
                             break;
+                    case "Informe saldos de pagares":
+
+
+                        Utils.SqlDatos = "SELECT [Datos registro de pagares].NumPaga, [Datos registro de pagares].ValorPaga, [Datos registro de pagares].FecPagare, " +
+                        " [Datos registro de pagares].NumFacPaga, [Datos registro cuotas pagares].ValCuota, [Datos registro cuotas pagares].CuoPaga, " +
+                        " [Datos registro cuotas pagares].FecVenCuota, [Datos registro cuotas pagares].FecPaCuota, [Datos registro cuotas pagares].ValPagado, " +
+                        " [ValCuota]-[ValPagado] AS TOTAL, [Datos registro de pagares].HistoriaPaga, (Trim([Nombre1] + ' ' + [Nombre2]) + ' ' + Trim([Apellido1] + ' ' + [Apellido2])) AS Paciente, " +
+                        " [Datos registro de pagares].NumTerPaga, [Datos terceros].NomAdmin, [Datos registro de pagares].AnuladoRecibo " +
+                        " FROM [BDCAJASQL].[dbo].[Datos terceros] " +
+                        " INNER JOIN([ACDATOXPSQL].[dbo].[Datos del Paciente] " +
+                        " INNER JOIN ( [BDCAJASQL].[dbo].[Datos registro de pagares] " +
+                        " INNER JOIN  [BDCAJASQL].[dbo].[Datos registro cuotas pagares] ON[Datos registro de pagares].NumPaga = [Datos registro cuotas pagares].NumPaga) " +
+                        " ON [Datos del Paciente].HistorPaci = [Datos registro de pagares].HistoriaPaga) " +
+                        " ON [Datos terceros].NumDocu = [Datos registro de pagares].NumTerPaga WHERE "+ Utils.condicion + " " +
+                        " ORDER BY [Datos registro de pagares].NumPaga;";
+
+                        infoSql = Conexion.SQLDataSet(Utils.SqlDatos);
+                        dsDetalle = new ReportDataSource("dsDetalle", infoSql.Tables[0]);
+
+                        break;
+                    case "Informe pagares abonos por caja":
+
+                        Utils.SqlDatos = "SELECT [Datos registro de pagares].NumPaga, [Datos registro de pagares].HistoriaPaga, RTrim([Nombre1] + ' ' + [Nombre2]) + ' ' + RTrim([Apellido1] + ' ' + [Apellido2]) AS Paciente, " +
+                        " [Datos registro de pagares].NumTerPaga, [Datos terceros].TipoDocu, [Datos registro de pagares].NumTerPaga, [Datos terceros].NomAdmin, [Datos registro de pagares].FecPagare, " +
+                        " [Datos registro de pagares].ValorPaga, [Datos recibos de caja].ReciboCaja, [Datos recibos de caja].FechaPagoCaja, Sum([Datos detalles recibos de caja].ValorUnitaCaja) AS SumaDeValorUnitaCaja, " +
+                        " [Datos detalles recibos de caja].DetaPagoCaja, [Datos registro de pagares].AnuladoRecibo " +
+                        " FROM[ACDATOXPSQL].[dbo].[Datos del Paciente] INNER JOIN([BDCAJASQL].[dbo].[Datos terceros] " +
+                        " INNER JOIN ([BDCAJASQL].[dbo].[Datos registro de pagares] INNER JOIN ([BDCAJASQL].[dbo].[Datos recibos de caja] INNER JOIN [BDCAJASQL].[dbo].[Datos detalles recibos de caja] " +
+                        " ON [Datos recibos de caja].ReciboCaja = [Datos detalles recibos de caja].ReciboNum) ON[Datos registro de pagares].NumPaga = [Datos recibos de caja].DocuCruce)  " +
+                        " ON[Datos terceros].NumDocu = [Datos registro de pagares].NumTerPaga) ON[Datos del Paciente].HistorPaci = [Datos registro de pagares].HistoriaPaga " +
+                        " WHERE  " + Utils.condicion + " and  ((([Datos detalles recibos de caja].NatuMovi) = 'C')) GROUP BY[Datos registro de pagares].NumPaga, [Datos registro de pagares].HistoriaPaga, " +
+                        " RTrim([Nombre1] + ' ' + [Nombre2]) +' ' + RTrim([Apellido1] + ' ' + [Apellido2]), [Datos registro de pagares].NumTerPaga, [Datos terceros].TipoDocu, " +
+                        " [Datos registro de pagares].NumTerPaga, [Datos terceros].NomAdmin, [Datos registro de pagares].FecPagare, [Datos registro de pagares].ValorPaga,  " +
+                        " [Datos recibos de caja].ReciboCaja, [Datos recibos de caja].FechaPagoCaja, " +
+                        " [Datos detalles recibos de caja].DetaPagoCaja, [Datos registro de pagares].AnuladoRecibo ORDER BY[Datos registro de pagares].NumPaga; ";
+
+                        infoSql = Conexion.SQLDataSet(Utils.SqlDatos);
+                        dsDetalle = new ReportDataSource("dsDetalle", infoSql.Tables[0]);
+
+                        parameters = new ReportParameter[2];
+
+                        parameters[0] = new ReportParameter("Fecha01", Utils.FechaInicial);
+                        parameters[1] = new ReportParameter("Fecha02", Utils.FechaFinal);
+
+                        break;
+                    case "Informe pagares abonos electronicos":
+
+                        Utils.SqlDatos = "SELECT [Datos registro de pagares].NumPaga, [Datos registro de pagares].HistoriaPaga, Trim([Nombre1] + ' ' + [Nombre2]) + ' ' + Trim([Apellido1] + ' ' + [Apellido2]) AS Paciente, " +
+                        " [Datos terceros].TipoDocu, [Datos registro de pagares].NumTerPaga, [Datos terceros].NomAdmin, [Datos registro de pagares].FecPagare, [Datos registro de pagares].ValorPaga,  " +
+                        " [Datos registro de pagares].AnuladoRecibo, [Datos de los bancos].NomBanco, [Datos abonos electronicos a pagares].NumConsig_Elect, [Datos abonos electronicos a pagares].FecConsig_Elect,  " +
+                        " [Datos abonos electronicos a pagares].ValPago_Elect, [Datos abonos electronicos a pagares].Descripcion_Elect, [Datos abonos electronicos a pagares].FecRegis_Elect FROM[GEOGRAXPSQL].[dbo].[Datos de los bancos] " +
+                        " INNER JOIN(( [ACDATOXPSQL].[dbo].[Datos del Paciente] INNER JOIN ([BDCAJASQL].[dbo].[Datos terceros] INNER JOIN [BDCAJASQL].[dbo].[Datos registro de pagares] ON[Datos terceros].NumDocu = [BDCAJASQL].[dbo].[Datos registro de pagares].NumTerPaga) " +
+                        " ON[Datos del Paciente].HistorPaci = [Datos registro de pagares].HistoriaPaga) INNER JOIN[BDCAJASQL].[dbo].[Datos abonos electronicos a pagares] ON[Datos registro de pagares].NumPaga " +
+                        " = [Datos abonos electronicos a pagares].NumPagare_Elect) ON[Datos de los bancos].CodiBanco = [Datos abonos electronicos a pagares].EntidConsig_Elect " +
+                        " WHERE "+ Utils.condicion +"  GROUP BY[Datos registro de pagares].NumPaga, [Datos registro de pagares].HistoriaPaga, Trim([Nombre1] + ' ' + [Nombre2]) +' ' + Trim([Apellido1] + ' ' + [Apellido2]),  " +
+                        " [Datos terceros].TipoDocu, [Datos registro de pagares].NumTerPaga, [Datos terceros].NomAdmin, [Datos registro de pagares].FecPagare, [Datos registro de pagares].ValorPaga,  " +
+                        " [Datos registro de pagares].AnuladoRecibo, [Datos de los bancos].NomBanco, [Datos abonos electronicos a pagares].NumConsig_Elect, [Datos abonos electronicos a pagares].FecConsig_Elect, " +
+                        " [Datos abonos electronicos a pagares].ValPago_Elect, [Datos abonos electronicos a pagares].Descripcion_Elect, " +
+                        " [Datos abonos electronicos a pagares].FecRegis_Elect ORDER BY[Datos registro de pagares].NumPaga; ";
+
+                        infoSql = Conexion.SQLDataSet(Utils.SqlDatos);
+                        dsDetalle = new ReportDataSource("dsDetalle", infoSql.Tables[0]);
+
+                        parameters = new ReportParameter[2];
+
+                        parameters[0] = new ReportParameter("Fecha01", Utils.FechaInicial);
+                        parameters[1] = new ReportParameter("Fecha02", Utils.FechaFinal);
+
+
+
+                        break;
+
                     default:
                         break;
 
@@ -573,7 +644,11 @@ namespace OBCAJASQL.Report
 
                 this.reportViewer1.LocalReport.ReportEmbeddedResource = reporte;
 
-                this.reportViewer1.LocalReport.SetParameters(parameters);
+                if(Utils.infNombreInforme != "Informe saldos de pagares")
+                {
+                    this.reportViewer1.LocalReport.SetParameters(parameters);
+                }
+
 
                 this.reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
 

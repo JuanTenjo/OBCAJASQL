@@ -14,6 +14,7 @@ using OBCAJASQL.Class;
 using OBCAJASQL.Forms.Caja;
 using OBCAJASQL.Forms.Caja.Reportes;
 using OBCAJASQL.Forms.Pagares;
+using OBCAJASQL.Forms.Pagares.Reportes;
 
 namespace OBCAJASQL.Forms
 {
@@ -278,6 +279,18 @@ namespace OBCAJASQL.Forms
         {
             FrmPagosPagare frmPagosPagare = new FrmPagosPagare();
             frmPagosPagare.ShowDialog();
+        }
+
+        private void pagosYSaldosDePagareToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmReportesPagoSaldosPagares frmReportesPagoSaldosPagares = new FrmReportesPagoSaldosPagares();
+            frmReportesPagoSaldosPagares.ShowDialog();
+        }
+
+        private void pagaresRegistradosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmReportesPagares frmReportesPagares = new FrmReportesPagares();
+            frmReportesPagares.ShowDialog();
         }
     }
 }

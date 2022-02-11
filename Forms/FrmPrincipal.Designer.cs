@@ -199,14 +199,14 @@ namespace OBCAJASQL.Forms
             // ingresarPagaresToolStripMenuItem
             // 
             this.ingresarPagaresToolStripMenuItem.Name = "ingresarPagaresToolStripMenuItem";
-            this.ingresarPagaresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ingresarPagaresToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.ingresarPagaresToolStripMenuItem.Text = "&Ingresar Pagares";
             this.ingresarPagaresToolStripMenuItem.Click += new System.EventHandler(this.ingresarPagaresToolStripMenuItem_Click);
             // 
             // pagosDePagaresToolStripMenuItem
             // 
             this.pagosDePagaresToolStripMenuItem.Name = "pagosDePagaresToolStripMenuItem";
-            this.pagosDePagaresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pagosDePagaresToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.pagosDePagaresToolStripMenuItem.Text = "&Pagos De Pagares";
             this.pagosDePagaresToolStripMenuItem.Click += new System.EventHandler(this.pagosDePagaresToolStripMenuItem_Click);
             // 
@@ -216,7 +216,7 @@ namespace OBCAJASQL.Forms
             this.pagosYSaldosDePagareToolStripMenuItem,
             this.pagaresRegistradosToolStripMenuItem});
             this.reportesToolStripMenuItem1.Name = "reportesToolStripMenuItem1";
-            this.reportesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.reportesToolStripMenuItem1.Size = new System.Drawing.Size(167, 22);
             this.reportesToolStripMenuItem1.Text = "&Reportes";
             // 
             // pagosYSaldosDePagareToolStripMenuItem
@@ -224,17 +224,19 @@ namespace OBCAJASQL.Forms
             this.pagosYSaldosDePagareToolStripMenuItem.Name = "pagosYSaldosDePagareToolStripMenuItem";
             this.pagosYSaldosDePagareToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.pagosYSaldosDePagareToolStripMenuItem.Text = "&Pagos y Saldos De Pagare";
+            this.pagosYSaldosDePagareToolStripMenuItem.Click += new System.EventHandler(this.pagosYSaldosDePagareToolStripMenuItem_Click);
             // 
             // pagaresRegistradosToolStripMenuItem
             // 
             this.pagaresRegistradosToolStripMenuItem.Name = "pagaresRegistradosToolStripMenuItem";
             this.pagaresRegistradosToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.pagaresRegistradosToolStripMenuItem.Text = "&Pagares Registrados";
+            this.pagaresRegistradosToolStripMenuItem.Click += new System.EventHandler(this.pagaresRegistradosToolStripMenuItem_Click);
             // 
             // anularPagaresToolStripMenuItem
             // 
             this.anularPagaresToolStripMenuItem.Name = "anularPagaresToolStripMenuItem";
-            this.anularPagaresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.anularPagaresToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.anularPagaresToolStripMenuItem.Text = "&Anular Pagares";
             // 
             // parametroToolStripMenuItem
